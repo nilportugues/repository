@@ -8,11 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
+namespace NilPortugues\DDDFoundation\Domain\Repository\Collection;
 
 use JsonSerializable;
 use SplFixedArray;
-
 
 /**
  * Class ImmutableCollection
@@ -27,4 +26,4 @@ class ImmutableCollection extends SplFixedArray implements JsonSerializable
     {
         return json_encode($this->toArray());
     }
-} 
+}

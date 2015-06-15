@@ -8,14 +8,13 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
+namespace NilPortugues\DDDFoundation\Domain\Repository\Collection;
 
 use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use JsonSerializable;
-
 
 /**
  * Class ArrayCollection
@@ -101,4 +100,4 @@ class Collection implements JsonSerializable, ArrayAccess, Countable, IteratorAg
     {
         return isset($this->data[$key]) ? $this->data[$key] : null;
     }
-} 
+}

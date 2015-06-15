@@ -8,13 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Repository;
+namespace NilPortugues\DDDFoundation\Domain\Repository;
 
+class Filter
+{
 
-/**
- * Class Filter
- * @package NilPortugues\DDDFoundation\Repository
- */
-class Filter {
-
-} 
+}
