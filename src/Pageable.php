@@ -11,9 +11,8 @@
 
 namespace NilPortugues\DDDFoundation\Domain\Repository;
 
-use NilPortugues\DDDFoundation\Domain\Repository\Collection\Collection;
 
-final class Pageable extends Collection
+final class Pageable
 {
     /**
      * @var int
