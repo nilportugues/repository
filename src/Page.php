@@ -10,12 +10,12 @@
 
 namespace PhpDdd\Foundation\Domain\Repository;
 
-use PhpDdd\Foundation\Domain\Repository\Collection\ImmutableCollection;
+use PhpDdd\Foundation\Domain\Repository\Collection\ImmutableTypedCollection;
 
 class Page
 {
     /**
-     * @var ImmutableCollection
+     * @var ImmutableTypedCollection
      */
     private $elements;
     /**
@@ -49,7 +49,7 @@ class Page
      */
     public function __construct(array $elements, $totalElements, $pageNumber, $totalPages, Sort $sort, Filter $filter)
     {
-        $this->elements      = ImmutableCollection::fromArray($elements);
+        $this->elements      = ImmutableTypedCollection::fromArray($elements);
         $this->totalElements = (int) $totalElements;
         $this->pageNumber    = (int) $pageNumber;
         $this->totalPages    = (int) $totalPages;
@@ -60,7 +60,7 @@ class Page
     /**
      * Returns the page content as an array.
      *
-     * @return ImmutableCollection
+     * @return ImmutableTypedCollection
      */
     public function getContent()
     {
@@ -74,7 +74,7 @@ class Page
      */
     public function hasPrevious()
     {
-        return $this->pageNumber > 0;
+        return $this->pageNumber > 1;
     }
 
     /**
@@ -104,7 +104,7 @@ class Page
      */
     public function hasNext()
     {
-        return $this->getPageSize() * $this->getNumber() < $this->getTotalPages();
+        return $this->getPageSize() * $this->getPageNumber() < $this->getTotalPages();
     }
 
     /**
@@ -122,7 +122,7 @@ class Page
      *
      * @return int
      */
-    public function getNumber()
+    public function getPageNumber()
     {
         return $this->pageNumber;
     }
@@ -144,7 +144,7 @@ class Page
      */
     public function nextPageable()
     {
-        return new Pageable($this->getNumber() + 1, $this->getPageSize(), $this->getSort(), $this->getFilter());
+        return new Pageable($this->getPageNumber() + 1, $this->getPageSize(), $this->getSort(), $this->getFilter());
     }
 
     /**
@@ -172,7 +172,7 @@ class Page
      */
     public function previousPageable()
     {
-        $pageable = new Pageable($this->getNumber(), $this->getPageSize(), $this->getSort(), $this->getFilter());
+        $pageable = new Pageable($this->getPageNumber(), $this->getPageSize(), $this->getSort(), $this->getFilter());
 
         return $pageable->previousOrFirst();
     }
@@ -196,10 +196,9 @@ class Page
      */
     public function map(callable $converter)
     {
-        $collection = new ImmutableCollection($this->getNumber());
-
-        foreach ($this->elements as $element) {
-            $collection[] = $converter($element);
+        $collection = [];
+        foreach ($this->elements as $key => $element) {
+            $collection[$key] = $converter($element);
         }
 
         return new self(

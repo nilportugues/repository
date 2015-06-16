@@ -4,8 +4,9 @@ namespace PhpDdd\Tests\Foundation\Domain\Repository;
 use PhpDdd\Foundation\Domain\Repository\Filter;
 use PhpDdd\Foundation\Domain\Repository\Pageable;
 use PhpDdd\Foundation\Domain\Repository\Sort;
+use PHPUnit_Framework_TestCase;
 
-class PageableTest extends \PHPUnit_Framework_TestCase
+class PageableTest extends PHPUnit_Framework_TestCase
 {
     public function testReturnsFirstPageable()
     {
@@ -17,6 +18,7 @@ class PageableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($result->hasPrevious());
         $this->assertEquals(20, $result->getOffset());
         $this->assertEquals(new Sort(), $result->getSort());
+        $this->assertEquals(new Filter(), $result->getFilter());
     }
 
     public function testReturnsNextPageable()
@@ -29,6 +31,7 @@ class PageableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result->hasPrevious());
         $this->assertEquals(2020, $result->getOffset());
         $this->assertEquals(new Sort(), $result->getSort());
+        $this->assertEquals(new Filter(), $result->getFilter());
     }
 
     public function testReturnsPreviousPageable()
@@ -41,6 +44,7 @@ class PageableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result->hasPrevious());
         $this->assertEquals(1980, $result->getOffset());
         $this->assertEquals(new Sort(), $result->getSort());
+        $this->assertEquals(new Filter(), $result->getFilter());
     }
 
     public function testPreviousOrFirstReturnsFirstPageable()
@@ -53,5 +57,6 @@ class PageableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($result->hasPrevious());
         $this->assertEquals(20, $result->getOffset());
         $this->assertEquals(new Sort(), $result->getSort());
+        $this->assertEquals(new Filter(), $result->getFilter());
     }
 }

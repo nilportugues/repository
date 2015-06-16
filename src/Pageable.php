@@ -38,20 +38,10 @@ class Pageable
      */
     public function __construct($pageNumber, $pageSize, Sort $sort = null, Filter $filter = null)
     {
-        $this->pageNumber = (int) $pageNumber;
-        $this->pageSize = (int) $pageSize;
-        $this->sort = $sort;
-        $this->filter = $filter;
-    }
-
-    /**
-     * Returns the Pageable requesting the first page.
-     *
-     * @return Pageable
-     */
-    public function first()
-    {
-        return new self(1, $this->getPageSize(), $this->sort, $this->filter);
+        $this->pageNumber = (int)$pageNumber;
+        $this->pageSize   = (int)$pageSize;
+        $this->sort       = $sort;
+        $this->filter     = $filter;
     }
 
     /**
@@ -63,7 +53,7 @@ class Pageable
     {
         $offset = $this->getPageNumber();
 
-        return ($offset>0) ? ($offset)*$this->pageSize : $this->pageSize;
+        return ($offset > 0) ? ($offset) * $this->pageSize : $this->pageSize;
     }
 
     /**
@@ -77,6 +67,24 @@ class Pageable
     }
 
     /**
+     * Returns the sorting parameters.
+     * @return Sort
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    /**
+     * Returns the Pageable requesting the next Page.
+     * @return Pageable
+     */
+    public function next()
+    {
+        return new self($this->getPageNumber() + 1, $this->getPageSize(), $this->sort, $this->filter);
+    }
+
+    /**
      * Returns the number of items to be returned.
      *
      * @return int
@@ -87,12 +95,16 @@ class Pageable
     }
 
     /**
-     * Returns the sorting parameters.
-     * @return Sort
+     * Returns the previous Pageable or the first Pageable if the current one already is the first one.
+     * @return Pageable
      */
-    public function getSort()
+    public function previousOrFirst()
     {
-        return $this->sort;
+        if ($this->hasPrevious()) {
+            return new self($this->getPageNumber() - 1, $this->getPageSize(), $this->sort, $this->filter);
+        }
+
+        return $this->first();
     }
 
     /**
@@ -101,28 +113,24 @@ class Pageable
      */
     public function hasPrevious()
     {
-        return ($this->getPageNumber()-1)>0;
+        return ($this->getPageNumber() - 1) > 0;
     }
 
     /**
-     * Returns the Pageable requesting the next Page.
+     * Returns the Pageable requesting the first page.
+     *
      * @return Pageable
      */
-    public function next()
+    public function first()
     {
-        return new self($this->getPageNumber()+1, $this->getPageSize(), $this->sort, $this->filter);
+        return new self(1, $this->getPageSize(), $this->sort, $this->filter);
     }
 
     /**
-     * Returns the previous Pageable or the first Pageable if the current one already is the first one.
-     * @return Pageable
+     * @return Filter
      */
-    public function previousOrFirst()
+    public function getFilter()
     {
-        if ($this->hasPrevious()) {
-            return new self($this->getPageNumber()-1, $this->getPageSize(), $this->sort, $this->filter);
-        }
-
-        return $this->first();
+        return $this->filter;
     }
 }
