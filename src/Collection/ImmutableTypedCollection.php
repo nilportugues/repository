@@ -20,6 +20,9 @@ use SplFixedArray;
  */
 final class ImmutableTypedCollection extends SplFixedArray implements JsonSerializable
 {
+    /**
+     * @var string
+     */
     private $type;
 
     /**
@@ -31,6 +34,9 @@ final class ImmutableTypedCollection extends SplFixedArray implements JsonSerial
         parent::offsetSet($index, $newval);
     }
 
+    /**
+     * @param $newval
+     */
     private function setGuardType($newval)
     {
         $type = gettype($newval);
