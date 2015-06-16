@@ -10,22 +10,23 @@
 
 namespace NilPortugues\DDDFoundation\Domain\Repository;
 
-interface ReadRepository
+interface ReadRepository extends Repository
 {
     /**
-     * Returns a Page of entities meeting the paging restriction provided in the Pageable object.
+     * Retrieves an entity by its id.
      *
-     * @param Pageable $pageable
+     * @param $id
      *
-     * @return Page
+     * @return mixed
      */
-    public function findAll(Pageable $pageable);
+    public function findOne($id);
 
     /**
-     * Returns the total amount of elements in the repository given the restrictions provided by the Filter object.
-     * @param Filter|null $filter
+     * Returns all instances of the type.
      *
-     * @return int
+     * @param Filter $filter
+     *
+     * @return mixed
      */
-    public function count(Filter $filter = null);
+    public function findAll(Filter $filter);
 }

@@ -10,16 +10,27 @@
 
 namespace NilPortugues\DDDFoundation\Domain\Repository;
 
-interface WriteRepository
+interface WriteRepository extends Repository
 {
 
     /**
+     * Deletes the entity with the given id.
+     *
+     * @param $id
+     *
+     * @return void
+     */
+    public function delete($id);
+
+    /**
      * Deletes all elements in the repository given the restrictions provided by the Filter object.
+     * If $filter is null, all the repository data will be deleted.
+     *
      * @param Filter $filter
      *
-     * @return bool
+     * @return void
      */
-    public function deleteAll(Filter $filter);
+    public function deleteAll(Filter $filter = null);
 
     /**
      * Updates all elements in the repository with the given $values, given the restrictions
@@ -28,7 +39,7 @@ interface WriteRepository
      * @param Filter       $filter
      * @param array|object $values
      *
-     * @return bool
+     * @return void
      */
-    public function update(Filter $filter, $values);
+    public function updateAll(Filter $filter, $values);
 }
