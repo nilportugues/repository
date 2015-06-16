@@ -24,9 +24,10 @@ interface ReadRepository extends Repository
     /**
      * Returns all instances of the type.
      *
+     * @param Sort   $sort
      * @param Filter $filter
      *
      * @return mixed
      */
-    public function findAll(Filter $filter);
+    public function findAll(Sort $sort = null, Filter $filter = null);
 }
