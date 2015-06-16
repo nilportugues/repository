@@ -12,7 +12,7 @@ namespace NilPortugues\DDDFoundation\Domain\Repository;
 
 use NilPortugues\DDDFoundation\Domain\Repository\Collection\ImmutableCollection;
 
-final class Page
+class Page
 {
     /**
      * @var ImmutableCollection
