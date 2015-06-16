@@ -10,7 +10,7 @@
 
 namespace NilPortugues\DDDFoundation\Domain\Repository;
 
-interface Repository
+interface ReadRepository
 {
     /**
      * Returns a Page of entities meeting the paging restriction provided in the Pageable object.
@@ -20,4 +20,12 @@ interface Repository
      * @return Page
      */
     public function findAll(Pageable $pageable);
+
+    /**
+     * Returns the total amount of elements in the repository given the restrictions provided by the Filter object.
+     * @param Filter|null $filter
+     *
+     * @return int
+     */
+    public function count(Filter $filter = null);
 }
