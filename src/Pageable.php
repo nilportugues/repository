@@ -51,7 +51,7 @@ class Pageable
      */
     public function first()
     {
-        return new self(0, $this->getPageSize(), $this->sort, $this->filter);
+        return new self(1, $this->getPageSize(), $this->sort, $this->filter);
     }
 
     /**
@@ -61,9 +61,9 @@ class Pageable
      */
     public function getOffset()
     {
-        $offset = $this->getPageNumber() - 1;
+        $offset = $this->getPageNumber();
 
-        return ($offset>0) ? $offset*$this->pageSize : $this->pageSize;
+        return ($offset>0) ? ($offset)*$this->pageSize : $this->pageSize;
     }
 
     /**
@@ -73,7 +73,7 @@ class Pageable
      */
     public function getPageNumber()
     {
-        return $this->pageNumber;
+        return ($this->pageNumber < 1) ? 1 : $this->pageNumber;
     }
 
     /**
@@ -101,7 +101,7 @@ class Pageable
      */
     public function hasPrevious()
     {
-        return $this->getOffset()>0;
+        return ($this->getPageNumber()-1)>0;
     }
 
     /**

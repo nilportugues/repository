@@ -100,4 +100,12 @@ class Collection implements JsonSerializable, ArrayAccess, Countable, IteratorAg
     {
         return isset($this->data[$key]) ? $this->data[$key] : null;
     }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->data;
+    }
 }

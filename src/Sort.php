@@ -33,8 +33,8 @@ final class Sort
      */
     public function __construct(array $properties = [], Order $order = null)
     {
-        $this->order      = $this->setOrder($order);
-        $this->properties = new Collection($properties);
+        $this->setOrder($order);
+        $this->setProperties($properties);
     }
 
     /**
@@ -47,8 +47,7 @@ final class Sort
         if (null === $order) {
             $order = new Order(Order::ASCENDING);
         }
-
-        return $order;
+        $this->order = $order;
     }
 
     /**
@@ -56,15 +55,19 @@ final class Sort
      *
      * @param Sort $sort
      *
-     * @return mixed
+     * @return Sort
      */
     public function andSort(self $sort)
     {
-        $properties = new Collection(
-            array_merge($this->getProperties(), $sort->getProperties())
+        $self = new self();
+        $self->properties = new Collection(
+            array_merge(
+                $this->getProperties()->toArray(),
+                $sort->getProperties()->toArray()
+            )
         );
 
-        return new self($properties);
+        return $self;
     }
 
     /**
@@ -82,7 +85,7 @@ final class Sort
      */
     public function equals(self $sort)
     {
-        return $sort->getProperties() === $this->getProperties();
+        return $sort->getProperties() == $this->getProperties();
     }
 
     /**
@@ -90,13 +93,13 @@ final class Sort
      *
      * @param string $propertyName
      *
-     * @return mixed
+     * @return Order
      */
     public function getOrderFor($propertyName)
     {
         $this->hasProperty($propertyName);
 
-        return $this->properties[$propertyName]->getDirection();
+        return $this->properties[$propertyName];
     }
 
     /**
@@ -126,10 +129,21 @@ final class Sort
      *
      * @throws \InvalidArgumentException
      */
-    public function hasProperty($propertyName)
+    private function hasProperty($propertyName)
     {
-        if (false === array_key_exists($propertyName, $this->properties)) {
+        if (true === empty($this->properties[$propertyName])) {
             throw new InvalidArgumentException('Provided property could not be found.');
         }
+    }
+
+    /**
+     * @param array $properties
+     */
+    private function setProperties(array $properties)
+    {
+        if (false === empty($properties)) {
+            $properties = array_fill_keys(array_values($properties), clone $this->order);
+        }
+        $this->properties = new Collection($properties);
     }
 }
