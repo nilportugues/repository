@@ -12,7 +12,7 @@
 namespace NilPortugues\DDDFoundation\Domain\Repository;
 
 
-final class Pageable
+class Pageable
 {
     /**
      * @var int
