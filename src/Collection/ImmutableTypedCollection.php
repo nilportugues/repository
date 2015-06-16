@@ -40,11 +40,7 @@ final class ImmutableTypedCollection extends SplFixedArray implements JsonSerial
     private function setGuardType($newval)
     {
         $type = gettype($newval);
-        if ('object' === $type) {
-            $this->type = get_class($newval);
-        } else {
-            $this->type = $type;
-        }
+        $this->type = ('object' === $type)? get_class($newval) : $type;
     }
 
     /**
