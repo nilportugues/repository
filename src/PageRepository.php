@@ -8,12 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
-
+namespace PhpDdd\Foundation\Domain\Repository;
 
 /**
  * Class PageRepository
- * @package NilPortugues\DDDFoundation\Domain\Repository
+ * @package PhpDdd\Foundation\Domain\Repository
  */
 interface PageRepository
 {
@@ -25,4 +24,4 @@ interface PageRepository
      * @return Page
      */
     public function findAll(Pageable $pageable);
-} 
+}

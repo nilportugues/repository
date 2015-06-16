@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
+namespace PhpDdd\Foundation\Domain\Repository;
 
-use NilPortugues\DDDFoundation\Domain\Repository\Collection\ImmutableCollection;
+use PhpDdd\Foundation\Domain\Repository\Collection\ImmutableCollection;
 
 class Page
 {

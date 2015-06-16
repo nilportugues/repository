@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
+namespace PhpDdd\Foundation\Domain\Repository;
 
 use InvalidArgumentException;
 
@@ -30,7 +30,6 @@ final class Order
         $direction = (string) strtoupper($direction);
         $this->isValidDirection($direction);
         $this->direction  = $direction;
-
     }
 
     /**

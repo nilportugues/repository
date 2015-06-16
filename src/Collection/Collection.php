@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository\Collection;
+namespace PhpDdd\Foundation\Domain\Repository\Collection;
 
 use ArrayAccess;
 use ArrayIterator;
@@ -18,7 +18,7 @@ use JsonSerializable;
 
 /**
  * Class ArrayCollection
- * @package NilPortugues\DDDFoundation\Domain\Repository
+ * @package PhpDdd\Foundation\Domain\Repository
  */
 class Collection implements JsonSerializable, ArrayAccess, Countable, IteratorAggregate
 {

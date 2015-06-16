@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
+namespace PhpDdd\Foundation\Domain\Repository;
 
 interface ReadRepository extends Repository
 {

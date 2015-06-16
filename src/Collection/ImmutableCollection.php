@@ -8,14 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository\Collection;
+namespace PhpDdd\Foundation\Domain\Repository\Collection;
 
 use JsonSerializable;
 use SplFixedArray;
 
 /**
  * Class ImmutableCollection
- * @package NilPortugues\DDDFoundation\Domain\Repository
+ * @package PhpDdd\Foundation\Domain\Repository
  */
 class ImmutableCollection extends SplFixedArray implements JsonSerializable
 {

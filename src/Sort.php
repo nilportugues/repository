@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
+namespace PhpDdd\Foundation\Domain\Repository;
 
 use InvalidArgumentException;
-use NilPortugues\DDDFoundation\Domain\Repository\Collection\Collection;
+use PhpDdd\Foundation\Domain\Repository\Collection\Collection;
 
 final class Sort
 {

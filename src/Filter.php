@@ -8,9 +8,8 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
+namespace PhpDdd\Foundation\Domain\Repository;
 
 class Filter
 {
-
 }

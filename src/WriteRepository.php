@@ -8,11 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
+namespace PhpDdd\Foundation\Domain\Repository;
 
 interface WriteRepository extends Repository
 {
-
     /**
      * Deletes the entity with the given id.
      *

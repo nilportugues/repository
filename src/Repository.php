@@ -8,12 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace NilPortugues\DDDFoundation\Domain\Repository;
-
+namespace PhpDdd\Foundation\Domain\Repository;
 
 /**
  * Class Repository
- * @package NilPortugues\DDDFoundation\Domain\Repository
+ * @package PhpDdd\Foundation\Domain\Repository
  */
 interface Repository
 {
@@ -33,4 +32,4 @@ interface Repository
      * @return bool
      */
     public function exists($id);
-} 
+}
