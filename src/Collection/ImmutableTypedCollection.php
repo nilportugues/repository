@@ -30,8 +30,24 @@ final class ImmutableTypedCollection extends SplFixedArray implements JsonSerial
      */
     public function offsetSet($index, $newval)
     {
+        if (null === $index) {
+            $index = (int) $this->calculateIndexKey();
+        }
+
         (null === $this->type) ? $this->setGuardType($newval) : $this->guard($newval);
         parent::offsetSet($index, $newval);
+    }
+
+    /**
+     * @return int
+     */
+    private function calculateIndexKey()
+    {
+        $callable = function ($value) {
+            return null !== $value;
+        };
+
+        return count(array_filter($this->toArray(), $callable));
     }
 
     /**
@@ -39,8 +55,8 @@ final class ImmutableTypedCollection extends SplFixedArray implements JsonSerial
      */
     private function setGuardType($newval)
     {
-        $type = gettype($newval);
-        $this->type = ('object' === $type)? get_class($newval) : $type;
+        $type       = gettype($newval);
+        $this->type = ('object' === $type) ? get_class($newval) : $type;
     }
 
     /**
@@ -51,14 +67,7 @@ final class ImmutableTypedCollection extends SplFixedArray implements JsonSerial
     private function guard($newval)
     {
         $type = gettype($newval);
-        if ('object' === $type) {
-            $this->objectGuard($newval);
-            return;
-        }
-
-        if ($type !== $this->type) {
-            $this->baseTypeGuard($type);
-        }
+        ('object' !== $type) ? $this->baseTypeGuard($type) : $this->objectGuard($newval);
     }
 
     /**
@@ -87,13 +96,15 @@ final class ImmutableTypedCollection extends SplFixedArray implements JsonSerial
      */
     private function baseTypeGuard($type)
     {
-        throw new RuntimeException(
-            sprintf(
-                'Provided value must be of type %s, but variable of type %s was given instead.',
-                $this->type,
-                $type
-            )
-        );
+        if ($type !== $this->type) {
+            throw new RuntimeException(
+                sprintf(
+                    'Provided value must be of type %s, but variable of type %s was given instead.',
+                    $this->type,
+                    $type
+                )
+            );
+        }
     }
 
     /**
@@ -101,6 +112,6 @@ final class ImmutableTypedCollection extends SplFixedArray implements JsonSerial
      */
     public function jsonSerialize()
     {
-        return json_encode($this->toArray());
+        return $this->toArray();
     }
 }

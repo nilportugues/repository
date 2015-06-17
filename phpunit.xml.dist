@@ -9,8 +9,8 @@
          convertWarningsToExceptions="true"
          stopOnError="true"
          stopOnFailure="true"
-         stopOnIncomplete="false"
-         stopOnSkipped="false"
+         stopOnIncomplete="true"
+         stopOnSkipped="true"
          syntaxCheck="true"
          bootstrap="vendor/autoload.php"
          verbose="true">

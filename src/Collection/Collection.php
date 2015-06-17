@@ -56,6 +56,11 @@ class Collection implements JsonSerializable, ArrayAccess, Countable, IteratorAg
      */
     public function offsetSet($offset, $value)
     {
+        if (null === $offset) {
+            $offset = (0 === count($this->data)) ? 0 : key($this->data) +1;
+        }
+
+
         $this->data[$offset] = $value;
     }
 
@@ -80,7 +85,7 @@ class Collection implements JsonSerializable, ArrayAccess, Countable, IteratorAg
      */
     public function jsonSerialize()
     {
-        return json_encode($this->data);
+        return $this->data;
     }
 
     /**
