@@ -1,0 +1,37 @@
+language: php
+cache:
+  directories:
+  - vendor
+php:
+  - 5.6
+  - 5.5
+  - 5.4
+  - nightly
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: nightly
+    
+before_install:
+  - /home/travis/.phpenv/versions/$(phpenv version-name)/bin/composer self-update
+  - sh -c "sudo mkdir vendor"
+  - sh -c "sudo mount -t tmpfs -o size=512M tmpfs vendor"
+    
+before_script:
+  - alias composer="php -d zend.enable_gc=0 /usr/bin/composer"
+  - composer require --dev satooshi/php-coveralls:dev-master
+  - composer require --dev fiunchinho/phpunit-randomizer:dev-master
+  - composer install
+  
+after_script:
+  - export COVERALLS_RUN_LOCALLY=1
+  - php bin/coveralls -v
+
+script: 
+  - bin/phpunit --coverage-text
+  - bin/phpunit-randomizer --order rand
+    
+matrix:
+     allow_failures:
+         - php: nightly  
