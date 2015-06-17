@@ -35,3 +35,4 @@ script:
 matrix:
      allow_failures:
          - php: nightly  
+
