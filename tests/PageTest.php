@@ -51,6 +51,11 @@ class PageTest extends PHPUnit_Framework_TestCase
      */
     private $pageSize;
 
+    /**
+     * @var array
+     */
+    private $filterAttributes = ['name'];
+
 
     protected function setUp()
     {
@@ -60,7 +65,7 @@ class PageTest extends PHPUnit_Framework_TestCase
         $this->totalPages    = 20;
         $this->totalElements = 151;
         $this->sort          = new Sort();
-        $this->filter        = new Filter();
+        $this->filter        = new Filter($this->filterAttributes);
 
         $this->page = new Page(
             $this->elements,

@@ -30,15 +30,4 @@ interface WriteRepository extends Repository
      * @return void
      */
     public function deleteAll(Filter $filter = null);
-
-    /**
-     * Updates all elements in the repository with the given $values, given the restrictions
-     * provided by the Filter object.
-     *
-     * @param Filter       $filter
-     * @param array|object $values
-     *
-     * @return void
-     */
-    public function updateAll(Filter $filter, $values);
 }
