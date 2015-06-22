@@ -75,6 +75,7 @@ class PdoSqlRepository implements CrudRepository
     private function prepareAndExecute($sql, array &$bindings)
     {
         $stmt = $this->pdo->prepare($sql);
+
         $stmt->execute($bindings);
 
         return $stmt;
@@ -219,8 +220,9 @@ class PdoSqlRepository implements CrudRepository
         list($sql, $bindings) = $this->sqlRepository->exists($id);
 
         $stmt = $this->prepareAndExecute($sql, $bindings);
+        $result = $stmt->fetch(PDO::FETCH_COLUMN, 0);
 
-        return empty($stmt->fetch(PDO::FETCH_COLUMN, 0));
+        return empty($result);
     }
 
     /**

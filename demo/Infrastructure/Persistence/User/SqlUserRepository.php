@@ -13,6 +13,7 @@ namespace PhpDdd\Demo\Infrastructure\Persistence\User;
 use InvalidArgumentException;
 use PhpDdd\Demo\Domain\User\User;
 use PhpDdd\Demo\Domain\User\UserId;
+use PhpDdd\Demo\Infrastructure\Persistence\SqlEntityRepository;
 use PhpDdd\Demo\Infrastructure\Persistence\SqlRepository;
 use PhpDdd\Foundation\Domain\Repository\CrudRepository;
 use PhpDdd\Foundation\Domain\Repository\Filter;
@@ -20,7 +21,7 @@ use PhpDdd\Foundation\Domain\Repository\Page;
 use PhpDdd\Foundation\Domain\Repository\Pageable;
 use PhpDdd\Foundation\Domain\Repository\Sort;
 
-class SqlUserRepository extends SqlRepository implements CrudRepository
+class SqlUserRepository extends SqlEntityRepository
 {
     /**
      * @var string
@@ -38,13 +39,16 @@ class SqlUserRepository extends SqlRepository implements CrudRepository
      * @var array
      */
     protected $columns = [
-
+        'users.user_id',
+        'users.name',
+        'users.birthdate',
+        'users.email',
     ];
 
     /**
      * Returns the next identity value.
      *
-     * @return mixed
+     * @return UserId
      */
     public function nextIdentity()
     {
@@ -52,33 +56,11 @@ class SqlUserRepository extends SqlRepository implements CrudRepository
     }
 
     /**
-     * Adds a new entity to the storage.
-     *
-     * @param User $value
-     *
-     * @return mixed
-     */
-    public function add($value)
-    {
-        $this->guardForUser($value);
-
-        return [
-            'INSERT INTO users(user_id, name, email, birthdate) VALUES(?, ?, ?, ?);',
-            [
-                (string) $value->userId(),
-                (string) $value->name(),
-                (string) $value->email(),
-                (string) $value->birthdate()
-            ]
-        ];
-    }
-
-    /**
      * @param $value
      *
      * @throws \InvalidArgumentException
      */
-    private function guardForUser($value)
+    protected function guardForEntity($value)
     {
         if (false === ($value instanceof User)) {
             throw new InvalidArgumentException(
@@ -88,159 +70,26 @@ class SqlUserRepository extends SqlRepository implements CrudRepository
     }
 
     /**
-     * Adds a collections of entities to the storage.
-     *
-     * @param array $values
+     * @param User $value
      *
      * @return mixed
      */
-    public function addAll(array $values)
+    protected function entityToArray($value)
     {
-        $sqlArray = [];
-        $bindingsArray = [];
-
-        foreach ($values as &$value) {
-            list($sql, $bindings) = $this->add($value);
-            $sqlArray = array_merge($sqlArray, $sql);
-            $bindingsArray = array_merge($bindingsArray, $bindings);
-        }
-
         return [
-            implode(PHP_EOL, $sqlArray),
-            $bindingsArray
+            (string) $value->userId(),
+            (string) $value->name(),
+            (string) $value->birthDate(),
+            (string) $value->email(),
         ];
     }
 
     /**
-     * Updates one element in the repository with the given $values.
+     * @param $id
      *
-     * @param UserId  $id
-     * @param array|object $values
-     *
-     * @return mixed
+     * @throws \InvalidArgumentException
      */
-    public function update($id, $values)
-    {
-        $this->guardForUserId($id);
-
-        return [
-            'UPDATE users SET users.name = ?, users.email = ? WHERE users.user_id = ? LIMIT 1;',
-            array_merge([(string) $id], (array) $values)
-        ];
-    }
-
-    /**
-     * Updates all elements in the repository with the given $values, given the restrictions
-     * provided by the Filter object.
-     *
-     * @param Filter       $filter
-     * @param array|object $values
-     *
-     * @return array
-     */
-    public function updateAll(Filter $filter, $values)
-    {
-        list($filtersAsSql, $bindings) = $this->filtersToSql($filter);
-
-        return [
-            sprintf('UPDATE users SET users.name = ?, users.email = ?%s;', $filtersAsSql),
-            array_merge((array) $values, $bindings)
-        ];
-    }
-
-    /**
-     * Returns all instances of the type.
-     *
-     * @param Filter $filter
-     * @param Sort   $sort
-     *
-     * @return array
-     */
-    public function findBy(Filter $filter = null, Sort $sort = null)
-    {
-        list($filtersAsSql, $bindings) = $this->filtersToSql($filter);
-
-        return [
-            sprintf('SELECT * FROM users%s%s;', $filtersAsSql, $this->sortToSql($sort)),
-            $bindings
-        ];
-    }
-
-    /**
-     * Returns a Page of entities meeting the paging restriction provided in the Pageable object.
-     *
-     * @param Pageable $pageable
-     *
-     * @return Page
-     */
-    public function findAll(Pageable $pageable)
-    {
-        list($filtersAsSql, $bindings) = $this->filtersToSql($pageable->getFilter());
-
-        return [
-            sprintf(
-                'SELECT * FROM users%s%s LIMIT %s OFFSET %s;',
-                $filtersAsSql,
-                $this->sortToSql($pageable->getSort()),
-                $pageable->getPageSize(),
-                $pageable->getOffset()
-            ),
-            $bindings
-        ];
-    }
-
-    /**
-     * Returns the total amount of elements in the repository given the restrictions provided by the Filter object.
-     *
-     * @param Filter|null $filter
-     *
-     * @return array
-     */
-    public function count(Filter $filter = null)
-    {
-        list($filtersAsSql, $bindings) = $this->filtersToSql($filter);
-
-        return [
-            sprintf('SELECT COUNT(user_id) FROM users%s LIMIT 1;', $filtersAsSql),
-            $bindings
-        ];
-    }
-
-    /**
-     * Returns whether an entity with the given id exists.
-     *
-     * @param UserId $id
-     *
-     * @return array
-     */
-    public function exists($id)
-    {
-        return $this->find($id);
-    }
-
-    /**
-     * Retrieves an entity by its id.
-     *
-     * @param UserId $id
-     *
-     * @return array
-     */
-    public function find($id)
-    {
-        $this->guardForUserId($id);
-
-        return [
-            'SELECT * FROM users WHERE user_id = ? LIMIT 1;',
-            [(string)$id]
-        ];
-    }
-
-    /**
-     * @param UserId $id
-     *
-     * @throws InvalidArgumentException
-     */
-    private function guardForUserId($id)
+    protected function guardForIdentity($id)
     {
         if (false === ($id instanceof UserId)) {
             throw new InvalidArgumentException(
@@ -250,37 +99,14 @@ class SqlUserRepository extends SqlRepository implements CrudRepository
     }
 
     /**
-     * Deletes the entity with the given id.
-     *
      * @param UserId $id
      *
-     * @return array
+     * @return mixed
      */
-    public function delete($id)
+    protected function identityToArray($id)
     {
-        $this->guardForUserId($id);
-
         return [
-            'DELETE FROM users WHERE user_id = ? LIMIT 1;',
-            [(string)$id]
-        ];
-    }
-
-    /**
-     * Deletes all elements in the repository given the restrictions provided by the Filter object.
-     * If $filter is null, all the repository data will be deleted.
-     *
-     * @param Filter $filter
-     *
-     * @return array
-     */
-    public function deleteAll(Filter $filter = null)
-    {
-        list($filtersAsSql, $bindings) = $this->filtersToSql($filter);
-
-        return [
-            sprintf('DELETE FROM users%s;', $filtersAsSql),
-            $bindings
+            (string) $id
         ];
     }
 }

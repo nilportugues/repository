@@ -39,24 +39,6 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
     protected $columns = [];
 
     /**
-     * @return array
-     * @throws \RuntimeException
-     */
-    public function getColumns()
-    {
-        if (empty($this->columns) || false === is_array($this->columns)) {
-            throw new RuntimeException(
-                sprintf(
-                    'No valid columns array has been defined for repository %s.',
-                    __CLASS__
-                )
-            );
-        }
-
-        return $this->columns;
-    }
-
-    /**
      * Returns the next identity value.
      *
      * @return mixed
@@ -72,12 +54,12 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
      */
     public function addAll(array $values)
     {
-        $sqlArray      = [];
+        $sqlArray = [];
         $bindingsArray = [];
 
         foreach ($values as &$value) {
             list($sql, $bindings) = $this->add($value);
-            $sqlArray      = array_merge($sqlArray, $sql);
+            $sqlArray = array_merge($sqlArray, $sql);
             $bindingsArray = array_merge($bindingsArray, $bindings);
         }
 
@@ -100,8 +82,10 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
 
         return [
             sprintf(
-                'INSERT INTO %s(user_id, name, email, birthdate) VALUES(?, ?, ?, ?);',
-                $this->getTableName()
+                'INSERT INTO %s(%s) VALUES(%s);',
+                $this->getTableName(),
+                implode(", ", str_replace($this->getTableName().".", '', $this->getColumns())),
+                implode(", ", array_fill(0, count($this->getColumns()), '?'))
             ),
             $this->entityToArray($value)
         ];
@@ -133,6 +117,24 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
     }
 
     /**
+     * @return array
+     * @throws \RuntimeException
+     */
+    public function getColumns()
+    {
+        if (empty($this->columns) || false === is_array($this->columns)) {
+            throw new RuntimeException(
+                sprintf(
+                    'No valid columns array has been defined for repository %s.',
+                    __CLASS__
+                )
+            );
+        }
+
+        return $this->columns;
+    }
+
+    /**
      * @param object $value
      *
      * @return mixed
@@ -142,7 +144,7 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
     /**
      * Updates one element in the repository with the given $values.
      *
-     * @param object       $id
+     * @param object $id
      * @param array|object $values
      *
      * @return mixed
@@ -153,8 +155,10 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
 
         return [
             sprintf(
-                'UPDATE %s SET users.name = ?, users.email = ? WHERE users.user_id = ? LIMIT 1;',
-                $this->getTableName()
+                'UPDATE %s SET %s WHERE %s LIMIT 1;',
+                $this->getTableName(),
+                $this->updateFields(', '),
+                $this->idFieldsEqual(' AND ')
             ),
             array_merge($this->identityToArray($id), (array)$values)
         ];
@@ -168,6 +172,50 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
     abstract protected function guardForIdentity($id);
 
     /**
+     * @param string $glue
+     * @return string
+     */
+    private function updateFields($glue)
+    {
+        $where = [];
+        foreach (array_diff($this->getColumns(), $this->getPrimaryKey()) as $key) {
+            $where[] = sprintf('%s = ?', $key);
+        }
+        return implode($glue, $where);
+    }
+
+    /**
+     * @return array
+     * @throws \RuntimeException
+     */
+    public function getPrimaryKey()
+    {
+        if (empty($this->tableName)) {
+            throw new RuntimeException(
+                sprintf(
+                    'No primary key column/s have been defined for repository %s.',
+                    __CLASS__
+                )
+            );
+        }
+
+        return (is_array($this->primaryKey)) ? $this->primaryKey : [$this->primaryKey];
+    }
+
+    /**
+     * @param string $glue
+     * @return string
+     */
+    private function idFieldsEqual($glue)
+    {
+        $where = [];
+        foreach ($this->getPrimaryKey() as $key) {
+            $where[] = sprintf('%s = ?', $key);
+        }
+        return implode($glue, $where);
+    }
+
+    /**
      * @param object $id
      *
      * @return mixed
@@ -178,7 +226,7 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
      * Updates all elements in the repository with the given $values, given the restrictions
      * provided by the Filter object.
      *
-     * @param Filter       $filter
+     * @param Filter $filter
      * @param array|object $values
      *
      * @return array
@@ -189,8 +237,9 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
 
         return [
             sprintf(
-                'UPDATE %s SET users.name = ?, users.email = ?%s;',
+                'UPDATE %s SET %s%s;',
                 $this->getTableName(),
+                $this->updateFields(', '),
                 $filtersAsSql
             ),
             array_merge((array)$values, $bindings)
@@ -201,7 +250,7 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
      * Returns all instances of the type.
      *
      * @param Filter $filter
-     * @param Sort   $sort
+     * @param Sort $sort
      *
      * @return array
      */
@@ -211,13 +260,31 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
 
         return [
             sprintf(
-                'SELECT * FROM %s%s%s;',
+                'SELECT %s FROM %s%s%s;',
+                $this->getAliasedColumns(),
                 $this->getTableName(),
                 $filtersAsSql,
                 $this->sortToSql($sort)
             ),
             $bindings
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAliasedColumns()
+    {
+        $columns = $this->getColumns();
+
+        $keys = array_keys($columns);
+        if (false === is_numeric(array_pop($keys))) {
+            foreach ($columns as $alias => $column) {
+                $columns[$alias] = sprintf("%s AS '%s'", $column, $alias);
+            }
+        }
+
+        return implode(', ', $columns);
     }
 
     /**
@@ -233,7 +300,8 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
 
         return [
             sprintf(
-                'SELECT * FROM %s%s%s LIMIT %s OFFSET %s;',
+                'SELECT %s FROM %s%s%s LIMIT %s OFFSET %s;',
+                $this->getAliasedColumns(),
                 $this->getTableName(),
                 $filtersAsSql,
                 $this->sortToSql($pageable->getSort()),
@@ -267,24 +335,6 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
     }
 
     /**
-     * @return array
-     * @throws \RuntimeException
-     */
-    public function getPrimaryKey()
-    {
-        if (empty($this->tableName)) {
-            throw new RuntimeException(
-                sprintf(
-                    'No primary key column/s have been defined for repository %s.',
-                    __CLASS__
-                )
-            );
-        }
-
-        return (is_array($this->primaryKey)) ? $this->primaryKey : [$this->primaryKey];
-    }
-
-    /**
      * Returns whether an entity with the given id exists.
      *
      * @param object $id
@@ -309,8 +359,10 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
 
         return [
             sprintf(
-                'SELECT * FROM %s WHERE user_id = ? LIMIT 1;',
-                $this->getTableName()
+                'SELECT %s FROM %s WHERE % LIMIT 1;',
+                $this->getAliasedColumns(),
+                $this->getTableName(),
+                $this->idFieldsEqual(' AND ')
             ),
             $this->identityToArray($id)
         ];
@@ -329,8 +381,9 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
 
         return [
             sprintf(
-                'DELETE FROM %s WHERE user_id = ? LIMIT 1;',
-                $this->getTableName()
+                'DELETE FROM %s WHERE %s LIMIT 1;',
+                $this->getTableName(),
+                $this->idFieldsEqual(' AND ')
             ),
             $this->identityToArray($id)
         ];

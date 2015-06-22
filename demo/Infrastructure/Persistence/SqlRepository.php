@@ -123,7 +123,7 @@ abstract class SqlRepository
      *
      * @return string
      */
-    private function getConditionPlaceholders(array &$newBindings)
+    private function getConditionPlaceholders(array $newBindings)
     {
         return array_keys($newBindings);
     }
