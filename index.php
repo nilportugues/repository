@@ -6,12 +6,12 @@ use PhpDdd\Demo\Domain\User\User;
 use PhpDdd\Demo\Domain\User\UserEmail;
 use PhpDdd\Demo\Domain\User\UserId;
 use PhpDdd\Demo\Domain\User\UserName;
-use PhpDdd\Demo\Infrastructure\Persistence\PdoSqlRepository;
 use PhpDdd\Demo\Infrastructure\Persistence\User\SqlUserRepository;
 use PhpDdd\Foundation\Domain\Repository\Pageable;
 use PhpDdd\Foundation\Domain\Repository\Sort;
 use PhpDdd\Foundation\Domain\Repository\Order;
 use PhpDdd\Foundation\Domain\Repository\Filter;
+use PhpDdd\Foundation\Infrastructure\Persistence\Repository\Sql\Pdo\PdoSqlRepository;
 
 /*#######################################################################################
  *

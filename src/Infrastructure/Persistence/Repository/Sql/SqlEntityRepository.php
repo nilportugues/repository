@@ -8,8 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace PhpDdd\Demo\Infrastructure\Persistence;
+namespace PhpDdd\Foundation\Infrastructure\Persistence\Repository\Sql;
 
+use InvalidArgumentException;
 use PhpDdd\Foundation\Domain\Repository\CrudRepository;
 use PhpDdd\Foundation\Domain\Repository\Filter;
 use PhpDdd\Foundation\Domain\Repository\Page;
@@ -37,6 +38,16 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
      * @var array
      */
     protected $columns = [];
+
+    /**
+     * @var string
+     */
+    protected $entityIdClass;
+
+    /**
+     * @var string
+     */
+    protected $entityClass;
 
     /**
      * Returns the next identity value.
@@ -94,9 +105,40 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
     /**
      * @param $value
      *
+     * @throws InvalidArgumentException
+     */
+    protected function guardForEntity($value)
+    {
+        if (true === empty($this->entityClass)) {
+            throw new RuntimeException('Entity class has not been set.');
+        }
+
+        $class = $this->entityClass;
+        if (false === ($value instanceof $class)) {
+            throw new InvalidArgumentException(
+                sprintf('Provided $value is not and instance of %s', $class)
+            );
+        }
+    }
+
+    /**
+     * @param $id
+     *
      * @throws \InvalidArgumentException
      */
-    abstract protected function guardForEntity($value);
+    protected function guardForIdentity($id)
+    {
+        if (true === empty($this->entityIdClass)) {
+            throw new RuntimeException('EntityId class has not been set.');
+        }
+
+        $class = $this->entityIdClass;
+        if (false === ($id instanceof $class)) {
+            throw new InvalidArgumentException(
+                sprintf('Provided $id is not and instance of %s', $class)
+            );
+        }
+    }
 
     /**
      * @throws \RuntimeException
@@ -163,13 +205,6 @@ abstract class SqlEntityRepository extends SqlRepository implements CrudReposito
             array_merge($this->identityToArray($id), (array)$values)
         ];
     }
-
-    /**
-     * @param $id
-     *
-     * @throws \InvalidArgumentException
-     */
-    abstract protected function guardForIdentity($id);
 
     /**
      * @param string $glue

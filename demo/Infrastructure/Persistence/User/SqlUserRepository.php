@@ -10,16 +10,9 @@
 
 namespace PhpDdd\Demo\Infrastructure\Persistence\User;
 
-use InvalidArgumentException;
 use PhpDdd\Demo\Domain\User\User;
 use PhpDdd\Demo\Domain\User\UserId;
-use PhpDdd\Demo\Infrastructure\Persistence\SqlEntityRepository;
-use PhpDdd\Demo\Infrastructure\Persistence\SqlRepository;
-use PhpDdd\Foundation\Domain\Repository\CrudRepository;
-use PhpDdd\Foundation\Domain\Repository\Filter;
-use PhpDdd\Foundation\Domain\Repository\Page;
-use PhpDdd\Foundation\Domain\Repository\Pageable;
-use PhpDdd\Foundation\Domain\Repository\Sort;
+use PhpDdd\Foundation\Infrastructure\Persistence\Repository\Sql\SqlEntityRepository;
 
 class SqlUserRepository extends SqlEntityRepository
 {
@@ -46,6 +39,16 @@ class SqlUserRepository extends SqlEntityRepository
     ];
 
     /**
+     * @var string
+     */
+    protected $entityClass = User::class;
+
+    /**
+     * @var string
+     */
+    protected $entityIdClass = UserId::class;
+
+    /**
      * Returns the next identity value.
      *
      * @return UserId
@@ -55,19 +58,6 @@ class SqlUserRepository extends SqlEntityRepository
         return new UserId();
     }
 
-    /**
-     * @param $value
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function guardForEntity($value)
-    {
-        if (false === ($value instanceof User)) {
-            throw new InvalidArgumentException(
-                sprintf('Provided $value is not and instance of %s', User::class)
-            );
-        }
-    }
 
     /**
      * @param User $value
@@ -84,19 +74,6 @@ class SqlUserRepository extends SqlEntityRepository
         ];
     }
 
-    /**
-     * @param $id
-     *
-     * @throws \InvalidArgumentException
-     */
-    protected function guardForIdentity($id)
-    {
-        if (false === ($id instanceof UserId)) {
-            throw new InvalidArgumentException(
-                sprintf('Provided $id is not and instance of %s', UserId::class)
-            );
-        }
-    }
 
     /**
      * @param UserId $id

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace PhpDdd\Demo\Infrastructure\Persistence;
+namespace PhpDdd\Foundation\Infrastructure\Persistence\Repository\Sql;
 
 use PhpDdd\Foundation\Domain\Repository\BaseFilter;
 use PhpDdd\Foundation\Domain\Repository\Filter;
