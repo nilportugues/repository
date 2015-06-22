@@ -13,11 +13,36 @@ namespace PhpDdd\Foundation\Domain\Repository;
 interface WriteRepository extends Repository
 {
     /**
+     * Returns the next identity value.
+     *
+     * @return mixed
+     */
+    public function nextIdentity();
+
+    /**
+     * Adds a new entity to the storage.
+     *
+     * @param array|object $value
+     *
+     * @return mixed
+     */
+    public function add($value);
+
+    /**
+     * Adds a collections of entities to the storage.
+     *
+     * @param array $values
+     *
+     * @return mixed
+     */
+    public function addAll(array $values);
+
+    /**
      * Deletes the entity with the given id.
      *
      * @param $id
      *
-     * @return void
+     * @return mixed
      */
     public function delete($id);
 
@@ -27,7 +52,7 @@ interface WriteRepository extends Repository
      *
      * @param Filter $filter
      *
-     * @return void
+     * @return mixed
      */
     public function deleteAll(Filter $filter = null);
 }

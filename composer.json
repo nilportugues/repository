@@ -21,12 +21,13 @@
   },
   "autoload": {
     "psr-4": {
-      "PhpDdd\\Foundation\\Domain\\Repository\\": "src/"
+      "PhpDdd\\Demo\\": "demo/",
+      "PhpDdd\\Foundation\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "PhpDdd\\Tests\\Foundation\\\\Domain\\Repository\\": "tests/"
+      "PhpDdd\\Tests\\Foundation\\": "tests/"
     }
   },
   "config": {

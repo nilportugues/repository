@@ -17,8 +17,11 @@ final class BaseFilter
     const LESS_THAN_OR_EQUAL    = 'lte';
     const LESS_THAN             = 'lt';
     const CONTAINS              = 'contains';
+    const STARTS_WITH           = 'start_with';
+    const ENDS_WITH             = 'end_with';
     const NOT_CONTAINS          = 'not_contains';
     const RANGES                = 'ranges';
+    const NOT_RANGES                = 'not_ranges';
     const GROUP                 = 'group';
     const EQUALS                = 'equals';
     const NOT_EQUAL             = 'not_equals';
@@ -67,6 +70,32 @@ final class BaseFilter
     public function hasEmpty($filterName)
     {
         $this->emptyAttributes[] = $filterName;
+
+        return $this;
+    }
+
+    /**
+     * @param string $filterName
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function startsWith($filterName, $value)
+    {
+        $this->addFilter(self::STARTS_WITH, $filterName, $value);
+
+        return $this;
+    }
+
+    /**
+     * @param string $filterName
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function endsWith($filterName, $value)
+    {
+        $this->addFilter(self::ENDS_WITH, $filterName, $value);
 
         return $this;
     }
@@ -135,12 +164,27 @@ final class BaseFilter
      *
      * @return $this
      */
-    public function rangesBetween($filterName, $firstValue, $secondValue)
+    public function ranges($filterName, $firstValue, $secondValue)
     {
         $this->addFilter(self::RANGES, $filterName, [$firstValue, $secondValue]);
 
         return $this;
     }
+
+    /**
+     * @param string $filterName
+     * @param mixed  $firstValue
+     * @param mixed  $secondValue
+     *
+     * @return $this
+     */
+    public function notRanges($filterName, $firstValue, $secondValue)
+    {
+        $this->addFilter(self::NOT_RANGES, $filterName, [$firstValue, $secondValue]);
+
+        return $this;
+    }
+
 
     /**
      * @param string $filterName

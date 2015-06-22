@@ -30,17 +30,17 @@ class SortTest extends PHPUnit_Framework_TestCase
 
     public function testItCanAddSorting()
     {
-        $sortAsc = new Sort(['size', 'pages'], new Order('ASC'));
+        $originalSort = new Sort(['size', 'pages'], new Order('ASC'));
         $sortDesc = new Sort(['words'], new Order('DESC'));
 
-        $mergedSort = $sortAsc->andSort($sortDesc);
+        $originalSort->andSort($sortDesc);
 
         $expected = new Collection();
         $expected['size'] = new Order('ASC');
         $expected['pages'] = new Order('ASC');
         $expected['words'] = new Order('DESC');
 
-        $this->assertEquals($expected, $mergedSort->getProperties());
+        $this->assertEquals($expected, $originalSort->getProperties());
     }
 
     public function testItCanSetOrderForAProperty()

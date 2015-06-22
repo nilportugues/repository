@@ -10,8 +10,18 @@
 
 namespace PhpDdd\Foundation\Domain\Repository;
 
-interface CrudRepository extends ReadRepository, WriteRepository
+interface CrudRepository extends ReadRepository, WriteRepository, PageRepository
 {
+    /**
+     * Updates one element in the repository with the given $values.
+     *
+     * @param $id
+     * @param array|object $values
+     *
+     * @return mixed
+     */
+    public function update($id, $values);
+
     /**
      * Updates all elements in the repository with the given $values, given the restrictions
      * provided by the Filter object.
@@ -19,7 +29,7 @@ interface CrudRepository extends ReadRepository, WriteRepository
      * @param Filter       $filter
      * @param array|object $values
      *
-     * @return void
+     * @return mixed
      */
     public function updateAll(Filter $filter, $values);
 }

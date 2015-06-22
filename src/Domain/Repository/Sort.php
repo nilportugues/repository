@@ -59,15 +59,14 @@ final class Sort
      */
     public function andSort(self $sort)
     {
-        $self = new self();
-        $self->properties = new Collection(
+        $this->properties = new Collection(
             array_merge(
                 $this->getProperties()->toArray(),
                 $sort->getProperties()->toArray()
             )
         );
 
-        return $self;
+        return $this;
     }
 
     /**

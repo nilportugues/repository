@@ -19,15 +19,15 @@ interface ReadRepository extends Repository
      *
      * @return mixed
      */
-    public function findOne($id);
+    public function find($id);
 
     /**
      * Returns all instances of the type.
      *
-     * @param Sort   $sort
      * @param Filter $filter
+     * @param Sort   $sort
      *
      * @return mixed
      */
-    public function findAll(Sort $sort = null, Filter $filter = null);
+    public function findBy(Filter $filter = null, Sort $sort = null);
 }

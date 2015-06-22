@@ -48,6 +48,36 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->filter->get());
     }
 
+    public function testItShouldAddFilterForStartsWith()
+    {
+        $this->filter->startsWith('name', 'N');
+
+        $expected = [
+            'start_with'        => [
+                'name' => ['N']
+            ],
+            'be_empty'     => [],
+            'be_not_empty' => []
+        ];
+
+        $this->assertEquals($expected, $this->filter->get());
+    }
+
+    public function testItShouldAddFilterForEndsWith()
+    {
+        $this->filter->endsWith('name', 'N');
+
+        $expected = [
+            'end_with'        => [
+                'name' => ['N']
+            ],
+            'be_empty'     => [],
+            'be_not_empty' => []
+        ];
+
+        $this->assertEquals($expected, $this->filter->get());
+    }
+
     public function testItShouldAddFilterForEquals()
     {
         $this->filter->equals('name', 'Nil');
@@ -97,10 +127,28 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForRangesBetween()
     {
-        $this->filter->rangesBetween('age', 18, 50);
+        $this->filter->ranges('age', 18, 50);
 
         $expected = [
             'ranges'         => [
+                'age' => [
+                    [18, 50]
+                ]
+            ],
+            'be_empty'     => [],
+            'be_not_empty' => []
+        ];
+
+        $this->assertEquals($expected, $this->filter->get());
+    }
+
+
+    public function testItShouldAddFilterForNotRangesBetween()
+    {
+        $this->filter->notRanges('age', 18, 50);
+
+        $expected = [
+            'not_ranges'         => [
                 'age' => [
                     [18, 50]
                 ]
