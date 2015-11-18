@@ -10,7 +10,7 @@
 
 namespace PhpDdd\Foundation\Domain\Repository;
 
-final class BaseFilter
+class BaseFilter
 {
     const GREATER_THAN_OR_EQUAL = 'gte';
     const GREATER_THAN          = 'gt';
