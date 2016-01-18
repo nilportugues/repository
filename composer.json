@@ -1,9 +1,9 @@
 {
-  "name": "phpddd/repository",
+  "name": "nilportugues/repository",
   "description": "Implementation of a base repository",
   "keywords": ["ddd", "hexagonal", "ports and adapters", "ports", "adapters", "repository", "pageable", "pagination", "nil portugues", "nilportugues"],
   "type": "library",
-  "homepage": "http://phpddd.com",
+  "homepage": "http://nilportugues.com",
   "license": "MIT",
   "authors": [
     {
@@ -15,18 +15,17 @@
      "php": ">=5.5"
   },
   "require-dev": {
-    "phpunit/phpunit": "~4.7",
-    "fabpot/php-cs-fixer": "dev-master"
+    "phpunit/phpunit": "~4.8",
+    "fabpot/php-cs-fixer": "1.9.*"
   },
   "autoload": {
     "psr-4": {
-      "PhpDdd\\Demo\\": "demo/",
-      "PhpDdd\\Foundation\\": "src/"
+      "NilPortugues\\Foundation\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "PhpDdd\\Tests\\Foundation\\": "tests/"
+      "NilPortugues\\Tests\\Foundation\\": "tests/"
     }
   },
   "config": {
