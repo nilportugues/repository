@@ -35,7 +35,7 @@ WIP
 
 To run the PHPUnit tests at the command line, go to the tests directory and issue phpunit.
 
-This library attempts to comply with [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/), [PSR-4](http://www.php-fig.org/psr/psr-4/) and [PSR-7](http://www.php-fig.org/psr/psr-7/).
+This library attempts to comply with [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/), [PSR-4](http://www.php-fig.org/psr/psr-4/).
 
 If you notice compliance oversights, please send a patch via [Pull Request](https://github.com/nilportugues/repository/pulls).
 
