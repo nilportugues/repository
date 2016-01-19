@@ -31,7 +31,7 @@ WIP
 
 ---
 
-### Quality
+## Quality
 
 To run the PHPUnit tests at the command line, go to the tests directory and issue phpunit.
 
@@ -40,7 +40,7 @@ This library attempts to comply with [PSR-1](http://www.php-fig.org/psr/psr-1/),
 If you notice compliance oversights, please send a patch via [Pull Request](https://github.com/nilportugues/repository/pulls).
 
 
-### Contribute
+## Contribute
 
 Contributions to the package are always welcome!
 
@@ -48,7 +48,7 @@ Contributions to the package are always welcome!
 * You can grab the source code at the package's [Git repository](https://github.com/nilportugues/repository).
 
 
-### Support
+## Support
 
 Get in touch with me using one of the following means:
 
@@ -56,11 +56,11 @@ Get in touch with me using one of the following means:
  - Opening an [Issue](https://github.com/nilportugues/repository/issues/new)
 
 
-### Authors
+## Authors
 
 * [Nil Portugués Calderó](http://nilportugues.com)
 * [The Community Contributors](https://github.com/nilportugues/repository/graphs/contributors)
 
 
-### License
+## License
 The code base is licensed under the [MIT license](LICENSE).
