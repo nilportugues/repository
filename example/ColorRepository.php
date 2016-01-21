@@ -8,6 +8,7 @@ use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Page;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Pageable;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort;
+use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryFilter;
 use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemorySorter;
 
 class ColorRepository implements ColorRepositoryInterface
@@ -61,8 +62,8 @@ class ColorRepository implements ColorRepositoryInterface
     {
         $results = $this->data;
 
-        //@todo implement code filtering.
         if (null !== $filter) {
+            $results = InMemoryFilter::filter($results, $filter);
         }
 
         if (null !== $sort) {
@@ -83,7 +84,7 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function persist($value)
     {
-        $id = (string) $value->nameId();
+        $id = (string) $value->id();
 
         $this->data[$id] = clone $value;
     }
