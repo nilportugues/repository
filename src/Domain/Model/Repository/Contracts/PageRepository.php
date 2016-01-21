@@ -22,5 +22,5 @@ interface PageRepository
      *
      * @return Page
      */
-    public function findAll(Pageable $pageable);
+    public function findAll(Pageable $pageable = null);
 }

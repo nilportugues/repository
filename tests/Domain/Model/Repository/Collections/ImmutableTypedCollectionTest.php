@@ -1,4 +1,5 @@
 <?php
+
 namespace NilPortugues\Tests\Foundation\Domain\Model\Repository\Collections;
 
 use DateTime;

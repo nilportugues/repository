@@ -23,7 +23,15 @@ interface Page
      * @param Filter $filter
      * @param Fields $fields
      */
-    public function __construct(array $elements, $totalElements, $pageNumber, $totalPages, Sort $sort, Filter $filter, Fields $fields);
+    public function __construct(
+        array $elements,
+        $totalElements,
+        $pageNumber,
+        $totalPages,
+        Sort $sort = null,
+        Filter $filter = null,
+        Fields $fields = null
+    );
 
     /**
      * Returns the page content as an array.

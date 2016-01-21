@@ -6,6 +6,7 @@ use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Fields;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Filter;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Page;
+use NilPortugues\Foundation\Domain\Model\Repository\Page as ResultPage;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Pageable;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort;
 use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryFilter;
@@ -98,7 +99,11 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function delete(Identity $id)
     {
-        // TODO: Implement delete() method.
+        if (false === array_key_exists($id->id(), $this->data)) {
+            throw new ColorNotFoundException();
+        }
+
+        unset($this->data[$id->id()]);
     }
 
     /**
@@ -108,11 +113,20 @@ class ColorRepository implements ColorRepositoryInterface
      *
      * @return Page
      */
-    public function findAll(Pageable $pageable)
+    public function findAll(Pageable $pageable = null)
     {
+        if (null === $pageable) {
+           return new ResultPage($this->data, count($this->data), 1, 1);
+        }
+
         $results = $this->findBy($pageable->getFilter(), $pageable->getSort());
 
-        return array_slice($results, $pageable->getOffset() - 1, $pageable->getPageSize());
+        return new ResultPage(
+            array_slice($results, $pageable->getOffset() - 1, $pageable->getPageSize()),
+            count($results),
+            $pageable->getPageNumber(),
+            $pageable->last()->getPageNumber()
+        );
     }
 
     /**
