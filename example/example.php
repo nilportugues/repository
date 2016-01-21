@@ -23,17 +23,17 @@ $repository = new ColorRepository($colors);
 
 echo '<h2>Print all colors</h2>';
 echo '<pre>';
-print_r($repository->findAll());
+print_r($repository->findAll()->getContent());
 echo '</pre>';
 
 
 
-echo '<h2>Print all names containing an E</h2>';
+echo '<h2>Print all names containing an O</h2>';
 $filter = new Filter();
-$filter->must()->contains('name', 'e');
+$filter->must()->contains('name', 'o');
 
-$colorsContainingE = $repository->findBy($filter);
+$colorsContainingO = $repository->findBy($filter);
 echo '<pre>';
-print_r($colorsContainingE);
+print_r($colorsContainingO);
 echo '</pre>';
 
