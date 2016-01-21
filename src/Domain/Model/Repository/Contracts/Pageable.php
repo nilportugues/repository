@@ -70,11 +70,6 @@ interface Pageable
     public function first();
 
     /**
-     * @return Pageable
-     */
-    public function last();
-
-    /**
      * @return Filter
      */
     public function getFilter();

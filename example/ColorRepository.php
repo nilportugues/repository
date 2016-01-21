@@ -125,7 +125,7 @@ class ColorRepository implements ColorRepositoryInterface
             array_slice($results, $pageable->getOffset() - 1, $pageable->getPageSize()),
             count($results),
             $pageable->getPageNumber(),
-            $pageable->last()->getPageNumber()
+            ceil(count($results) / $pageable->getPageSize())
         );
     }
 
