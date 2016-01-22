@@ -60,10 +60,15 @@ class InMemoryFilter
     {
         foreach ($filters as $filterName => $valuePair) {
             foreach ($valuePair as $property => $value) {
+
+                $value = array_shift($value);
+
                 if (is_array($value)) {
                     if (count($value) > 1) {
+
                         switch ($filterName) {
                             case BaseFilter::RANGES:
+
                                 $filteredResults = array_merge(
                                     $filteredResults,
                                     array_filter($results, self::ranges($property, $value[0], $value[1]), ARRAY_FILTER_USE_BOTH)
@@ -84,7 +89,7 @@ class InMemoryFilter
                         }
                         break;
                     }
-                    $value = array_shift($value);
+
                 }
 
                 switch ($filterName) {
@@ -180,6 +185,9 @@ class InMemoryFilter
      */
     private static function notEquals($property, $value)
     {
+        return function ($v, $k) use ($property, $value) {
+            return InMemoryValue::get($v, $property) != $value;
+        };
     }
 
     /**
@@ -190,6 +198,9 @@ class InMemoryFilter
      */
     private static function equals($property, $value)
     {
+        return function ($v, $k) use ($property, $value) {
+            return InMemoryValue::get($v, $property) == $value;
+        };
     }
 
     /**
@@ -210,6 +221,11 @@ class InMemoryFilter
      */
     private static function endsWith($property, $value)
     {
+        return function ($v, $k) use ($property, $value) {
+            $v = InMemoryValue::get($v, $property);
+
+            return 1 == preg_match(sprintf('/%s$/i', $value), $v);
+        };
     }
 
     /**
@@ -220,35 +236,40 @@ class InMemoryFilter
      */
     private static function startsWith($property, $value)
     {
-    }
-
-    /**
-     * @param string                $property
-     * @param string|int|float|bool $needle
-     *
-     * @return \Closure
-     */
-    private static function notContains($property, $needle)
-    {
-        return function ($v, $k) use ($property,$needle) {
+        return function ($v, $k) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
-            return false === mb_strpos($v, $needle);
+            return 1 == preg_match(sprintf('/^%s/i', $value), $v);
         };
     }
 
     /**
      * @param string                $property
-     * @param string|int|float|bool $needle
+     * @param string|int|float|bool $value
      *
      * @return \Closure
      */
-    private static function contains($property, $needle)
+    private static function notContains($property, $value)
     {
-        return function ($v, $k) use ($property,$needle) {
+        return function ($v, $k) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
-            return mb_strpos($v, $needle);
+            return 0 == preg_match(sprintf('/%s/i', $value), $v);
+        };
+    }
+
+    /**
+     * @param string                $property
+     * @param string|int|float|bool $value
+     *
+     * @return \Closure
+     */
+    private static function contains($property, $value)
+    {
+        return function ($v, $k) use ($property, $value) {
+            $v = InMemoryValue::get($v, $property);
+
+            return 1 == preg_match(sprintf('/%s/i', $value), $v);
         };
     }
 
@@ -293,6 +314,17 @@ class InMemoryFilter
     }
 
     /**
+     * @param $callable
+     * @return \Closure
+     */
+    private static function not($callable)
+    {
+        return function () use ($callable) {
+            return !$callable();
+        };
+    }
+
+    /**
      * @param string           $property
      * @param string|int|float $value1
      * @param string|int|float $value2
@@ -301,6 +333,7 @@ class InMemoryFilter
      */
     private static function notRanges($property, $value1, $value2)
     {
+        return self::not(self::ranges($property, $value1, $value2));
     }
 
     /**
@@ -312,5 +345,11 @@ class InMemoryFilter
      */
     private static function ranges($property, $value1, $value2)
     {
+
+        return function ($v, $k) use ($property, $value1, $value2) {
+            $v = InMemoryValue::get($v, $property);
+
+            return $v >= $value1 && $v <=$value2;
+        };
     }
 }

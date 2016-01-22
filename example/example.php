@@ -28,12 +28,23 @@ echo '</pre>';
 
 
 
-echo '<h2>Print all names containing an O</h2>';
+echo '<h2>Print all names containing R</h2>';
 $filter = new Filter();
-$filter->must()->contains('name', 'o');
+$filter->must()->contains('name', 'R');
 
-$colorsContainingO = $repository->findBy($filter);
+$colorsContaining = $repository->findBy($filter);
 echo '<pre>';
-print_r($colorsContainingO);
+print_r($colorsContaining);
+echo '</pre>';
+
+
+
+echo '<h2>Print all colours with id between 2 and 6</h2>';
+$filter = new Filter();
+$filter->must()->ranges('hexCode', 2, 6);
+
+$idRanges = $repository->findBy($filter);
+echo '<pre>';
+print_r($idRanges);
 echo '</pre>';
 
