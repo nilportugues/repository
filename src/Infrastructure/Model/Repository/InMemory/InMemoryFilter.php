@@ -10,8 +10,10 @@
  */
 namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory;
 
+use Exception;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\BaseFilter;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Filter;
+use Traversable;
 
 /**
  * Class InMemoryFilter.
@@ -60,12 +62,10 @@ class InMemoryFilter
     {
         foreach ($filters as $filterName => $valuePair) {
             foreach ($valuePair as $property => $value) {
-
                 $value = array_shift($value);
 
                 if (is_array($value)) {
                     if (count($value) > 1) {
-
                         switch ($filterName) {
                             case BaseFilter::RANGES:
 
@@ -89,7 +89,6 @@ class InMemoryFilter
                         }
                         break;
                     }
-
                 }
 
                 switch ($filterName) {
@@ -224,6 +223,14 @@ class InMemoryFilter
         return function ($v, $k) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
+            if (false === is_scalar($v)) {
+                throw new Exception(sprintf("Value for '%s' is not a scalar value.", $property));
+            }
+
+            if (false === is_scalar($value)) {
+                throw new Exception("Ending value provided is not a scalar value.");
+            }
+
             return 1 == preg_match(sprintf('/%s$/i', $value), $v);
         };
     }
@@ -238,6 +245,14 @@ class InMemoryFilter
     {
         return function ($v, $k) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
+
+            if (false === is_scalar($v)) {
+                throw new Exception(sprintf("Value for '%s' is not a scalar value.", $property));
+            }
+
+            if (false === is_scalar($value)) {
+                throw new Exception("Starting value provided is not a scalar value.");
+            }
 
             return 1 == preg_match(sprintf('/^%s/i', $value), $v);
         };
@@ -254,7 +269,23 @@ class InMemoryFilter
         return function ($v, $k) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
-            return 0 == preg_match(sprintf('/%s/i', $value), $v);
+            if (is_scalar($v)) {
+                return 0 == preg_match(sprintf('/%s/i', $value), $v);
+            }
+
+            if (is_array($v)) {
+                return false === in_array($value, $v);
+            }
+
+            $contains = false;
+            if ($v instanceof Traversable) {
+                foreach ($v as $item) {
+                    $contains = ($value == $item);
+                }
+                $contains = !$contains;
+            }
+
+            return $contains;
         };
     }
 
@@ -269,7 +300,22 @@ class InMemoryFilter
         return function ($v, $k) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
-            return 1 == preg_match(sprintf('/%s/i', $value), $v);
+            if (is_scalar($v)) {
+                return 1 == preg_match(sprintf('/%s/i', $value), $v);
+            }
+
+            if (is_array($v)) {
+                return in_array($value, $v);
+            }
+
+            $contains = false;
+            if ($v instanceof Traversable) {
+                foreach ($v as $item) {
+                    return ($value == $item);
+                }
+            }
+
+            return $contains;
         };
     }
 
@@ -314,17 +360,6 @@ class InMemoryFilter
     }
 
     /**
-     * @param $callable
-     * @return \Closure
-     */
-    private static function not($callable)
-    {
-        return function () use ($callable) {
-            return !$callable();
-        };
-    }
-
-    /**
      * @param string           $property
      * @param string|int|float $value1
      * @param string|int|float $value2
@@ -333,7 +368,13 @@ class InMemoryFilter
      */
     private static function notRanges($property, $value1, $value2)
     {
-        return self::not(self::ranges($property, $value1, $value2));
+        return function ($v, $k) use ($property, $value1, $value2) {
+            $v = InMemoryValue::get($v, $property);
+
+            //@todo check if $v is of "type" and $value1 or $value2 are of the same "type" to... (is_object, is_scalar)
+
+            return !($v >= $value1 && $v <=$value2);
+        };
     }
 
     /**
@@ -345,9 +386,10 @@ class InMemoryFilter
      */
     private static function ranges($property, $value1, $value2)
     {
-
         return function ($v, $k) use ($property, $value1, $value2) {
             $v = InMemoryValue::get($v, $property);
+
+            //@todo check if $v is of "type" and $value1 or $value2 are of the same "type" to... (is_object, is_scalar)
 
             return $v >= $value1 && $v <=$value2;
         };
