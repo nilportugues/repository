@@ -25,7 +25,7 @@ class Order implements OrderInterface
      */
     public function __construct($direction)
     {
-        $direction = (string) strtoupper($direction);
+        $direction = (string)strtoupper($direction);
         $this->assert($direction);
         $this->direction = $direction;
     }
@@ -63,7 +63,7 @@ class Order implements OrderInterface
      */
     public function __toString()
     {
-        return (string) $this->direction;
+        return (string)$this->direction;
     }
 
     /**

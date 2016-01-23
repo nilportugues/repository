@@ -10,10 +10,10 @@
  */
 namespace NilPortugues\Foundation\Domain\Model\Repository;
 
+use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Fields as FieldsInterface;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Filter as FilterInterface;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Pageable as PageableInterface;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort as SortInterface;
-use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Fields as FieldsInterface;
 
 class Pageable implements PageableInterface
 {
@@ -55,11 +55,11 @@ class Pageable implements PageableInterface
         FilterInterface $filter = null,
         FieldsInterface $fields = null
     ) {
-        $this->pageNumber = (int) $pageNumber;
-        $this->pageSize = (int) $pageSize;
-        $this->sort = $sort;
-        $this->filter = $filter;
-        $this->fields = $fields;
+        $this->pageNumber = (int)$pageNumber;
+        $this->pageSize   = (int)$pageSize;
+        $this->sort       = $sort;
+        $this->filter     = $filter;
+        $this->fields     = $fields;
     }
 
     /**
@@ -122,7 +122,8 @@ class Pageable implements PageableInterface
     public function previousOrFirst()
     {
         if ($this->hasPrevious()) {
-            return new self($this->getPageNumber() - 1, $this->getPageSize(), $this->sort, $this->filter, $this->fields);
+            return new self($this->getPageNumber() - 1, $this->getPageSize(), $this->sort, $this->filter,
+                $this->fields);
         }
 
         return $this->first();

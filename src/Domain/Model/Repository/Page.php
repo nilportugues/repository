@@ -69,13 +69,13 @@ class Page implements PageInterface
         FilterInterface $filter = null,
         FieldsInterface $fields = null
     ) {
-        $this->elements = ImmutableTypedCollection::fromArray($elements);
-        $this->totalElements = (int) $totalElements;
-        $this->pageNumber = (int) $pageNumber;
-        $this->totalPages = (int) $totalPages;
-        $this->sort = ($sort) ? $sort : new Sort();
-        $this->filter = ($filter) ? $filter : new Filter();
-        $this->fields = ($fields) ? $fields : new Fields();
+        $this->elements      = ImmutableTypedCollection::fromArray($elements);
+        $this->totalElements = (int)$totalElements;
+        $this->pageNumber    = (int)$pageNumber;
+        $this->totalPages    = (int)$totalPages;
+        $this->sort          = ($sort) ? $sort : new Sort();
+        $this->filter        = ($filter) ? $filter : new Filter();
+        $this->fields        = ($fields) ? $fields : new Fields();
     }
 
     /**

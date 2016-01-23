@@ -35,9 +35,9 @@ class Filter implements FilterInterface
     public function filters()
     {
         return [
-            'must' => $this->must()->get(),
+            'must'     => $this->must()->get(),
             'must_not' => $this->mustNot()->get(),
-            'should' => $this->should()->get(),
+            'should'   => $this->should()->get(),
         ];
     }
 

@@ -29,7 +29,7 @@ class ImmutableTypedCollection extends SplFixedArray
     public function offsetSet($index, $newval)
     {
         if (null === $index) {
-            $index = (int) $this->calculateIndexKey();
+            $index = (int)$this->calculateIndexKey();
         }
 
         (null === $this->type) ? $this->setGuardType($newval) : $this->guard($newval);
@@ -53,7 +53,7 @@ class ImmutableTypedCollection extends SplFixedArray
      */
     protected function setGuardType($newval)
     {
-        $type = gettype($newval);
+        $type       = gettype($newval);
         $this->type = ('object' === $type) ? get_class($newval) : $type;
     }
 

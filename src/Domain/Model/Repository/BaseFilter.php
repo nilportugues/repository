@@ -32,8 +32,8 @@ class BaseFilter implements BaseFilterInterface
      */
     public function __construct()
     {
-        $this->filters = [];
-        $this->emptyAttributes = [];
+        $this->filters            = [];
+        $this->emptyAttributes    = [];
         $this->notEmptyAttributes = [];
     }
 
@@ -81,8 +81,8 @@ class BaseFilter implements BaseFilterInterface
      */
     protected function addFilter($property, $filterName, $value)
     {
-        $filterName = (string) $filterName;
-        $property = (string) $property;
+        $filterName = (string)$filterName;
+        $property   = (string)$property;
 
         $this->filters[$property][$filterName][] = $value;
     }
@@ -134,7 +134,7 @@ class BaseFilter implements BaseFilterInterface
      */
     public function includesGroup($filterName, array $value)
     {
-        $filterName = (string) $filterName;
+        $filterName = (string)$filterName;
 
         $this->filters[self::GROUP][$filterName] = array_merge(
             (!empty($this->filters[self::GROUP][$filterName])) ? $this->filters[self::GROUP][$filterName] : [],
@@ -255,8 +255,8 @@ class BaseFilter implements BaseFilterInterface
      */
     public function clear()
     {
-        $this->filters = [];
-        $this->emptyAttributes = [];
+        $this->filters            = [];
+        $this->emptyAttributes    = [];
         $this->notEmptyAttributes = [];
 
         return $this;

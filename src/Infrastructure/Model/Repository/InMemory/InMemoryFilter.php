@@ -68,13 +68,15 @@ class InMemoryFilter
                             case BaseFilter::RANGES:
                                 $filteredResults = array_merge(
                                     $filteredResults,
-                                    array_filter($results, self::ranges($property, $v[0][0], $v[0][1]), ARRAY_FILTER_USE_BOTH)
+                                    array_filter($results, self::ranges($property, $v[0][0], $v[0][1]),
+                                        ARRAY_FILTER_USE_BOTH)
                                 );
                                 break;
                             case BaseFilter::NOT_RANGES:
                                 $filteredResults = array_merge(
                                     $filteredResults,
-                                    array_filter($results, self::notRanges($property, $v[0][0], $v[0][1]), ARRAY_FILTER_USE_BOTH)
+                                    array_filter($results, self::notRanges($property, $v[0][0], $v[0][1]),
+                                        ARRAY_FILTER_USE_BOTH)
                                 );
                                 break;
 
@@ -359,8 +361,8 @@ class InMemoryFilter
     }
 
     /**
-     * @param string           $property
-     * @param array            $value
+     * @param string $property
+     * @param array  $value
      *
      * @return \Closure
      */
@@ -368,7 +370,7 @@ class InMemoryFilter
     {
         return function ($v, $k) use ($property, $value) {
             $hasGroup = true;
-            $v = InMemoryValue::get($v, $property);
+            $v        = InMemoryValue::get($v, $property);
 
             foreach ($value as $groupItem) {
                 if (is_scalar($v)) {
@@ -376,7 +378,7 @@ class InMemoryFilter
                 }
 
                 if (is_array($v)) {
-                    $hasGroup = $hasGroup &&in_array($groupItem, $v);
+                    $hasGroup = $hasGroup && in_array($groupItem, $v);
                 }
             }
             return $hasGroup;
@@ -398,7 +400,7 @@ class InMemoryFilter
 
             //@todo check if $v is of "type" and $value1 or $value2 are of the same "type" to... (is_object, is_scalar)
 
-            return !($v >= $value1 && $v <=$value2);
+            return !($v >= $value1 && $v <= $value2);
         };
     }
 
@@ -416,7 +418,7 @@ class InMemoryFilter
 
             //@todo check if $v is of "type" and $value1 or $value2 are of the same "type" to... (is_object, is_scalar)
 
-            return $v >= $value1 && $v <=$value2;
+            return $v >= $value1 && $v <= $value2;
         };
     }
 }

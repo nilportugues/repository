@@ -5,7 +5,7 @@ namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory;
 class InMemoryValue
 {
     /**
-     * @param $object
+     * @param        $object
      * @param string $property
      *
      * @return mixed
@@ -22,8 +22,8 @@ class InMemoryValue
             return $object->{$property}();
         }
 
-        if (method_exists(get_class($object), 'get'.$property)) {
-            $property = 'get'.$property;
+        if (method_exists(get_class($object), 'get' . $property)) {
+            $property = 'get' . $property;
 
             return $object->{$property}();
         }

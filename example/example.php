@@ -1,9 +1,9 @@
 <?php
 
-include __DIR__.'/../vendor/autoload.php';
+include __DIR__ . '/../vendor/autoload.php';
 
-use NilPortugues\Example\Repository\ColorRepository;
 use NilPortugues\Example\Repository\Color;
+use NilPortugues\Example\Repository\ColorRepository;
 use NilPortugues\Foundation\Domain\Model\Repository\Filter;
 
 $colors = [
@@ -27,7 +27,6 @@ print_r($repository->findAll()->getContent());
 echo '</pre>';
 
 
-
 echo '<h2>Print all names containing R</h2>';
 $filter = new Filter();
 $filter->must()->contains('name', 'R');
@@ -36,7 +35,6 @@ $colorsContaining = $repository->findBy($filter);
 echo '<pre>';
 print_r($colorsContaining);
 echo '</pre>';
-
 
 
 echo '<h2>Print all colours with id between 2 and 6</h2>';

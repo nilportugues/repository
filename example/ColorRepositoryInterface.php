@@ -2,21 +2,21 @@
 
 namespace NilPortugues\Example\Repository;
 
-use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Fields;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Filter;
-use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort;
-use NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository;
-use NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository;
+use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository;
+use NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository;
+use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort;
+use NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository;
 
 interface ColorRepositoryInterface extends ReadRepository, WriteRepository, PageRepository
 {
     /**
      * Returns a Color.
      *
-     * @param Identity $id
-     * @param Fields|null     $fields
+     * @param Identity    $id
+     * @param Fields|null $fields
      *
      * @throws ColorNotFoundException
      *

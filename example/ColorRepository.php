@@ -6,9 +6,9 @@ use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Fields;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Filter;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Page;
-use NilPortugues\Foundation\Domain\Model\Repository\Page as ResultPage;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Pageable;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort;
+use NilPortugues\Foundation\Domain\Model\Repository\Page as ResultPage;
 use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryFilter;
 use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemorySorter;
 
@@ -32,7 +32,7 @@ class ColorRepository implements ColorRepositoryInterface
     /**
      * Returns a Color.
      *
-     * @param Identity $id
+     * @param Identity    $id
      * @param Fields|null $fields
      *
      * @throws ColorNotFoundException
@@ -45,7 +45,7 @@ class ColorRepository implements ColorRepositoryInterface
             throw new ColorNotFoundException($id);
         }
 
-        $id = (string) $id;
+        $id = (string)$id;
 
         return clone $this->data[$id];
     }
@@ -54,7 +54,7 @@ class ColorRepository implements ColorRepositoryInterface
      * Returns an array of Colors based on the filtering conditions.
      *
      * @param Filter|null $filter
-     * @param Sort|null $sort
+     * @param Sort|null   $sort
      * @param Fields|null $fields
      *
      * @return Color[]
@@ -85,7 +85,7 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function persist($value)
     {
-        $id = (string) $value->id();
+        $id = (string)$value->id();
 
         $this->data[$id] = clone $value;
     }
@@ -154,7 +154,7 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function exists(Identity $id)
     {
-        $id = (string) $id;
+        $id = (string)$id;
 
         return array_key_exists($id, $this->data);
     }
@@ -178,6 +178,7 @@ class ColorRepository implements ColorRepositoryInterface
      * If $filter is null, all the repository data will be deleted.
      *
      * @param Filter $filter
+     *
      * @return bool
      */
     public function deleteAll(Filter $filter = null)
