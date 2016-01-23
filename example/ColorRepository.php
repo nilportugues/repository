@@ -116,7 +116,7 @@ class ColorRepository implements ColorRepositoryInterface
     public function findAll(Pageable $pageable = null)
     {
         if (null === $pageable) {
-           return new ResultPage($this->data, count($this->data), 1, 1);
+            return new ResultPage($this->data, count($this->data), 1, 1);
         }
 
         $results = $this->findBy($pageable->getFilter(), $pageable->getSort());
@@ -195,4 +195,3 @@ class ColorRepository implements ColorRepositoryInterface
         return true;
     }
 }
-

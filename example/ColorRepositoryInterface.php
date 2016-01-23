@@ -55,4 +55,3 @@ interface ColorRepositoryInterface extends ReadRepository, WriteRepository, Page
      */
     public function delete(Identity $id);
 }
-

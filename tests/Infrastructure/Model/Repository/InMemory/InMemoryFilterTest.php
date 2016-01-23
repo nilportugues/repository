@@ -207,6 +207,15 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($results));
     }
 
+    public function testItStartsWithScalarThrowsException()
+    {
+        $filter = new Filter();
+        $filter->must()->startsWith('orderDates', 'Masuda');
+
+        $this->setExpectedException(Exception::class);
+        InMemoryFilter::filter($this->data, $filter);
+    }
+
     public function testItStartsWithObjectThrowsException()
     {
         $filter = new Filter();
@@ -225,6 +234,15 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($results));
     }
 
+    public function testItEndsWithScalarThrowsException()
+    {
+        $filter = new Filter();
+        $filter->must()->endsWith('orderDates', 'Masuda');
+
+        $this->setExpectedException(Exception::class);
+        InMemoryFilter::filter($this->data, $filter);
+    }
+
     public function testItEndsWithObjectThrowsException()
     {
         $filter = new Filter();
@@ -232,5 +250,71 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException(Exception::class);
         InMemoryFilter::filter($this->data, $filter);
+    }
+
+    public function testItEquals()
+    {
+        $filter = new Filter();
+        $filter->must()->equals('name', 'Junichi Masuda');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(1, count($results));
+    }
+
+    public function testItNotEquals()
+    {
+        $filter = new Filter();
+        $filter->must()->notEquals('name', 'Junichi Masuda');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(3, count($results));
+    }
+
+    public function testLessThan()
+    {
+        $filter = new Filter();
+        $filter->must()->lessThan('totalEarnings', 100);
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(1, count($results));
+    }
+
+    public function testLessOrEqualThan()
+    {
+        $filter = new Filter();
+        $filter->must()->lessThanOrEqual('totalEarnings', 25.125);
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(1, count($results));
+    }
+
+    public function testGreaterThan()
+    {
+        $filter = new Filter();
+        $filter->must()->greaterThan('totalEarnings', 100);
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(3, count($results));
+    }
+
+    public function testGreaterOrEqualThan()
+    {
+        $filter = new Filter();
+        $filter->must()->greaterThanOrEqual('totalEarnings', 25.125);
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(4, count($results));
+    }
+
+    public function testItBeIn()
+    {
+        $filter = new Filter();
+        $filter->must()->includesGroup(
+            'orderDates',
+            [ new DateTime('1999-04-16'), new DateTime('1996-02-04'), new DateTime('1992-06-01'),]
+        );
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(1, count($results));
     }
 }

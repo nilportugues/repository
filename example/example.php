@@ -47,4 +47,3 @@ $idRanges = $repository->findBy($filter);
 echo '<pre>';
 print_r($idRanges);
 echo '</pre>';
-
