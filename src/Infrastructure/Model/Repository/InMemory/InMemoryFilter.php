@@ -92,6 +92,14 @@ class InMemoryFilter
                             array_filter($results, self::in($property, $v), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
+
+                    case BaseFilter::NOT_GROUP:
+                        $filteredResults = array_merge(
+                            $filteredResults,
+                            array_filter($results, self::notIn($property, $v), ARRAY_FILTER_USE_BOTH)
+                        );
+                        break;
+
                     case BaseFilter::GREATER_THAN_OR_EQUAL:
                         $filteredResults = array_merge(
                             $filteredResults,
@@ -385,6 +393,30 @@ class InMemoryFilter
         };
     }
 
+    /**
+     * @param string $property
+     * @param array  $value
+     *
+     * @return \Closure
+     */
+    private static function notIn($property, array $value)
+    {
+        return function ($v, $k) use ($property, $value) {
+            $hasGroup = true;
+            $v        = InMemoryValue::get($v, $property);
+
+            foreach ($value as $groupItem) {
+                if (is_scalar($v)) {
+                    $hasGroup = $hasGroup  && 1 == preg_match(sprintf('/%s/i', $groupItem), $v);
+                }
+
+                if (is_array($v)) {
+                    $hasGroup = $hasGroup && in_array($groupItem, $v);
+                }
+            }
+            return !$hasGroup;
+        };
+    }
 
     /**
      * @param string           $property

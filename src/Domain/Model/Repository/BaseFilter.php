@@ -146,6 +146,24 @@ class BaseFilter implements BaseFilterInterface
 
     /**
      * @param string $filterName
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function notIncludesGroup($filterName, array $value)
+    {
+        $filterName = (string)$filterName;
+
+        $this->filters[self::NOT_GROUP][$filterName] = array_merge(
+            (!empty($this->filters[self::NOT_GROUP][$filterName])) ? $this->filters[self::NOT_GROUP][$filterName] : [],
+            array_values($value)
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param string $filterName
      * @param mixed  $firstValue
      * @param mixed  $secondValue
      *

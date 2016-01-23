@@ -335,4 +335,40 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, count($results));
     }
+
+    public function testItBeNotInScalar()
+    {
+        $filter = new Filter();
+        $filter->must()->notIncludesGroup(
+            'name',
+            [ 'k', 'e', 'n']
+        );
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(3, count($results));
+
+        $names = ['Ken Sugimori'];
+        /** @var Clients $client */
+        foreach ($results as $client) {
+            $this->assertNotContains($client->name(), $names);
+        }
+    }
+
+    public function testItBeNotInArray()
+    {
+        $filter = new Filter();
+        $filter->must()->notIncludesGroup(
+            'orderDates',
+            [ new DateTime('1999-04-16'), new DateTime('1996-02-04'), new DateTime('1992-06-01'),]
+        );
+
+        $results = InMemoryFilter::filter($this->data, $filter);
+        $this->assertEquals(3, count($results));
+
+        $names = ['John Doe', 'Junichi Masuda', 'Ken Sugimori'];
+        /** @var Clients $client */
+        foreach ($results as $client) {
+            $this->assertContains($client->name(), $names);
+        }
+    }
 }

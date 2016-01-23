@@ -23,43 +23,71 @@ interface BaseFilter
     const RANGES = 'ranges';
     const NOT_RANGES = 'not_ranges';
     const GROUP = 'group';
+    const NOT_GROUP = 'not_group';
     const EQUALS = 'equals';
     const NOT_EQUAL = 'not_equals';
 
     /**
-     * @return $this
+     * @param $filterName
+     *
+     * @return mixed
      */
     public function notEmpty($filterName);
 
     /**
-     * @return $this
+     * @param $filterName
+     *
+     * @return mixed
      */
     public function hasEmpty($filterName);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function startsWith($filterName, $value);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function endsWith($filterName, $value);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function equals($filterName, $value);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function notEquals($filterName, $value);
 
     /**
-     * @return $this
+     * @param       $filterName
+     * @param array $value
+     *
+     * @return mixed
      */
     public function includesGroup($filterName, array $value);
+
+    /**
+     * @param       $filterName
+     * @param array $value
+     *
+     * @return mixed
+     */
+    public function notIncludesGroup($filterName, array $value);
 
     /**
      * @return $this
@@ -67,47 +95,69 @@ interface BaseFilter
     public function ranges($filterName, $firstValue, $secondValue);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $firstValue
+     * @param $secondValue
+     *
+     * @return mixed
      */
     public function notRanges($filterName, $firstValue, $secondValue);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function notContains($filterName, $value);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function contains($filterName, $value);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function greaterThanOrEqual($filterName, $value);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function greaterThan($filterName, $value);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function lessThanOrEqual($filterName, $value);
 
     /**
-     * @return $this
+     * @param $filterName
+     * @param $value
+     *
+     * @return mixed
      */
     public function lessThan($filterName, $value);
 
     /**
-     * @return $this
+     * @return mixed
      */
     public function clear();
 
     /**
-     * @return array
+     * @return mixed
      */
     public function get();
 }
