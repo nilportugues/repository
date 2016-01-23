@@ -306,7 +306,25 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4, count($results));
     }
 
-    public function testItBeIn()
+    public function testItBeInScalar()
+    {
+        $filter = new Filter();
+        $filter->must()->includesGroup(
+            'name',
+            [ 'k', 'e', 'n']
+        );
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(1, count($results));
+
+        $names = ['Ken Sugimori'];
+        /** @var Clients $client */
+        foreach ($results as $client) {
+            $this->assertContains($client->name(), $names);
+        }
+    }
+
+    public function testItBeInArray()
     {
         $filter = new Filter();
         $filter->must()->includesGroup(
