@@ -68,13 +68,13 @@ class InMemoryFilter
                             case BaseFilter::RANGES:
                                 $filteredResults = array_merge(
                                     $filteredResults,
-                                    array_filter($results, self::ranges($property, $v[0][0], $v[0][1]), 1)
+                                    array_filter($results, self::ranges($property, $v[0][0], $v[0][1]), ARRAY_FILTER_USE_BOTH)
                                 );
                                 break;
                             case BaseFilter::NOT_RANGES:
                                 $filteredResults = array_merge(
                                     $filteredResults,
-                                    array_filter($results, self::notRanges($property, $v[0][0], $v[0][1]), 1)
+                                    array_filter($results, self::notRanges($property, $v[0][0], $v[0][1]), ARRAY_FILTER_USE_BOTH)
                                 );
                                 break;
 
@@ -87,67 +87,67 @@ class InMemoryFilter
 
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::in($property, $v), 1)
+                            array_filter($results, self::in($property, $v), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::GREATER_THAN_OR_EQUAL:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::greaterThanOrEqual($property, $v[0]), 1)
+                            array_filter($results, self::greaterThanOrEqual($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::GREATER_THAN:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::greaterThan($property, $v[0]), 1)
+                            array_filter($results, self::greaterThan($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::LESS_THAN_OR_EQUAL:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::lessThanOrEqual($property, $v[0]), 1)
+                            array_filter($results, self::lessThanOrEqual($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::LESS_THAN:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::lessThan($property, $v[0]), 1)
+                            array_filter($results, self::lessThan($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::CONTAINS:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::contains($property, $v[0]), 1)
+                            array_filter($results, self::contains($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::NOT_CONTAINS:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::notContains($property, $v[0]), 1)
+                            array_filter($results, self::notContains($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::STARTS_WITH:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::startsWith($property, $v[0]), 1)
+                            array_filter($results, self::startsWith($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::ENDS_WITH:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::endsWith($property, $v[0]), 1)
+                            array_filter($results, self::endsWith($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::EQUALS:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::equals($property, $v[0]), 1)
+                            array_filter($results, self::equals($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                     case BaseFilter::NOT_EQUAL:
                         $filteredResults = array_merge(
                             $filteredResults,
-                            array_filter($results, self::notEquals($property, $v[0]), 1)
+                            array_filter($results, self::notEquals($property, $v[0]), ARRAY_FILTER_USE_BOTH)
                         );
                         break;
                 }
