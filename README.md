@@ -108,10 +108,10 @@ Implementation can be seen [here](https://github.com/nilportugues/php-repository
 
 The base InMemoryRepository implements the following interfaces:
 
-- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository**
-- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository**
-- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository**
-- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository**
+- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository`
+- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository`
+- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository`
+- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository`
 
 
 ## InMemoryRepository Example
