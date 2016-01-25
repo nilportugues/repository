@@ -3,7 +3,7 @@
 namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\Filters;
 
 use Exception;
-use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryValue;
+use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\PropertyValue;
 
 class RangeFilter
 {
@@ -17,7 +17,7 @@ class RangeFilter
     public static function ranges($property, $value1, $value2)
     {
         return function ($v) use ($property, $value1, $value2) {
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
             self::sameTypeGuard($v, $value1, $value2);
 
             return $v >= $value1 && $v <= $value2;
@@ -34,7 +34,7 @@ class RangeFilter
     public static function notRanges($property, $value1, $value2)
     {
         return function ($v) use ($property, $value1, $value2) {
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
             self::sameTypeGuard($v, $value1, $value2);
 
             return !($v >= $value1 && $v <= $value2);

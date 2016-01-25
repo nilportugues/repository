@@ -3,7 +3,7 @@
 namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\Filters;
 
 use Exception;
-use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryValue;
+use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\PropertyValue;
 
 class StringFilter
 {
@@ -16,7 +16,7 @@ class StringFilter
     public static function startsWith($property, $value)
     {
         return function ($v) use ($property, $value) {
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
 
             self::propertyGuard($v, $property);
             self::valueGuard($value, 'Starting');
@@ -60,7 +60,7 @@ class StringFilter
     public static function endsWith($property, $value)
     {
         return function ($v) use ($property, $value) {
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
 
             self::propertyGuard($v, $property);
             self::valueGuard($value, 'Ending');
@@ -78,7 +78,7 @@ class StringFilter
     public static function notStartsWith($property, $value)
     {
         return function ($v) use ($property, $value) {
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
 
             self::propertyGuard($v, $property);
             self::valueGuard($value, 'Starting');
@@ -96,7 +96,7 @@ class StringFilter
     public static function notEndsWith($property, $value)
     {
         return function ($v) use ($property, $value) {
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
 
             self::propertyGuard($v, $property);
             self::valueGuard($value, 'Ending');

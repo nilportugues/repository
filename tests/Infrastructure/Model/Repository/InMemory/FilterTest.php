@@ -13,11 +13,11 @@ namespace NilPortugues\Tests\Foundation\Infrastructure\Model\Repository\InMemory
 use DateTime;
 use Exception;
 use NilPortugues\Foundation\Domain\Model\Repository\Filter;
-use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryFilter;
+use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\Filter as InMemoryFilter;
 use NilPortugues\Tests\Foundation\Infrastructure\Model\Repository\InMemory\Dummies\Clients;
 use stdClass;
 
-class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
+class FilterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var array
@@ -28,6 +28,7 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
     {
         $this->data = [
             new Clients(
+                1,
                 'John Doe',
                 new DateTime('2014-12-11'),
                 3,
@@ -39,6 +40,7 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
                 25.125
             ),
             new Clients(
+                2,
                 'Junichi Masuda',
                 new DateTime('2013-02-22'),
                 3,
@@ -49,6 +51,7 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
                 50978.125
             ),
             new Clients(
+                3,
                 'Shigeru Miyamoto',
                 new DateTime('2010-12-01'),
                 5,
@@ -62,6 +65,7 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
                 47889850.125
             ),
             new Clients(
+                4,
                 'Ken Sugimori',
                 new DateTime('2010-12-10'),
                 4,

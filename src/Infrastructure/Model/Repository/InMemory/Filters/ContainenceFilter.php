@@ -2,7 +2,7 @@
 
 namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\Filters;
 
-use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryValue;
+use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\PropertyValue;
 use Traversable;
 
 class ContainenceFilter
@@ -16,7 +16,7 @@ class ContainenceFilter
     public static function contains($property, $value)
     {
         return function ($v) use ($property, $value) {
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
 
             if (is_scalar($v)) {
                 return 1 == preg_match(sprintf('/%s/i', $value), $v);
@@ -46,7 +46,7 @@ class ContainenceFilter
     public static function notContains($property, $value)
     {
         return function ($v) use ($property, $value) {
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
 
             if (is_scalar($v)) {
                 return 0 == preg_match(sprintf('/%s/i', $value), $v);
@@ -78,7 +78,7 @@ class ContainenceFilter
     {
         return function ($v) use ($property, $value) {
             $hasGroup = true;
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
 
             foreach ($value as $groupItem) {
                 if (is_scalar($v)) {
@@ -104,7 +104,7 @@ class ContainenceFilter
     {
         return function ($v) use ($property, $value) {
             $hasGroup = true;
-            $v = InMemoryValue::get($v, $property);
+            $v = PropertyValue::get($v, $property);
 
             foreach ($value as $groupItem) {
                 if (is_scalar($v)) {

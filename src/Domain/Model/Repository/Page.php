@@ -81,11 +81,11 @@ class Page implements PageInterface
     /**
      * Returns the page content as an array.
      *
-     * @return ImmutableTypedCollection
+     * @return array
      */
     public function content()
     {
-        return $this->elements;
+        return array_filter($this->elements->toArray());
     }
 
     /**

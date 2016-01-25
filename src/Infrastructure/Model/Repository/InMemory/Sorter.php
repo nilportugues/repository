@@ -13,10 +13,7 @@ namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Order;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort;
 
-/**
- * Class InMemorySort.
- */
-class InMemorySorter
+class Sorter
 {
     /**
      * @param array $results
@@ -34,15 +31,15 @@ class InMemorySorter
         foreach ($sortOrder as $propertyName => $sortDirection) {
             if ($sortDirection->isAscending()) {
                 self::stableUasort($results, function ($a, $b) use ($propertyName) {
-                    $value1 = (string) InMemoryValue::get($a, $propertyName);
-                    $value2 = (string) InMemoryValue::get($b, $propertyName);
+                    $value1 = (string) PropertyValue::get($a, $propertyName);
+                    $value2 = (string) PropertyValue::get($b, $propertyName);
 
                     return ((int) (strcmp($value1, $value2) >= 0));
                 });
             } else {
                 self::stableUasort($results, function ($a, $b) use ($propertyName) {
-                    $value1 = (string) InMemoryValue::get($a, $propertyName);
-                    $value2 = (string) InMemoryValue::get($b, $propertyName);
+                    $value1 = (string) PropertyValue::get($a, $propertyName);
+                    $value2 = (string) PropertyValue::get($b, $propertyName);
 
                     return ((int) (strcmp($value1, $value2) < 0));
                 });

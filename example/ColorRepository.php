@@ -8,32 +8,15 @@ use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Page;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Pageable;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort;
-use NilPortugues\Foundation\Domain\Model\Repository\Page as ResultPage;
-use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryFilter;
-use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemorySorter;
+use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryRepository;
 
-class ColorRepository implements ColorRepositoryInterface
+class ColorRepository extends InMemoryRepository
 {
-    /**
-     * @var Identity[]
-     */
-    private $data = [];
-
-    /**
-     * NameRepository constructor.
-     *
-     * @param array $data
-     */
-    public function __construct(array $data = [])
-    {
-        $this->data = $data;
-    }
-
     /**
      * Returns a Color.
      *
-     * @param Identity    $id
-     * @param Fields|null $fields
+     * @param Color|Identity $id
+     * @param Fields|null    $fields
      *
      * @throws ColorNotFoundException
      *
@@ -41,13 +24,13 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function find(Identity $id, Fields $fields = null)
     {
-        if (false === $this->exists($id)) {
+        $result = parent::find($id, $fields);
+
+        if (null === $result) {
             throw new ColorNotFoundException($id);
         }
 
-        $id = (string)$id;
-
-        return clone $this->data[$id];
+        return $result;
     }
 
     /**
@@ -61,49 +44,39 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null)
     {
-        $results = $this->data;
-
-        if (null !== $filter) {
-            $results = InMemoryFilter::filter($results, $filter);
-        }
-
-        if (null !== $sort) {
-            $results = InMemorySorter::sort($results, $sort);
-        }
-
-        return array_values($results);
+        return parent::findBy($filter, $sort, $fields);
     }
 
     /**
      * Adds or modifies a Color.
      *
-     * @param Color $value
+     * @param Color|Identity $value
      *
      * @throws ColorNotFoundException
      *
      * @return Color
      */
-    public function persist($value)
+    public function persist(Identity $value)
     {
-        $id = (string)$value->id();
-
-        $this->data[$id] = clone $value;
+        return parent::persist($value);
     }
 
     /**
      * Delete a Color.
      *
-     * @param Identity $id
+     * @param Color|Identity $id
      *
      * @throws ColorNotFoundException
      */
     public function delete(Identity $id)
     {
-        if (false === array_key_exists($id->id(), $this->data)) {
+        $result = parent::find($id);
+
+        if (null === $result) {
             throw new ColorNotFoundException();
         }
 
-        unset($this->data[$id->id()]);
+        parent::delete($id);
     }
 
     /**
@@ -115,18 +88,7 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function findAll(Pageable $pageable = null)
     {
-        if (null === $pageable) {
-            return new ResultPage($this->data, count($this->data), 1, 1);
-        }
-
-        $results = $this->findBy($pageable->filters(), $pageable->sortings());
-
-        return new ResultPage(
-            array_slice($results, $pageable->offset() - 1, $pageable->pageSize()),
-            count($results),
-            $pageable->pageNumber(),
-            ceil(count($results) / $pageable->pageSize())
-        );
+        return parent::findAll($pageable);
     }
 
     /**
@@ -138,25 +100,19 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function count(Filter $filter = null)
     {
-        if (null === $filter) {
-            return count($this->data);
-        }
-
-        return count($this->findBy($filter));
+        return parent::count($filter);
     }
 
     /**
      * Returns whether an entity with the given id exists.
      *
-     * @param $id
+     * @param Color|Identity $id
      *
      * @return bool
      */
     public function exists(Identity $id)
     {
-        $id = (string)$id;
-
-        return array_key_exists($id, $this->data);
+        return parent::exists($id);
     }
 
     /**
@@ -168,9 +124,7 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function persistAll(array $values)
     {
-        foreach ($values as $value) {
-            $this->persist($value);
-        }
+        parent::persistAll($values);
     }
 
     /**
@@ -183,16 +137,6 @@ class ColorRepository implements ColorRepositoryInterface
      */
     public function deleteAll(Filter $filter = null)
     {
-        if (null === $filter) {
-            $this->data = [];
-
-            return true;
-        }
-
-        /** @var Identity $value */
-        foreach ($this->findBy($filter) as $value) {
-            $this->delete($value->id());
-        }
-        return true;
+        return parent::deleteAll($filter);
     }
 }

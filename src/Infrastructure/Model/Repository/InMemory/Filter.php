@@ -11,16 +11,13 @@
 namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory;
 
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\BaseFilter;
-use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Filter;
+use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Filter as FilterInterface;
 use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\Filters\ComparisonFilter;
 use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\Filters\ContainenceFilter;
 use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\Filters\RangeFilter;
 use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\Filters\StringFilter;
 
-/**
- * Class InMemoryFilter.
- */
-class InMemoryFilter
+class Filter
 {
     const MUST_NOT = 'must_not';
     const MUST = 'must';
@@ -28,11 +25,11 @@ class InMemoryFilter
 
     /**
      * @param array  $results
-     * @param Filter $filter
+     * @param FilterInterface $filter
      *
      * @return array
      */
-    public static function filter(array $results, Filter $filter)
+    public static function filter(array $results, FilterInterface $filter)
     {
         $filteredResults = [];
 

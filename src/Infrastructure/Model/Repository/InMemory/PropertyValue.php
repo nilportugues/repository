@@ -2,7 +2,7 @@
 
 namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory;
 
-class InMemoryValue
+class PropertyValue
 {
     /**
      * @param        $object

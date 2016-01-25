@@ -15,11 +15,11 @@ interface WriteRepository extends Repository
     /**
      * Adds a new entity to the storage.
      *
-     * @param array|object $value
+     * @param Identity $value
      *
      * @return mixed
      */
-    public function persist($value);
+    public function persist(Identity $value);
 
     /**
      * Adds a collections of entities to the storage.
@@ -42,6 +42,8 @@ interface WriteRepository extends Repository
      * If $filter is null, all the repository data will be deleted.
      *
      * @param Filter $filter
+     *
+     * @return bool
      */
     public function deleteAll(Filter $filter = null);
 }

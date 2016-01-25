@@ -4,47 +4,129 @@
 
 Generic implementation and definition of a Repository and its in-memory implementation.
 
-# Building blocks
+## Foundation Classes
 
 Interaction with the repository requires the usage of the following classes or classes implementing interfaces.
 
-**Classes**
+- **NilPortugues\Foundation\Domain\Model\Repository\Fields**
+`public function __construct(array $fields = [])`
+`public function add($field)`
+`public function get()`
 
-- `NilPortugues\Foundation\Domain\Model\Repository\Fields`
+- **NilPortugues\Foundation\Domain\Model\Repository\Filter**
+`public function filters()`
+`public function must()`
+`public function mustNot()`
+`public function should()`
+`public function clear()`
 
-    - `public function __construct(array $fields = [])`
-    - `public function add($field)`
-    - `public function get()`
+- **NilPortugues\Foundation\Domain\Model\Repository\Order**
+`public function __construct($direction)`
+`public function isDescending()`
+`public function isAscending()`
+`public function __toString()`
+`public function equals($object)`
+`public function direction()`
 
-<br>
-- `NilPortugues\Foundation\Domain\Model\Repository\Filter`
+- **NilPortugues\Foundation\Domain\Model\Repository\Pageable**
+`public function __construct($pageNumber, $pageSize, SortInterface $sort = null, FilterInterface $filter = null, FieldsInterface $fields = null)`
+`public function offset()`
+`public function pageNumber()`
+`public function sortings()`
+`public function next()`
+`public function pageSize()`
+`public function previousOrFirst()`
+`public function hasPrevious()`
+`public function first()`
+`public function filters()`
+`public function fields()`
 
-<br>
-- `NilPortugues\Foundation\Domain\Model\Repository\Order`
+- **NilPortugues\Foundation\Domain\Model\Repository\Page**
+`public function __construct(array $elements, $totalElements, $pageNumber, $totalPages, SortInterface $sort = null, FilterInterface $filter = null, FieldsInterface $fields = null)`
+`public function content()`
+`public function hasPrevious()`
+`public function isFirst()`
+`public function isLast()`
+`public function hasNext()`
+`public function pageSize()`
+`public function pageNumber()`
+`public function totalPages()`
+`public function nextPageable()`
+`public function sortings()`
+`public function filters()`
+`public function fields()`
+`public function previousPageable()`
+`public function totalElements()`
+`public function map(callable $converter)`
 
-<br>
-- `NilPortugues\Foundation\Domain\Model\Repository\Pageable`
+- **NilPortugues\Foundation\Domain\Model\Repository\Sort**
+`public function __construct(array $properties = [], OrderInterface $order = null)`
+`public function andSort(SortInterface $sort)`
+`public function orders()`
+`public function equals(SortInterface $sort)`
+`public function orderFor($propertyName)`
+`public function setOrderFor($propertyName, OrderInterface $order)`
+`public function property($propertyName)`
 
-<br>
-- `NilPortugues\Foundation\Domain\Model\Repository\Page`
+#### Interfaces 
 
-<br>
-- `NilPortugues\Foundation\Domain\Model\Repository\Sort`
+- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity**
+`public function id()`
+`public function __toString()`
+    
+- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository**
+`public function count(Filter $filter = null)`
+`public function exists(Identity $id)`
+
+- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository**
+`public function findAll(Pageable $pageable = null)`
+
+- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository**
+`public function find(Identity $id, Fields $fields = null)`
+`public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null)`
+
+- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository**
+`public function persist($value)`
+`public function persistAll(array $values)`
+`public function delete(Identity $id)`
+`public function deleteAll(Filter $filter = null)`
+
+## InMemory Implementation
+
+A custom repository can be easily created by extending the InMemoryRepository class provided.
+
+```php
+use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryRepository
+
+class MyInMemoryRepository extends InMemoryRepository
+{
+    //... your custom implementation.
+}
+```
+
+Implementation can be seen [here](https://github.com/nilportugues/php-repository/blob/master/src/Infrastructure/Model/Repository/InMemory/InMemoryRepository.php). 
+
+The base InMemoryRepository implements the following interfaces:
+
+- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository**
+- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository**
+- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository**
+- **NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository**
 
 
-**Interfaces** 
+## InMemoryRepository Example
 
-- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity`
-- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository`
-- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository`
-- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository`
-- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository`
+An example with a complete implementation can be found in the [/example directory](https://github.com/nilportugues/php-repository/tree/master/example).
 
-# InMemory Implementation
+In the example:
 
-WIP
+- Colors are defined as a class implementing the `Identity` interface.
+- A `ColorRepository` is implemented. Will throw exception if Color is not found.
+- Examples on how to filter are provided in the `example.php` file.
 
 ---
+
+
 
 ## Quality
 

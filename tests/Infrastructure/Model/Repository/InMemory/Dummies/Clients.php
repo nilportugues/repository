@@ -10,10 +10,12 @@
  */
 namespace NilPortugues\Tests\Foundation\Infrastructure\Model\Repository\InMemory\Dummies;
 
+use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity;
+
 /**
  * Class Clients.
  */
-class Clients
+class Clients implements Identity
 {
     /**
      * @var string
@@ -38,18 +40,24 @@ class Clients
      * @var float
      */
     private $totalEarnings;
+    /**
+     * @var string
+     */
+    private $id;
 
     /**
      * Clients constructor.
      *
-     * @param string      $name
-     * @param \DateTime   $date
-     * @param int         $totalOrders
-     * @param \DateTime[] $orderDates
-     * @param float       $totalEarnings
+     * @param           $id
+     * @param           $name
+     * @param \DateTime $date
+     * @param           $totalOrders
+     * @param array     $orderDates
+     * @param           $totalEarnings
      */
-    public function __construct($name, \DateTime $date, $totalOrders, array $orderDates, $totalEarnings)
+    public function __construct($id, $name, \DateTime $date, $totalOrders, array $orderDates, $totalEarnings)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->date = $date;
         $this->totalOrders = $totalOrders;
@@ -105,5 +113,15 @@ class Clients
     public function totalEarnings()
     {
         return $this->totalEarnings;
+    }
+
+    public function id()
+    {
+        return $this->id;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->id();
     }
 }

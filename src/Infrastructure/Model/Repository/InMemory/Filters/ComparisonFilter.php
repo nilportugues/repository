@@ -2,7 +2,7 @@
 
 namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\Filters;
 
-use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryValue;
+use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\PropertyValue;
 
 class ComparisonFilter
 {
@@ -15,7 +15,7 @@ class ComparisonFilter
     public static function equals($property, $value)
     {
         return function ($v) use ($property, $value) {
-            return InMemoryValue::get($v, $property) == $value;
+            return PropertyValue::get($v, $property) == $value;
         };
     }
 
@@ -28,7 +28,7 @@ class ComparisonFilter
     public static function notEquals($property, $value)
     {
         return function ($v) use ($property, $value) {
-            return InMemoryValue::get($v, $property) != $value;
+            return PropertyValue::get($v, $property) != $value;
         };
     }
 
@@ -41,7 +41,7 @@ class ComparisonFilter
     public static function greaterThanOrEqual($property, $value)
     {
         return function ($v) use ($property, $value) {
-            return InMemoryValue::get($v, $property) >= $value;
+            return PropertyValue::get($v, $property) >= $value;
         };
     }
 
@@ -54,7 +54,7 @@ class ComparisonFilter
     public static function greaterThan($property, $value)
     {
         return function ($v) use ($property, $value) {
-            return InMemoryValue::get($v, $property) > $value;
+            return PropertyValue::get($v, $property) > $value;
         };
     }
 
@@ -67,7 +67,7 @@ class ComparisonFilter
     public static function lessThanOrEqual($property, $value)
     {
         return function ($v) use ($property, $value) {
-            return InMemoryValue::get($v, $property) <= $value;
+            return PropertyValue::get($v, $property) <= $value;
         };
     }
 
@@ -80,7 +80,7 @@ class ComparisonFilter
     public static function lessThan($property, $value)
     {
         return function ($v) use ($property, $value) {
-            return InMemoryValue::get($v, $property) < $value;
+            return PropertyValue::get($v, $property) < $value;
         };
     }
 }
