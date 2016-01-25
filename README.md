@@ -9,87 +9,87 @@ Generic implementation and definition of a Repository and its in-memory implemen
 Interaction with the repository requires the usage of the following classes or classes implementing interfaces.
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Fields**
-`public function __construct(array $fields = [])`
-`public function add($field)`
-`public function get()`
+    - `public function __construct(array $fields = [])`
+    - `public function add($field)`
+    - `public function get()`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Filter**
-`public function filters()`
-`public function must()`
-`public function mustNot()`
-`public function should()`
-`public function clear()`
+    - `public function filters()`
+    - `public function must()`
+    - `public function mustNot()`
+    - `public function should()`
+    - `public function clear()`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Order**
-`public function __construct($direction)`
-`public function isDescending()`
-`public function isAscending()`
-`public function __toString()`
-`public function equals($object)`
-`public function direction()`
+    - `public function __construct($direction)`
+    - `public function isDescending()`
+    - `public function isAscending()`
+    - `public function __toString()`
+    - `public function equals($object)`
+    - `public function direction()`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Pageable**
-`public function __construct($pageNumber, $pageSize, SortInterface $sort = null, FilterInterface $filter = null, FieldsInterface $fields = null)`
-`public function offset()`
-`public function pageNumber()`
-`public function sortings()`
-`public function next()`
-`public function pageSize()`
-`public function previousOrFirst()`
-`public function hasPrevious()`
-`public function first()`
-`public function filters()`
-`public function fields()`
+    - `public function __construct($pageNumber, $pageSize, SortInterface $sort = null, FilterInterface $filter = null, FieldsInterface $fields = null)`
+    - `public function offset()`
+    - `public function pageNumber()`
+    - `public function sortings()`
+    - `public function next()`
+    - `public function pageSize()`
+    - `public function previousOrFirst()`
+    - `public function hasPrevious()`
+    - `public function first()`
+    - `public function filters()`
+    - `public function fields()`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Page**
-`public function __construct(array $elements, $totalElements, $pageNumber, $totalPages, SortInterface $sort = null, FilterInterface $filter = null, FieldsInterface $fields = null)`
-`public function content()`
-`public function hasPrevious()`
-`public function isFirst()`
-`public function isLast()`
-`public function hasNext()`
-`public function pageSize()`
-`public function pageNumber()`
-`public function totalPages()`
-`public function nextPageable()`
-`public function sortings()`
-`public function filters()`
-`public function fields()`
-`public function previousPageable()`
-`public function totalElements()`
-`public function map(callable $converter)`
+    - `public function __construct(array $elements, $totalElements, $pageNumber, $totalPages, SortInterface $sort = null, FilterInterface $filter = null, FieldsInterface $fields = null)`
+    - `public function content()`
+    - `public function hasPrevious()`
+    - `public function isFirst()`
+    - `public function isLast()`
+    - `public function hasNext()`
+    - `public function pageSize()`
+    - `public function pageNumber()`
+    - `public function totalPages()`
+    - `public function nextPageable()`
+    - `public function sortings()`
+    - `public function filters()`
+    - `public function fields()`
+    - `public function previousPageable()`
+    - `public function totalElements()`
+    - `public function map(callable $converter)`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Sort**
-`public function __construct(array $properties = [], OrderInterface $order = null)`
-`public function andSort(SortInterface $sort)`
-`public function orders()`
-`public function equals(SortInterface $sort)`
-`public function orderFor($propertyName)`
-`public function setOrderFor($propertyName, OrderInterface $order)`
-`public function property($propertyName)`
+    - `public function __construct(array $properties = [], OrderInterface $order = null)`
+    - `public function andSort(SortInterface $sort)`
+    - `public function orders()`
+    - `public function equals(SortInterface $sort)`
+    - `public function orderFor($propertyName)`
+    - `public function setOrderFor($propertyName, OrderInterface $order)`
+    - `public function property($propertyName)`
 
 #### Interfaces 
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity**
-`public function id()`
-`public function __toString()`
+    - `public function id()`
+    - `public function __toString()`
     
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository**
-`public function count(Filter $filter = null)`
-`public function exists(Identity $id)`
+    - `public function count(Filter $filter = null)`
+    - `public function exists(Identity $id)`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository**
-`public function findAll(Pageable $pageable = null)`
+    - `public function findAll(Pageable $pageable = null)`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository**
-`public function find(Identity $id, Fields $fields = null)`
-`public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null)`
+    - `public function find(Identity $id, Fields $fields = null)`
+    - `public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null)`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository**
-`public function persist($value)`
-`public function persistAll(array $values)`
-`public function delete(Identity $id)`
-`public function deleteAll(Filter $filter = null)`
+    - `public function persist($value)`
+    - `public function persistAll(array $values)`
+    - `public function delete(Identity $id)`
+    - `public function deleteAll(Filter $filter = null)`
 
 ## InMemory Implementation
 
