@@ -4,6 +4,40 @@
 
 Generic implementation and definition of a Repository and its in-memory implementation.
 
+
+## InMemory Implementation
+
+A custom repository can be easily created by extending the InMemoryRepository class provided.
+
+```php
+use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryRepository
+
+class MyInMemoryRepository extends InMemoryRepository
+{
+    //... your custom implementation.
+}
+```
+
+Implementation can be seen [here](https://github.com/nilportugues/php-repository/blob/master/src/Infrastructure/Model/Repository/InMemory/InMemoryRepository.php). 
+
+The base InMemoryRepository implements the following interfaces:
+
+- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository`
+- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository`
+- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository`
+- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository`
+
+
+## InMemoryRepository Example
+
+An example with a complete implementation can be found in the [/example directory](https://github.com/nilportugues/php-repository/tree/master/example).
+
+In the example:
+
+- Colors are defined as a class implementing the `Identity` interface.
+- A `ColorRepository` is implemented. Will throw exception if Color is not found.
+- Examples on how to filter are provided in the `example.php` file.
+
 ## Foundation Classes
 
 Interaction with the repository requires the usage of the following classes or classes implementing interfaces.
@@ -90,39 +124,6 @@ Interaction with the repository requires the usage of the following classes or c
     - `public function persistAll(array $values)`
     - `public function delete(Identity $id)`
     - `public function deleteAll(Filter $filter = null)`
-
-## InMemory Implementation
-
-A custom repository can be easily created by extending the InMemoryRepository class provided.
-
-```php
-use NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory\InMemoryRepository
-
-class MyInMemoryRepository extends InMemoryRepository
-{
-    //... your custom implementation.
-}
-```
-
-Implementation can be seen [here](https://github.com/nilportugues/php-repository/blob/master/src/Infrastructure/Model/Repository/InMemory/InMemoryRepository.php). 
-
-The base InMemoryRepository implements the following interfaces:
-
-- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository`
-- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository`
-- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository`
-- `NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository`
-
-
-## InMemoryRepository Example
-
-An example with a complete implementation can be found in the [/example directory](https://github.com/nilportugues/php-repository/tree/master/example).
-
-In the example:
-
-- Colors are defined as a class implementing the `Identity` interface.
-- A `ColorRepository` is implemented. Will throw exception if Color is not found.
-- Examples on how to filter are provided in the `example.php` file.
 
 ---
 
