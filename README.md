@@ -4,6 +4,13 @@
 
 Generic implementation and definition of a Repository and its in-memory implementation.
 
+## Installation
+
+Use [Composer](https://getcomposer.org) to install the package:
+
+```json
+$ composer require nilportugues/repository
+```
 
 ## InMemory Implementation
 
