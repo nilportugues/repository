@@ -59,7 +59,7 @@ class StringFilter
      */
     public static function endsWith($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
             self::propertyGuard($v, $property);
@@ -77,7 +77,7 @@ class StringFilter
      */
     public static function notStartsWith($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
             self::propertyGuard($v, $property);
@@ -95,7 +95,7 @@ class StringFilter
      */
     public static function notEndsWith($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
             self::propertyGuard($v, $property);
