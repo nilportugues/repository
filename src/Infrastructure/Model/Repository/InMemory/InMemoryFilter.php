@@ -174,7 +174,7 @@ class InMemoryFilter
      */
     private static function ranges($property, $value1, $value2)
     {
-        return function ($v, $k) use ($property, $value1, $value2) {
+        return function ($v) use ($property, $value1, $value2) {
             $v = InMemoryValue::get($v, $property);
 
             //@todo check if $v is of "type" and $value1 or $value2 are of the same "type" to... (is_object, is_scalar)
@@ -192,7 +192,7 @@ class InMemoryFilter
      */
     private static function notRanges($property, $value1, $value2)
     {
-        return function ($v, $k) use ($property, $value1, $value2) {
+        return function ($v) use ($property, $value1, $value2) {
             $v = InMemoryValue::get($v, $property);
 
             //@todo check if $v is of "type" and $value1 or $value2 are of the same "type" to... (is_object, is_scalar)
@@ -209,7 +209,7 @@ class InMemoryFilter
      */
     private static function in($property, array $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             $hasGroup = true;
             $v = InMemoryValue::get($v, $property);
 
@@ -235,7 +235,7 @@ class InMemoryFilter
      */
     private static function notIn($property, array $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             $hasGroup = true;
             $v = InMemoryValue::get($v, $property);
 
@@ -261,7 +261,7 @@ class InMemoryFilter
      */
     private static function greaterThanOrEqual($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             return InMemoryValue::get($v, $property) >= $value;
         };
     }
@@ -274,7 +274,7 @@ class InMemoryFilter
      */
     private static function greaterThan($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             return InMemoryValue::get($v, $property) > $value;
         };
     }
@@ -287,7 +287,7 @@ class InMemoryFilter
      */
     private static function lessThanOrEqual($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             return InMemoryValue::get($v, $property) <= $value;
         };
     }
@@ -300,7 +300,7 @@ class InMemoryFilter
      */
     private static function lessThan($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             return InMemoryValue::get($v, $property) < $value;
         };
     }
@@ -313,7 +313,7 @@ class InMemoryFilter
      */
     private static function contains($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
             if (is_scalar($v)) {
@@ -343,7 +343,7 @@ class InMemoryFilter
      */
     private static function notContains($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
             if (is_scalar($v)) {
@@ -374,7 +374,7 @@ class InMemoryFilter
      */
     private static function equals($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             return InMemoryValue::get($v, $property) == $value;
         };
     }
@@ -387,7 +387,7 @@ class InMemoryFilter
      */
     private static function notEquals($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             return InMemoryValue::get($v, $property) != $value;
         };
     }

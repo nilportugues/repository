@@ -15,7 +15,7 @@ class StringFilter
      */
     public static function startsWith($property, $value)
     {
-        return function ($v, $k) use ($property, $value) {
+        return function ($v) use ($property, $value) {
             $v = InMemoryValue::get($v, $property);
 
             self::propertyGuard($v, $property);
