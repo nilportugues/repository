@@ -92,6 +92,15 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testItMustRangeOfDifferentTypesThrowsException()
+    {
+        $filter = new Filter();
+        $filter->must()->ranges('totalOrders', 4, new stdClass());
+
+        $this->setExpectedException(Exception::class);
+        InMemoryFilter::filter($this->data, $filter);
+    }
+
     public function testItMustRangeBetweenTwoObjects()
     {
         $filter = new Filter();
@@ -106,6 +115,15 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         foreach ($results as $client) {
             $this->assertContains($client->name(), $names);
         }
+    }
+
+    public function testItMustNotRangeOfDifferentTypesThrowsException()
+    {
+        $filter = new Filter();
+        $filter->must()->notRanges('totalOrders', 4, new stdClass());
+
+        $this->setExpectedException(Exception::class);
+        InMemoryFilter::filter($this->data, $filter);
     }
 
     public function testItMustNotRangeBetweenTwoScalars()
