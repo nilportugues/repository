@@ -34,17 +34,17 @@ class InMemorySorter
         foreach ($sortOrder as $propertyName => $sortDirection) {
             if ($sortDirection->isAscending()) {
                 self::stableUasort($results, function ($a, $b) use ($propertyName) {
-                    $value1 = (string)InMemoryValue::get($a, $propertyName);
-                    $value2 = (string)InMemoryValue::get($b, $propertyName);
+                    $value1 = (string) InMemoryValue::get($a, $propertyName);
+                    $value2 = (string) InMemoryValue::get($b, $propertyName);
 
-                    return ((int)(strcmp($value1, $value2) >= 0));
+                    return ((int) (strcmp($value1, $value2) >= 0));
                 });
             } else {
                 self::stableUasort($results, function ($a, $b) use ($propertyName) {
-                    $value1 = (string)InMemoryValue::get($a, $propertyName);
-                    $value2 = (string)InMemoryValue::get($b, $propertyName);
+                    $value1 = (string) InMemoryValue::get($a, $propertyName);
+                    $value2 = (string) InMemoryValue::get($b, $propertyName);
 
-                    return ((int)(strcmp($value1, $value2) < 0));
+                    return ((int) (strcmp($value1, $value2) < 0));
                 });
             }
         }
@@ -57,6 +57,7 @@ class InMemorySorter
      * implementation in PHP for both versions 5 and 7.
      *
      * @author: Clement Wong <cw@clement.hk>
+     *
      * @link  : https://bugs.php.net/bug.php?id=53341
      */
     protected static function stableUasort(array &$array, callable $cmpFunction)
@@ -65,8 +66,8 @@ class InMemorySorter
             return;
         }
         $halfway = count($array) / 2;
-        $array1  = array_slice($array, 0, $halfway, true);
-        $array2  = array_slice($array, $halfway, null, true);
+        $array1 = array_slice($array, 0, $halfway, true);
+        $array2 = array_slice($array, $halfway, null, true);
 
         self::stableUasort($array1, $cmpFunction);
         self::stableUasort($array2, $cmpFunction);

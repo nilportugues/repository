@@ -22,8 +22,8 @@ class InMemoryValue
             return $object->{$property}();
         }
 
-        if (method_exists(get_class($object), 'get' . $property)) {
-            $property = 'get' . $property;
+        if (method_exists(get_class($object), 'get'.$property)) {
+            $property = 'get'.$property;
 
             return $object->{$property}();
         }

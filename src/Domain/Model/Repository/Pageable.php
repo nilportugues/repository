@@ -55,11 +55,11 @@ class Pageable implements PageableInterface
         FilterInterface $filter = null,
         FieldsInterface $fields = null
     ) {
-        $this->pageNumber = (int)$pageNumber;
-        $this->pageSize   = (int)$pageSize;
-        $this->sort       = $sort;
-        $this->filter     = $filter;
-        $this->fields     = $fields;
+        $this->pageNumber = (int) $pageNumber;
+        $this->pageSize = (int) $pageSize;
+        $this->sort = $sort;
+        $this->filter = $filter;
+        $this->fields = $fields;
     }
 
     /**

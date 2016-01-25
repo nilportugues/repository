@@ -1,13 +1,13 @@
 <?php
+
 /**
  * Author: Nil Portugués Calderó <contact@nilportugues.com>
  * Date: 22/01/16
- * Time: 21:01
+ * Time: 21:01.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace NilPortugues\Tests\Foundation\Infrastructure\Model\Repository\InMemory;
 
 use DateTime;
@@ -34,7 +34,7 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
                 [
                     new DateTime('2014-12-16'),
                     new DateTime('2014-12-31'),
-                    new DateTime('2015-03-11')
+                    new DateTime('2015-03-11'),
                 ],
                 25.125
             ),
@@ -45,7 +45,7 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
                 [
                     new DateTime('2014-04-16'),
                     new DateTime('2015-12-31'),
-                    new DateTime('2016-04-31')],
+                    new DateTime('2016-04-31'), ],
                 50978.125
             ),
             new Clients(
@@ -124,7 +124,6 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
     public function testItMustNotRangeBetweenTwoObjects()
     {
         $filter = new Filter();
@@ -183,7 +182,6 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
             $this->assertContains($client->name(), $names);
         }
     }
-
 
     public function testItNotContainsObjectInArray()
     {
@@ -311,7 +309,7 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         $filter = new Filter();
         $filter->must()->includesGroup(
             'name',
-            [ 'k', 'e', 'n']
+            ['k', 'e', 'n']
         );
         $results = InMemoryFilter::filter($this->data, $filter);
 
@@ -329,7 +327,7 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         $filter = new Filter();
         $filter->must()->includesGroup(
             'orderDates',
-            [ new DateTime('1999-04-16'), new DateTime('1996-02-04'), new DateTime('1992-06-01'),]
+            [new DateTime('1999-04-16'), new DateTime('1996-02-04'), new DateTime('1992-06-01')]
         );
         $results = InMemoryFilter::filter($this->data, $filter);
 
@@ -341,7 +339,7 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         $filter = new Filter();
         $filter->must()->notIncludesGroup(
             'name',
-            [ 'k', 'e', 'n']
+            ['k', 'e', 'n']
         );
         $results = InMemoryFilter::filter($this->data, $filter);
 
@@ -359,13 +357,41 @@ class InMemoryFilterTest extends \PHPUnit_Framework_TestCase
         $filter = new Filter();
         $filter->must()->notIncludesGroup(
             'orderDates',
-            [ new DateTime('1999-04-16'), new DateTime('1996-02-04'), new DateTime('1992-06-01'),]
+            [new DateTime('1999-04-16'), new DateTime('1996-02-04'), new DateTime('1992-06-01')]
         );
 
         $results = InMemoryFilter::filter($this->data, $filter);
         $this->assertEquals(3, count($results));
 
         $names = ['John Doe', 'Junichi Masuda', 'Ken Sugimori'];
+        /** @var Clients $client */
+        foreach ($results as $client) {
+            $this->assertContains($client->name(), $names);
+        }
+    }
+
+    public function testItNotEndsWithScalar()
+    {
+        $filter = new Filter();
+        $filter->mustNot()->endsWith('name', 'Masuda');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(3, count($results));
+        $names = ['John Doe', 'Shigeru Miyamoto', 'Ken Sugimori'];
+        /** @var Clients $client */
+        foreach ($results as $client) {
+            $this->assertContains($client->name(), $names);
+        }
+    }
+    public function testItNotStartsWithScalar()
+    {
+        $filter = new Filter();
+
+        $filter->mustNot()->startsWith('name', 'Junichi');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(3, count($results));
+        $names = ['John Doe', 'Shigeru Miyamoto', 'Ken Sugimori'];
         /** @var Clients $client */
         foreach ($results as $client) {
             $this->assertContains($client->name(), $names);
