@@ -74,13 +74,13 @@ class Order implements OrderInterface
     public function equals($object)
     {
         return get_class($this) === get_class($object)
-        && $this->getDirection() === $object->getDirection();
+        && $this->direction() === $object->direction();
     }
 
     /**
      * @return string
      */
-    public function getDirection()
+    public function direction()
     {
         return (!empty($this->direction)) ? $this->direction : self::ASCENDING;
     }

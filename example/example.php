@@ -23,7 +23,7 @@ $repository = new ColorRepository($colors);
 
 echo '<h2>Print all colors</h2>';
 echo '<pre>';
-print_r($repository->findAll()->getContent());
+print_r($repository->findAll()->content());
 echo '</pre>';
 
 

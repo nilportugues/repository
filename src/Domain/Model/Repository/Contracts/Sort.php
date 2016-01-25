@@ -32,7 +32,7 @@ interface Sort
     /**
      * @return Order[]
      */
-    public function getOrders();
+    public function orders();
 
     /**
      * @param Sort $sort
@@ -48,7 +48,7 @@ interface Sort
      *
      * @return Order
      */
-    public function getOrderFor($propertyName);
+    public function orderFor($propertyName);
 
     /**
      * @param string $propertyName
@@ -63,5 +63,5 @@ interface Sort
      *
      * @throws \InvalidArgumentException
      */
-    public function getProperty($propertyName);
+    public function property($propertyName);
 }

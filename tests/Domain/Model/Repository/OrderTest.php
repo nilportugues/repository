@@ -20,10 +20,10 @@ class OrderTest extends \PHPUnit_Framework_TestCase
         $asc = new Order('ASC');
         $desc = new Order('DESC');
 
-        $this->assertEquals('ASC', $asc->getDirection());
+        $this->assertEquals('ASC', $asc->direction());
         $this->assertTrue($asc->isAscending());
 
-        $this->assertEquals('DESC', $desc->getDirection());
+        $this->assertEquals('DESC', $desc->direction());
         $this->assertTrue($desc->isDescending());
     }
 

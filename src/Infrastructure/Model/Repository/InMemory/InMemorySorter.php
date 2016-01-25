@@ -28,7 +28,7 @@ class InMemorySorter
      */
     public static function sort(array $results, Sort $sort)
     {
-        $sortOrder = array_reverse($sort->getOrders(), true);
+        $sortOrder = array_reverse($sort->orders(), true);
 
         /** @var Order $sortDirection */
         foreach ($sortOrder as $propertyName => $sortDirection) {

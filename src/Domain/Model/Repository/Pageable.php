@@ -67,9 +67,9 @@ class Pageable implements PageableInterface
      *
      * @return int
      */
-    public function getOffset()
+    public function offset()
     {
-        $offset = $this->getPageNumber();
+        $offset = $this->pageNumber();
 
         return ($offset > 0) ? ($offset) * $this->pageSize : $this->pageSize;
     }
@@ -79,7 +79,7 @@ class Pageable implements PageableInterface
      *
      * @return int
      */
-    public function getPageNumber()
+    public function pageNumber()
     {
         return ($this->pageNumber < 1) ? 1 : $this->pageNumber;
     }
@@ -89,7 +89,7 @@ class Pageable implements PageableInterface
      *
      * @return SortInterface
      */
-    public function getSort()
+    public function sortings()
     {
         return $this->sort;
     }
@@ -101,7 +101,7 @@ class Pageable implements PageableInterface
      */
     public function next()
     {
-        return new self($this->getPageNumber() + 1, $this->getPageSize(), $this->sort, $this->filter, $this->fields);
+        return new self($this->pageNumber() + 1, $this->pageSize(), $this->sort, $this->filter, $this->fields);
     }
 
     /**
@@ -109,7 +109,7 @@ class Pageable implements PageableInterface
      *
      * @return int
      */
-    public function getPageSize()
+    public function pageSize()
     {
         return $this->pageSize;
     }
@@ -122,7 +122,7 @@ class Pageable implements PageableInterface
     public function previousOrFirst()
     {
         if ($this->hasPrevious()) {
-            return new self($this->getPageNumber() - 1, $this->getPageSize(), $this->sort, $this->filter,
+            return new self($this->pageNumber() - 1, $this->pageSize(), $this->sort, $this->filter,
                 $this->fields);
         }
 
@@ -136,7 +136,7 @@ class Pageable implements PageableInterface
      */
     public function hasPrevious()
     {
-        return ($this->getPageNumber() - 1) > 0;
+        return ($this->pageNumber() - 1) > 0;
     }
 
     /**
@@ -146,13 +146,13 @@ class Pageable implements PageableInterface
      */
     public function first()
     {
-        return new self(1, $this->getPageSize(), $this->sort, $this->filter, $this->fields);
+        return new self(1, $this->pageSize(), $this->sort, $this->filter, $this->fields);
     }
 
     /**
      * @return FilterInterface
      */
-    public function getFilter()
+    public function filters()
     {
         return $this->filter;
     }
@@ -160,7 +160,7 @@ class Pageable implements PageableInterface
     /**
      * @return Fields
      */
-    public function getFields()
+    public function fields()
     {
         return $this->fields;
     }

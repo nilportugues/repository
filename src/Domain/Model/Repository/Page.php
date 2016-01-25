@@ -83,7 +83,7 @@ class Page implements PageInterface
      *
      * @return ImmutableTypedCollection
      */
-    public function getContent()
+    public function content()
     {
         return $this->elements;
     }
@@ -125,7 +125,7 @@ class Page implements PageInterface
      */
     public function hasNext()
     {
-        return $this->getPageSize() * $this->getPageNumber() < $this->getTotalPages();
+        return $this->pageSize() * $this->pageNumber() < $this->totalPages();
     }
 
     /**
@@ -133,7 +133,7 @@ class Page implements PageInterface
      *
      * @return int
      */
-    public function getPageSize()
+    public function pageSize()
     {
         return count($this->elements);
     }
@@ -143,7 +143,7 @@ class Page implements PageInterface
      *
      * @return int
      */
-    public function getPageNumber()
+    public function pageNumber()
     {
         return $this->pageNumber;
     }
@@ -153,7 +153,7 @@ class Page implements PageInterface
      *
      * @return int
      */
-    public function getTotalPages()
+    public function totalPages()
     {
         return $this->totalPages;
     }
@@ -166,11 +166,11 @@ class Page implements PageInterface
     public function nextPageable()
     {
         return new Pageable(
-            $this->getPageNumber() + 1,
-            $this->getPageSize(),
-            $this->getSort(),
-            $this->getFilter(),
-            $this->getFields()
+            $this->pageNumber() + 1,
+            $this->pageSize(),
+            $this->sortings(),
+            $this->filters(),
+            $this->fields()
         );
     }
 
@@ -179,7 +179,7 @@ class Page implements PageInterface
      *
      * @return SortInterface
      */
-    public function getSort()
+    public function sortings()
     {
         return $this->sort;
     }
@@ -187,7 +187,7 @@ class Page implements PageInterface
     /**
      * @return FilterInterface
      */
-    public function getFilter()
+    public function filters()
     {
         return $this->filter;
     }
@@ -195,7 +195,7 @@ class Page implements PageInterface
     /**
      * @return FieldsInterface
      */
-    public function getFields()
+    public function fields()
     {
         return $this->fields;
     }
@@ -208,11 +208,11 @@ class Page implements PageInterface
     public function previousPageable()
     {
         $pageable = new Pageable(
-            $this->getPageNumber(),
-            $this->getPageSize(),
-            $this->getSort(),
-            $this->getFilter(),
-            $this->getFields()
+            $this->pageNumber(),
+            $this->pageSize(),
+            $this->sortings(),
+            $this->filters(),
+            $this->fields()
         );
 
         return $pageable->previousOrFirst();
@@ -223,7 +223,7 @@ class Page implements PageInterface
      *
      * @return int
      */
-    public function getTotalElements()
+    public function totalElements()
     {
         return $this->totalElements;
     }

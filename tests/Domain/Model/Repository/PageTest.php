@@ -99,12 +99,12 @@ class PageTest extends PHPUnit_Framework_TestCase
 
     public function testItCanConstruct()
     {
-        $this->assertEquals($this->totalElements, $this->page->getTotalElements());
-        $this->assertEquals($this->pageNumber, $this->page->getPageNumber());
-        $this->assertEquals($this->totalPages, $this->page->getTotalPages());
-        $this->assertEquals($this->sort, $this->page->getSort());
-        $this->assertEquals($this->filter, $this->page->getFilter());
-        $this->assertEquals($this->fields, $this->page->getFields());
+        $this->assertEquals($this->totalElements, $this->page->totalElements());
+        $this->assertEquals($this->pageNumber, $this->page->pageNumber());
+        $this->assertEquals($this->totalPages, $this->page->totalPages());
+        $this->assertEquals($this->sort, $this->page->sortings());
+        $this->assertEquals($this->filter, $this->page->filters());
+        $this->assertEquals($this->fields, $this->page->fields());
 
         $this->assertTrue($this->page->hasNext());
         $this->assertTrue($this->page->hasPrevious());
@@ -112,30 +112,30 @@ class PageTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->page->isLast());
         $this->assertFalse($this->page->isFirst());
 
-        $this->assertEquals($this->pageSize, $this->page->getPageSize());
+        $this->assertEquals($this->pageSize, $this->page->pageSize());
         foreach ($this->elements as $key => $element) {
-            $this->assertEquals($element, $this->page->getContent()[$key]);
+            $this->assertEquals($element, $this->page->content()[$key]);
         }
     }
 
     public function testItCanCalculatePreviousPageable()
     {
         $previousPageable = $this->page->previousPageable();
-        $this->assertEquals(2, $previousPageable->getPageNumber());
-        $this->assertEquals($this->pageSize, $previousPageable->getPageSize());
-        $this->assertEquals($this->sort, $previousPageable->getSort());
-        $this->assertEquals($this->filter, $previousPageable->getFilter());
-        $this->assertEquals($this->fields, $previousPageable->getFields());
+        $this->assertEquals(2, $previousPageable->pageNumber());
+        $this->assertEquals($this->pageSize, $previousPageable->pageSize());
+        $this->assertEquals($this->sort, $previousPageable->sortings());
+        $this->assertEquals($this->filter, $previousPageable->filters());
+        $this->assertEquals($this->fields, $previousPageable->fields());
     }
 
     public function testItCanCalculateNextPageable()
     {
         $nextPageable = $this->page->nextPageable();
-        $this->assertEquals(4, $nextPageable->getPageNumber());
-        $this->assertEquals($this->pageSize, $nextPageable->getPageSize());
-        $this->assertEquals($this->sort, $nextPageable->getSort());
-        $this->assertEquals($this->filter, $nextPageable->getFilter());
-        $this->assertEquals($this->fields, $nextPageable->getFields());
+        $this->assertEquals(4, $nextPageable->pageNumber());
+        $this->assertEquals($this->pageSize, $nextPageable->pageSize());
+        $this->assertEquals($this->sort, $nextPageable->sortings());
+        $this->assertEquals($this->filter, $nextPageable->filters());
+        $this->assertEquals($this->fields, $nextPageable->fields());
     }
 
     public function testItCanCreateANewPageFromCallableMap()
@@ -149,7 +149,7 @@ class PageTest extends PHPUnit_Framework_TestCase
 
         $page = $this->page->map($convert);
 
-        foreach ($page->getContent() as $key => $value) {
+        foreach ($page->content() as $key => $value) {
             $this->assertInstanceOf(stdClass::class, $value);
             $this->assertEquals($this->elements[$key], $value->name);
         }

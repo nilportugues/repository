@@ -11,11 +11,26 @@ Interaction with the repository requires the usage of the following classes or c
 **Classes**
 
 - `NilPortugues\Foundation\Domain\Model\Repository\Fields`
+
+    - `public function __construct(array $fields = [])`
+    - `public function add($field)`
+    - `public function get()`
+
+<br>
 - `NilPortugues\Foundation\Domain\Model\Repository\Filter`
+
+<br>
 - `NilPortugues\Foundation\Domain\Model\Repository\Order`
+
+<br>
 - `NilPortugues\Foundation\Domain\Model\Repository\Pageable`
+
+<br>
 - `NilPortugues\Foundation\Domain\Model\Repository\Page`
+
+<br>
 - `NilPortugues\Foundation\Domain\Model\Repository\Sort`
+
 
 **Interfaces** 
 

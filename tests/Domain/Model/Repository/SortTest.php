@@ -15,7 +15,7 @@ class SortTest extends PHPUnit_Framework_TestCase
         $order = new Order('ASC');
         $sort = new Sort($properties, $order);
 
-        $this->assertEquals(new Order('ASC'), $sort->getProperty('size'));
+        $this->assertEquals(new Order('ASC'), $sort->property('size'));
     }
 
     public function testItThrowsExceptionIfPropertyNameNotFound()
@@ -24,7 +24,7 @@ class SortTest extends PHPUnit_Framework_TestCase
         $sort = new Sort($properties);
 
         $this->setExpectedException(InvalidArgumentException::class);
-        $sort->getProperty('aPropertyName');
+        $sort->property('aPropertyName');
     }
 
     public function testItCanAddSorting()
@@ -39,7 +39,7 @@ class SortTest extends PHPUnit_Framework_TestCase
         $expected['pages'] = new Order('ASC');
         $expected['words'] = new Order('DESC');
 
-        $this->assertEquals($expected, $originalSort->getOrders());
+        $this->assertEquals($expected, $originalSort->orders());
     }
 
     public function testItCanSetOrderForAProperty()
@@ -47,7 +47,7 @@ class SortTest extends PHPUnit_Framework_TestCase
         $sort = new Sort();
         $sort->setOrderFor('size', new Order('ASC'));
 
-        $this->assertEquals(new Order('ASC'), $sort->getOrderFor('size'));
+        $this->assertEquals(new Order('ASC'), $sort->orderFor('size'));
     }
 
     public function testItCanCheckIfEqual()

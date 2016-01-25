@@ -32,13 +32,13 @@ class PageableTest extends PHPUnit_Framework_TestCase
         );
         $result = $pageable->first();
 
-        $this->assertEquals(1, $result->getPageNumber());
-        $this->assertEquals(20, $result->getPageSize());
+        $this->assertEquals(1, $result->pageNumber());
+        $this->assertEquals(20, $result->pageSize());
         $this->assertFalse($result->hasPrevious());
-        $this->assertEquals(20, $result->getOffset());
-        $this->assertEquals(new Sort(), $result->getSort());
-        $this->assertEquals(new Fields(), $result->getFields());
-        $this->assertEquals(new Filter($this->filterableAttributes), $result->getFilter());
+        $this->assertEquals(20, $result->offset());
+        $this->assertEquals(new Sort(), $result->sortings());
+        $this->assertEquals(new Fields(), $result->fields());
+        $this->assertEquals(new Filter($this->filterableAttributes), $result->filters());
     }
 
     public function testReturnsNextPageable()
@@ -46,12 +46,12 @@ class PageableTest extends PHPUnit_Framework_TestCase
         $pageable = new Pageable(100, 20, new Sort(), new Filter($this->filterableAttributes));
         $result = $pageable->next();
 
-        $this->assertEquals(101, $result->getPageNumber());
-        $this->assertEquals(20, $result->getPageSize());
+        $this->assertEquals(101, $result->pageNumber());
+        $this->assertEquals(20, $result->pageSize());
         $this->assertTrue($result->hasPrevious());
-        $this->assertEquals(2020, $result->getOffset());
-        $this->assertEquals(new Sort(), $result->getSort());
-        $this->assertEquals(new Filter($this->filterableAttributes), $result->getFilter());
+        $this->assertEquals(2020, $result->offset());
+        $this->assertEquals(new Sort(), $result->sortings());
+        $this->assertEquals(new Filter($this->filterableAttributes), $result->filters());
     }
 
     public function testReturnsPreviousPageable()
@@ -59,12 +59,12 @@ class PageableTest extends PHPUnit_Framework_TestCase
         $pageable = new Pageable(100, 20, new Sort(), new Filter($this->filterableAttributes));
         $result = $pageable->previousOrFirst();
 
-        $this->assertEquals(99, $result->getPageNumber());
-        $this->assertEquals(20, $result->getPageSize());
+        $this->assertEquals(99, $result->pageNumber());
+        $this->assertEquals(20, $result->pageSize());
         $this->assertTrue($result->hasPrevious());
-        $this->assertEquals(1980, $result->getOffset());
-        $this->assertEquals(new Sort(), $result->getSort());
-        $this->assertEquals(new Filter($this->filterableAttributes), $result->getFilter());
+        $this->assertEquals(1980, $result->offset());
+        $this->assertEquals(new Sort(), $result->sortings());
+        $this->assertEquals(new Filter($this->filterableAttributes), $result->filters());
     }
 
     public function testPreviousOrFirstReturnsFirstPageable()
@@ -72,11 +72,11 @@ class PageableTest extends PHPUnit_Framework_TestCase
         $pageable = new Pageable(1, 20, new Sort(), new Filter($this->filterableAttributes));
         $result = $pageable->previousOrFirst();
 
-        $this->assertEquals(1, $result->getPageNumber());
-        $this->assertEquals(20, $result->getPageSize());
+        $this->assertEquals(1, $result->pageNumber());
+        $this->assertEquals(20, $result->pageSize());
         $this->assertFalse($result->hasPrevious());
-        $this->assertEquals(20, $result->getOffset());
-        $this->assertEquals(new Sort(), $result->getSort());
-        $this->assertEquals(new Filter($this->filterableAttributes), $result->getFilter());
+        $this->assertEquals(20, $result->offset());
+        $this->assertEquals(new Sort(), $result->sortings());
+        $this->assertEquals(new Filter($this->filterableAttributes), $result->filters());
     }
 }

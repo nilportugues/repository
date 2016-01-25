@@ -119,13 +119,13 @@ class ColorRepository implements ColorRepositoryInterface
             return new ResultPage($this->data, count($this->data), 1, 1);
         }
 
-        $results = $this->findBy($pageable->getFilter(), $pageable->getSort());
+        $results = $this->findBy($pageable->filters(), $pageable->sortings());
 
         return new ResultPage(
-            array_slice($results, $pageable->getOffset() - 1, $pageable->getPageSize()),
+            array_slice($results, $pageable->offset() - 1, $pageable->pageSize()),
             count($results),
-            $pageable->getPageNumber(),
-            ceil(count($results) / $pageable->getPageSize())
+            $pageable->pageNumber(),
+            ceil(count($results) / $pageable->pageSize())
         );
     }
 

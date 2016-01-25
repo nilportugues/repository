@@ -28,7 +28,7 @@ interface Order
     /**
      * @return string
      */
-    public function getDirection();
+    public function direction();
 
     /**
      * @return string

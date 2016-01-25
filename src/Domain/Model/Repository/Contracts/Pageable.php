@@ -32,17 +32,17 @@ interface Pageable
     /**
      * @return int
      */
-    public function getOffset();
+    public function offset();
 
     /**
      * @return int
      */
-    public function getPageNumber();
+    public function pageNumber();
 
     /**
      * @return Sort
      */
-    public function getSort();
+    public function sortings();
 
     /**
      * @return Pageable
@@ -52,7 +52,7 @@ interface Pageable
     /**
      * @return int
      */
-    public function getPageSize();
+    public function pageSize();
 
     /**
      * @return Pageable
@@ -72,10 +72,10 @@ interface Pageable
     /**
      * @return Filter
      */
-    public function getFilter();
+    public function filters();
 
     /**
      * @return Fields
      */
-    public function getFields();
+    public function fields();
 }

@@ -38,7 +38,7 @@ interface Page
      *
      * @return array
      */
-    public function getContent();
+    public function content();
 
     /**
      * Returns if there is a previous Page.
@@ -73,21 +73,21 @@ interface Page
      *
      * @return int
      */
-    public function getPageSize();
+    public function pageSize();
 
     /**
      * Returns the number of the current Page.
      *
      * @return int
      */
-    public function getPageNumber();
+    public function pageNumber();
 
     /**
      * Returns the number of total pages.
      *
      * @return int
      */
-    public function getTotalPages();
+    public function totalPages();
 
     /**
      * Returns the Pageable to request the next Page.
@@ -101,12 +101,12 @@ interface Page
      *
      * @return Sort
      */
-    public function getSort();
+    public function sortings();
 
     /**
      * @return Filter
      */
-    public function getFilter();
+    public function filters();
 
     /**
      * Returns the Pageable to request the previous Page.
@@ -120,7 +120,7 @@ interface Page
      *
      * @return int
      */
-    public function getTotalElements();
+    public function totalElements();
 
     /**
      * Returns a new Page with the content of the current one mapped by the $converter callable.
@@ -134,5 +134,5 @@ interface Page
     /**
      * @return Fields
      */
-    public function getFields();
+    public function fields();
 }

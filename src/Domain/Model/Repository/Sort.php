@@ -60,7 +60,7 @@ class Sort implements SortInterface
      */
     public function andSort(SortInterface $sort)
     {
-        $this->properties = array_merge($this->getOrders(), $sort->getOrders());
+        $this->properties = array_merge($this->orders(), $sort->orders());
 
         return $this;
     }
@@ -68,7 +68,7 @@ class Sort implements SortInterface
     /**
      * @return array
      */
-    public function getOrders()
+    public function orders()
     {
         return $this->properties;
     }
@@ -91,7 +91,7 @@ class Sort implements SortInterface
      */
     public function equals(SortInterface $sort)
     {
-        return $sort->getOrders() == $this->getOrders();
+        return $sort->orders() == $this->orders();
     }
 
     /**
@@ -101,7 +101,7 @@ class Sort implements SortInterface
      *
      * @return Order
      */
-    public function getOrderFor($propertyName)
+    public function orderFor($propertyName)
     {
         $this->hasProperty($propertyName);
 
@@ -136,7 +136,7 @@ class Sort implements SortInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function getProperty($propertyName)
+    public function property($propertyName)
     {
         $this->hasProperty($propertyName);
 
