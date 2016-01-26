@@ -13,18 +13,18 @@ class Color implements Identity
     /**
      * @var string
      */
-    private $hexCode;
+    private $id;
 
     /**
      * Color constructor.
      *
      * @param string $name
-     * @param string $hexCode
+     * @param string $id
      */
-    public function __construct($name, $hexCode)
+    public function __construct($name, $id)
     {
-        $this->name    = $name;
-        $this->hexCode = $hexCode;
+        $this->name = $name;
+        $this->id = $id;
     }
 
     /**
@@ -42,17 +42,7 @@ class Color implements Identity
      */
     public function id()
     {
-        return $this->getHexCode();
-    }
-
-    /**
-     * Returns value for hexCode property.
-     *
-     * @return string
-     */
-    public function getHexCode()
-    {
-        return $this->hexCode;
+        return $this->id;
     }
 
     /**
@@ -60,6 +50,6 @@ class Color implements Identity
      */
     public function __toString()
     {
-        return (string)$this->getHexCode();
+        return (string) $this->id;
     }
 }

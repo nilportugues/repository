@@ -24,7 +24,7 @@ class Filter
     const SHOULD = 'should';
 
     /**
-     * @param array  $results
+     * @param array           $results
      * @param FilterInterface $filter
      *
      * @return array

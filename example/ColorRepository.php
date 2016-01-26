@@ -56,19 +56,19 @@ class ColorRepository extends InMemoryRepository
      *
      * @return Color
      */
-    public function persist(Identity $value)
+    public function add(Identity $value)
     {
-        return parent::persist($value);
+        return parent::add($value);
     }
 
     /**
-     * Delete a Color.
+     * Remove a Color.
      *
      * @param Color|Identity $id
      *
      * @throws ColorNotFoundException
      */
-    public function delete(Identity $id)
+    public function remove(Identity $id)
     {
         $result = parent::find($id);
 
@@ -76,7 +76,7 @@ class ColorRepository extends InMemoryRepository
             throw new ColorNotFoundException();
         }
 
-        parent::delete($id);
+        parent::remove($id);
     }
 
     /**
@@ -122,21 +122,34 @@ class ColorRepository extends InMemoryRepository
      *
      * @return mixed
      */
-    public function persistAll(array $values)
+    public function addAll(array $values)
     {
-        parent::persistAll($values);
+        foreach ($values as $value) {
+            $this->add($value);
+        }
     }
 
     /**
-     * Deletes all elements in the repository given the restrictions provided by the Filter object.
-     * If $filter is null, all the repository data will be deleted.
+     * Removes all elements in the repository given the restrictions provided by the Filter object.
+     * If $filter is null, all the repository data will be removed.
      *
      * @param Filter $filter
      *
      * @return bool
      */
-    public function deleteAll(Filter $filter = null)
+    public function removeAll(Filter $filter = null)
     {
-        return parent::deleteAll($filter);
+        if (null === $filter) {
+            $this->data = [];
+
+            return true;
+        }
+
+        /** @var Identity $value */
+        foreach ($this->findBy($filter) as $value) {
+            $this->remove($value->id());
+        }
+
+        return true;
     }
 }

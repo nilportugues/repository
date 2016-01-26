@@ -19,7 +19,7 @@ interface WriteRepository extends Repository
      *
      * @return mixed
      */
-    public function persist(Identity $value);
+    public function add(Identity $value);
 
     /**
      * Adds a collections of entities to the storage.
@@ -28,22 +28,22 @@ interface WriteRepository extends Repository
      *
      * @return mixed
      */
-    public function persistAll(array $values);
+    public function addAll(array $values);
 
     /**
-     * Deletes the entity with the given id.
+     * Removes the entity with the given id.
      *
      * @param $id
      */
-    public function delete(Identity $id);
+    public function remove(Identity $id);
 
     /**
-     * Deletes all elements in the repository given the restrictions provided by the Filter object.
+     * Removes all elements in the repository given the restrictions provided by the Filter object.
      * If $filter is null, all the repository data will be deleted.
      *
      * @param Filter $filter
      *
      * @return bool
      */
-    public function deleteAll(Filter $filter = null);
+    public function removeAll(Filter $filter = null);
 }

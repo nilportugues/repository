@@ -1,13 +1,13 @@
 <?php
+
 /**
  * Author: Nil Portugués Calderó <contact@nilportugues.com>
  * Date: 25/01/16
- * Time: 20:39
+ * Time: 20:39.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace NilPortugues\Tests\Foundation\Infrastructure\Model\Repository\InMemory;
 
 use DateTime;
@@ -125,45 +125,45 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->repository->exists(new ObjectId(1)));
     }
 
-    public function testPersist()
+    public function testAdd()
     {
         $client = new Clients(5, 'New Client', new DateTime('now'), 0, [], 0);
-        $this->repository->persist($client);
+        $this->repository->add($client);
 
         $this->assertNotNull($this->repository->find(new ObjectId(5)));
     }
 
-    public function testPersistAll()
+    public function testAddAll()
     {
         $clients = [
             new Clients(5, 'New Client 1', new DateTime('now'), 0, [], 0),
-            new Clients(6, 'New Client 2', new DateTime('now'), 0, [], 0)
+            new Clients(6, 'New Client 2', new DateTime('now'), 0, [], 0),
         ];
-        $this->repository->persistAll($clients);
+        $this->repository->addAll($clients);
 
         $this->assertNotNull($this->repository->find(new ObjectId(5)));
         $this->assertNotNull($this->repository->find(new ObjectId(6)));
     }
 
-    public function testDelete()
+    public function testRemove()
     {
         $id = new ObjectId(1);
-        $this->repository->delete($id);
+        $this->repository->remove($id);
         $this->assertFalse($this->repository->exists($id));
     }
 
-    public function testDeleteAll()
+    public function testRemoveAll()
     {
-        $this->repository->deleteAll();
+        $this->repository->removeAll();
         $this->assertFalse($this->repository->exists(new ObjectId(1)));
     }
 
-    public function testDeleteAllWithFilter()
+    public function testRemoveAllWithFilter()
     {
         $filter = new Filter();
         $filter->must()->contains('name', 'Doe');
 
-        $this->repository->deleteAll($filter);
+        $this->repository->removeAll($filter);
         $this->assertFalse($this->repository->exists(new ObjectId(1)));
     }
 
@@ -188,7 +188,6 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
             $this->repository->find(new ObjectId(self::CLIENT_ID_NO4))
         );
     }
-
 
     public function testFindReturnsNullIfNotFound()
     {

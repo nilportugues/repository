@@ -127,10 +127,10 @@ Interaction with the repository requires the usage of the following classes or c
     - `public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null)`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository**
-    - `public function persist($value)`
-    - `public function persistAll(array $values)`
-    - `public function delete(Identity $id)`
-    - `public function deleteAll(Filter $filter = null)`
+    - `public function add($value)`
+    - `public function addAll(array $values)`
+    - `public function remove(Identity $id)`
+    - `public function removeAll(Filter $filter = null)`
 
 ---
 

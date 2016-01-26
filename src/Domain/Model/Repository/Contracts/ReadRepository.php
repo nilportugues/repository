@@ -18,7 +18,7 @@ interface ReadRepository extends Repository
      * @param Identity    $id
      * @param Fields|null $fields
      *
-     * @return mixed
+     * @return array
      */
     public function find(Identity $id, Fields $fields = null);
 
@@ -29,7 +29,7 @@ interface ReadRepository extends Repository
      * @param Sort|null   $sort
      * @param Fields|null $fields
      *
-     * @return mixed
+     * @return array
      */
     public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null);
 }

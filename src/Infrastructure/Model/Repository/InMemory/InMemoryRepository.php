@@ -1,13 +1,13 @@
 <?php
+
 /**
  * Author: Nil Portugués Calderó <contact@nilportugues.com>
  * Date: 25/01/16
- * Time: 19:19
+ * Time: 19:19.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory;
 
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Fields;
@@ -74,6 +74,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
         if (null === $filter) {
             return count($this->data);
         }
+
         return count($this->findBy($filter));
     }
 
@@ -87,6 +88,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
     public function exists(Identity $id)
     {
         $id = (string) $id;
+
         return array_key_exists($id, $this->data);
     }
 
@@ -97,7 +99,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      *
      * @return mixed
      */
-    public function persist(Identity $value)
+    public function add(Identity $value)
     {
         $id = (string) $value->id();
         $this->data[$id] = clone $value;
@@ -110,19 +112,19 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      *
      * @return mixed
      */
-    public function persistAll(array $values)
+    public function addAll(array $values)
     {
         foreach ($values as $value) {
-            $this->persist($value);
+            $this->add($value);
         }
     }
 
     /**
-     * Deletes the entity with the given id.
+     * Removes the entity with the given id.
      *
      * @param $id
      */
-    public function delete(Identity $id)
+    public function remove(Identity $id)
     {
         if ($this->exists($id)) {
             unset($this->data[$id->id()]);
@@ -130,23 +132,25 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
     }
 
     /**
-     * Deletes all elements in the repository given the restrictions provided by the Filter object.
-     * If $filter is null, all the repository data will be deleted.
+     * Removes all elements in the repository given the restrictions provided by the Filter object.
+     * If $filter is null, all the repository data will be removed.
      *
      * @param FilterInterface $filter
      *
      * @return bool
      */
-    public function deleteAll(FilterInterface $filter = null)
+    public function removeAll(FilterInterface $filter = null)
     {
         if (null === $filter) {
             $this->data = [];
+
             return true;
         }
         /** @var Identity $value */
         foreach ($this->findBy($filter) as $value) {
             unset($this->data[$value->id()]);
         }
+
         return true;
     }
 
@@ -161,18 +165,18 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
     public function find(Identity $id, Fields $fields = null)
     {
         if (false === $this->exists($id)) {
-            return null;
+            return;
         }
 
-        return clone $this->data[(string)$id];
+        return clone $this->data[(string) $id];
     }
 
     /**
      * Returns all instances of the type.
      *
      * @param FilterInterface|null $filter
-     * @param Sort|null   $sort
-     * @param Fields|null $fields
+     * @param Sort|null            $sort
+     * @param Fields|null          $fields
      *
      * @return array
      */
