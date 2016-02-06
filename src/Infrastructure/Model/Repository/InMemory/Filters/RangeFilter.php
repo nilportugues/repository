@@ -50,7 +50,7 @@ class RangeFilter
      */
     private static function sameTypeGuard($v, $value1, $value2)
     {
-        if (1 !== count(array_unique($types = [is_scalar($value1), is_scalar($value2), is_scalar($v)]))) {
+        if (1 !== count(array_unique([is_scalar($value1), is_scalar($value2), is_scalar($v)]))) {
             throw new Exception('Range values and property values should be of the same type, either scalars or objects.');
         }
     }
