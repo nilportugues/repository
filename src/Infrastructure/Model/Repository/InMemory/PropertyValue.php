@@ -5,7 +5,7 @@ namespace NilPortugues\Foundation\Infrastructure\Model\Repository\InMemory;
 class PropertyValue
 {
     /**
-     * @param        $object
+     * @param mixed  $object
      * @param string $property
      *
      * @return mixed
