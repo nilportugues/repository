@@ -34,22 +34,39 @@ class Filter
         $filteredResults = $results;
 
         foreach ($filter->filters() as $condition => $filters) {
-            switch ($condition) {
-                case self::MUST:
-                    self::must($filteredResults, $filters);
-                    break;
+            $filters = self::removeEmptyFilters($filters);
+            if (count($filters) > 0) {
+                switch ($condition) {
+                    case self::MUST:
+                        self::must($filteredResults, $filters);
+                        break;
 
-                case self::MUST_NOT:
-                    self::mustNot($filteredResults, $filters);
-                    break;
+                    case self::MUST_NOT:
+                        self::mustNot($filteredResults, $filters);
+                        break;
 
-                case self::SHOULD:
-                    self::should($results, $filteredResults, $filters);
-                    break;
+                    case self::SHOULD:
+                        self::should($results, $filteredResults, $filters);
+                        break;
+                }
             }
         }
 
         return $filteredResults;
+    }
+
+    /**
+     * @param array $filters
+     *
+     * @return array
+     */
+    private static function removeEmptyFilters(array $filters)
+    {
+        $filters = array_filter($filters, function ($v) {
+            return count($v) > 0;
+        });
+
+        return $filters;
     }
 
     /**

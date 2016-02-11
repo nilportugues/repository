@@ -36,7 +36,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItReturnsFilters()
     {
         $filter = new Filter();
-        $filter->must()->equals('id', 1);
+        $filter->must()->equal('id', 1);
 
         $expected = [
             'must' => [
@@ -62,7 +62,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItReturnsEmptyFilters()
     {
         $filter = new Filter();
-        $filter->must()->equals('id', 1);
+        $filter->must()->equal('id', 1);
         $filter->clear();
 
         $expected = [

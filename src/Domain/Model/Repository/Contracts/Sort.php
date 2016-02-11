@@ -64,4 +64,16 @@ interface Sort
      * @throws \InvalidArgumentException
      */
     public function property($propertyName);
+
+    /**
+     * Creates a null Value Object.
+     *
+     * @return self
+     */
+    public static function null();
+
+    /**
+     * @return bool
+     */
+    public function isNull();
 }

@@ -60,6 +60,27 @@ Interaction with the repository requires the usage of the following classes or c
     - `public function mustNot()`
     - `public function should()`
     - `public function clear()`
+    
+- **NilPortugues\Foundation\Domain\Model\Repository\BaseFilter**   
+    - `public function notEmpty($filterName)`
+    - `public function hasEmpty($filterName)`
+    - `public function startsWith($filterName, $value)`
+    - `public function endsWith($filterName, $value)`
+    - `public function equal($filterName, $value)`
+    - `public function notEqual($filterName, $value)`
+    - `public function includeGroup($filterName, array $value)`
+    - `public function notIncludeGroup($filterName, array $value)`
+    - `public function range($filterName, $firstValue, $secondValue)`
+    - `public function notRange($filterName, $firstValue, $secondValue)`
+    - `public function notContain($filterName, $value)`
+    - `public function contain($filterName, $value)`
+    - `public function beGreaterThanOrEqual($filterName, $value)`
+    - `public function beGreaterThan($filterName, $value)`
+    - `public function beLessThanOrEqual($filterName, $value)`
+    - `public function beLessThan($filterName, $value)`
+    - `public function clear()`
+    - `public function get()`
+    
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Order**
     - `public function __construct($direction)`
@@ -112,21 +133,26 @@ Interaction with the repository requires the usage of the following classes or c
 #### Interfaces 
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity**
+
     - `public function id()`
     - `public function __toString()`
     
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository**
+
     - `public function count(Filter $filter = null)`
     - `public function exists(Identity $id)`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\PageRepository**
+
     - `public function findAll(Pageable $pageable = null)`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\ReadRepository**
+
     - `public function find(Identity $id, Fields $fields = null)`
     - `public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null)`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository**
+
     - `public function add($value)`
     - `public function addAll(array $values)`
     - `public function remove(Identity $id)`

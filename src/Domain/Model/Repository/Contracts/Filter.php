@@ -40,4 +40,16 @@ interface Filter
      * @return $this
      */
     public function clear();
+
+    /**
+     * Creates a null Value Object.
+     *
+     * @return self
+     */
+    public static function null();
+
+    /**
+     * @return bool
+     */
+    public function isNull();
 }

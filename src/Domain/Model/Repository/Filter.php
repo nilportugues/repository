@@ -13,9 +13,12 @@ namespace NilPortugues\Foundation\Domain\Model\Repository;
 use NilPortugues\Foundation\Domain\Model\Repository\Collections\ImmutableTypedCollection;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\BaseFilter as BaseFilterInterface;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Filter as FilterInterface;
+use NilPortugues\Foundation\Domain\Model\Repository\Traits\Nullable;
 
 class Filter implements FilterInterface
 {
+    use Nullable;
+
     /**
      * @var BaseFilterInterface[]
      */

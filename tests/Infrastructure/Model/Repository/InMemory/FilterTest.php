@@ -83,7 +83,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItMustRangeBetweenTwoScalars()
     {
         $filter = new Filter();
-        $filter->must()->ranges('totalOrders', 4, 5);
+        $filter->must()->range('totalOrders', 4, 5);
 
         $results = InMemoryFilter::filter($this->data, $filter);
 
@@ -99,7 +99,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItMustRangeOfDifferentTypesThrowsException()
     {
         $filter = new Filter();
-        $filter->must()->ranges('totalOrders', 4, new stdClass());
+        $filter->must()->range('totalOrders', 4, new stdClass());
 
         $this->setExpectedException(Exception::class);
         InMemoryFilter::filter($this->data, $filter);
@@ -108,7 +108,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItMustRangeBetweenTwoObjects()
     {
         $filter = new Filter();
-        $filter->must()->ranges('date', new DateTime('2010-12-01'), new DateTime('2010-12-10'));
+        $filter->must()->range('date', new DateTime('2010-12-01'), new DateTime('2010-12-10'));
 
         $results = InMemoryFilter::filter($this->data, $filter);
 
@@ -124,7 +124,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItMustNotRangeOfDifferentTypesThrowsException()
     {
         $filter = new Filter();
-        $filter->must()->notRanges('totalOrders', 4, new stdClass());
+        $filter->must()->notRange('totalOrders', 4, new stdClass());
 
         $this->setExpectedException(Exception::class);
         InMemoryFilter::filter($this->data, $filter);
@@ -133,7 +133,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItMustNotRangeBetweenTwoScalars()
     {
         $filter = new Filter();
-        $filter->must()->notRanges('totalOrders', 4, 5);
+        $filter->must()->notRange('totalOrders', 4, 5);
 
         $results = InMemoryFilter::filter($this->data, $filter);
 
@@ -149,7 +149,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItMustNotRangeBetweenTwoObjects()
     {
         $filter = new Filter();
-        $filter->must()->notRanges('date', new DateTime('2010-12-01'), new DateTime('2010-12-10'));
+        $filter->must()->notRange('date', new DateTime('2010-12-01'), new DateTime('2010-12-10'));
 
         $results = InMemoryFilter::filter($this->data, $filter);
 
@@ -165,7 +165,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItContainsScalar()
     {
         $filter = new Filter();
-        $filter->must()->contains('name', 'a');
+        $filter->must()->contain('name', 'a');
         $results = InMemoryFilter::filter($this->data, $filter);
 
         $this->assertEquals(2, count($results));
@@ -180,7 +180,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItContainsObjectInArray()
     {
         $filter = new Filter();
-        $filter->must()->contains('orderDates', new DateTime('1999-04-16'));
+        $filter->must()->contain('orderDates', new DateTime('1999-04-16'));
 
         $results = InMemoryFilter::filter($this->data, $filter);
         $names = ['Shigeru Miyamoto'];
@@ -193,7 +193,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItNotContainsScalar()
     {
         $filter = new Filter();
-        $filter->must()->notContains('name', 'a');
+        $filter->must()->notContain('name', 'a');
         $results = InMemoryFilter::filter($this->data, $filter);
 
         $this->assertEquals(2, count($results));
@@ -208,7 +208,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItNotContainsObjectInArray()
     {
         $filter = new Filter();
-        $filter->must()->notContains('orderDates', new DateTime('1999-04-16'));
+        $filter->must()->notContain('orderDates', new DateTime('1999-04-16'));
 
         $results = InMemoryFilter::filter($this->data, $filter);
         $names = ['John Doe', 'Junichi Masuda', 'Ken Sugimori'];
@@ -275,7 +275,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItEquals()
     {
         $filter = new Filter();
-        $filter->must()->equals('name', 'Junichi Masuda');
+        $filter->must()->equal('name', 'Junichi Masuda');
         $results = InMemoryFilter::filter($this->data, $filter);
 
         $this->assertEquals(1, count($results));
@@ -284,7 +284,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItNotEquals()
     {
         $filter = new Filter();
-        $filter->must()->notEquals('name', 'Junichi Masuda');
+        $filter->must()->notEqual('name', 'Junichi Masuda');
         $results = InMemoryFilter::filter($this->data, $filter);
 
         $this->assertEquals(3, count($results));
@@ -293,7 +293,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testLessThan()
     {
         $filter = new Filter();
-        $filter->must()->lessThan('totalEarnings', 100);
+        $filter->must()->beLessThan('totalEarnings', 100);
         $results = InMemoryFilter::filter($this->data, $filter);
 
         $this->assertEquals(1, count($results));
@@ -302,7 +302,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testLessOrEqualThan()
     {
         $filter = new Filter();
-        $filter->must()->lessThanOrEqual('totalEarnings', 25.125);
+        $filter->must()->beLessThanOrEqual('totalEarnings', 25.125);
         $results = InMemoryFilter::filter($this->data, $filter);
 
         $this->assertEquals(1, count($results));
@@ -311,7 +311,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testGreaterThan()
     {
         $filter = new Filter();
-        $filter->must()->greaterThan('totalEarnings', 100);
+        $filter->must()->beGreaterThan('totalEarnings', 100);
         $results = InMemoryFilter::filter($this->data, $filter);
 
         $this->assertEquals(3, count($results));
@@ -320,7 +320,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testGreaterOrEqualThan()
     {
         $filter = new Filter();
-        $filter->must()->greaterThanOrEqual('totalEarnings', 25.125);
+        $filter->must()->beGreaterThanOrEqual('totalEarnings', 25.125);
         $results = InMemoryFilter::filter($this->data, $filter);
 
         $this->assertEquals(4, count($results));
@@ -329,7 +329,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItBeInScalar()
     {
         $filter = new Filter();
-        $filter->must()->includesGroup(
+        $filter->must()->includeGroup(
             'name',
             ['k', 'e', 'n']
         );
@@ -347,7 +347,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItBeInArray()
     {
         $filter = new Filter();
-        $filter->must()->includesGroup(
+        $filter->must()->includeGroup(
             'orderDates',
             [new DateTime('1999-04-16'), new DateTime('1996-02-04'), new DateTime('1992-06-01')]
         );
@@ -359,7 +359,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItBeNotInScalar()
     {
         $filter = new Filter();
-        $filter->must()->notIncludesGroup(
+        $filter->must()->notIncludeGroup(
             'name',
             ['k', 'e', 'n']
         );
@@ -377,7 +377,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
     public function testItBeNotInArray()
     {
         $filter = new Filter();
-        $filter->must()->notIncludesGroup(
+        $filter->must()->notIncludeGroup(
             'orderDates',
             [new DateTime('1999-04-16'), new DateTime('1996-02-04'), new DateTime('1992-06-01')]
         );

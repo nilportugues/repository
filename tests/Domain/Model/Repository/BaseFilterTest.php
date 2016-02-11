@@ -75,7 +75,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForEquals()
     {
-        $this->filter->equals('name', 'Nil');
+        $this->filter->equal('name', 'Nil');
 
         $expected = [
             'equals' => [
@@ -90,7 +90,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForNotEquals()
     {
-        $this->filter->notEquals('name', 'Nil');
+        $this->filter->notEqual('name', 'Nil');
 
         $expected = [
             'not_equals' => [
@@ -105,7 +105,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForIncludesGroup()
     {
-        $this->filter->includesGroup('name', ['Nil', 'Juan']);
+        $this->filter->includeGroup('name', ['Nil', 'Juan']);
 
         $expected = [
 
@@ -122,7 +122,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForRangesBetween()
     {
-        $this->filter->ranges('age', 18, 50);
+        $this->filter->range('age', 18, 50);
 
         $expected = [
             'ranges' => [
@@ -139,7 +139,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForNotRangesBetween()
     {
-        $this->filter->notRanges('age', 18, 50);
+        $this->filter->notRange('age', 18, 50);
 
         $expected = [
             'not_ranges' => [
@@ -156,7 +156,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForNotContains()
     {
-        $this->filter->notContains('name', 'Nil');
+        $this->filter->notContain('name', 'Nil');
 
         $expected = [
             'not_contains' => [
@@ -171,7 +171,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForContains()
     {
-        $this->filter->contains('name', 'N');
+        $this->filter->contain('name', 'N');
 
         $expected = [
             'contains' => [
@@ -186,7 +186,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForGreaterThanOrEqual()
     {
-        $this->filter->greaterThanOrEqual('age', 18);
+        $this->filter->beGreaterThanOrEqual('age', 18);
 
         $expected = [
             'gte' => [
@@ -201,7 +201,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForGreaterThan()
     {
-        $this->filter->greaterThan('age', 18);
+        $this->filter->beGreaterThan('age', 18);
 
         $expected = [
             'gt' => [
@@ -216,7 +216,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForLessThanOrEqual()
     {
-        $this->filter->lessThanOrEqual('age', 18);
+        $this->filter->beLessThanOrEqual('age', 18);
 
         $expected = [
             'lte' => [
@@ -231,7 +231,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldAddFilterForLessThan()
     {
-        $this->filter->lessThan('age', 18);
+        $this->filter->beLessThan('age', 18);
 
         $expected = [
             'lt' => [
@@ -248,7 +248,7 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
     {
         $current = $this->filter->get();
 
-        $this->filter->greaterThan('publication_date', 2000);
+        $this->filter->beGreaterThan('publication_date', 2000);
         $this->filter->clear();
 
         $this->assertEquals($current, $this->filter->get());

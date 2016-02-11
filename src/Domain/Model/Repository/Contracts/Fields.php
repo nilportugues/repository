@@ -28,4 +28,16 @@ interface Fields
      * @return array
      */
     public function get();
+
+    /**
+     * Creates a null Value Object.
+     *
+     * @return self
+     */
+    public static function null();
+
+    /**
+     * @return bool
+     */
+    public function isNull();
 }

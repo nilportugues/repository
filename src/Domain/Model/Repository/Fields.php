@@ -11,12 +11,15 @@
 namespace NilPortugues\Foundation\Domain\Model\Repository;
 
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Fields as FieldsInterface;
+use NilPortugues\Foundation\Domain\Model\Repository\Traits\Nullable;
 
 /**
  * Class Fields.
  */
 class Fields implements FieldsInterface
 {
+    use Nullable;
+
     /**
      * @var array
      */

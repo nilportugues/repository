@@ -28,7 +28,7 @@ echo '</pre>';
 
 echo '<h2>Print all names containing R</h2>';
 $filter = new Filter();
-$filter->must()->contains('name', 'R');
+$filter->must()->contain('name', 'R');
 
 $colorsContaining = $repository->findBy($filter);
 echo '<pre>';
@@ -37,7 +37,7 @@ echo '</pre>';
 
 echo '<h2>Print all colours with id between 2 and 6</h2>';
 $filter = new Filter();
-$filter->must()->ranges('id', 2, 6);
+$filter->must()->range('id', 2, 6);
 
 $idRanges = $repository->findBy($filter);
 echo '<pre>';

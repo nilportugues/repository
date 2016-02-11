@@ -184,11 +184,11 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
     {
         $results = $this->data;
 
-        if (null !== $filter) {
+        if (null !== $filter && !$filter->isNull()) {
             $results = InMemoryFilter::filter($results, $filter);
         }
 
-        if (null !== $sort) {
+        if (null !== $sort && !$filter->isNull()) {
             $results = Sorter::sort($results, $sort);
         }
 

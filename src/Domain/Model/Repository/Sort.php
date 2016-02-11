@@ -13,9 +13,12 @@ namespace NilPortugues\Foundation\Domain\Model\Repository;
 use InvalidArgumentException;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Order as OrderInterface;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort as SortInterface;
+use NilPortugues\Foundation\Domain\Model\Repository\Traits\Nullable;
 
 class Sort implements SortInterface
 {
+    use Nullable;
+
     /**
      * @var array
      */

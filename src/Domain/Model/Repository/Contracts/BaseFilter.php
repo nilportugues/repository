@@ -63,7 +63,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function equals($filterName, $value);
+    public function equal($filterName, $value);
 
     /**
      * @param $filterName
@@ -71,7 +71,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function notEquals($filterName, $value);
+    public function notEqual($filterName, $value);
 
     /**
      * @param       $filterName
@@ -79,7 +79,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function includesGroup($filterName, array $value);
+    public function includeGroup($filterName, array $value);
 
     /**
      * @param       $filterName
@@ -87,12 +87,12 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function notIncludesGroup($filterName, array $value);
+    public function notIncludeGroup($filterName, array $value);
 
     /**
      * @return $this
      */
-    public function ranges($filterName, $firstValue, $secondValue);
+    public function range($filterName, $firstValue, $secondValue);
 
     /**
      * @param $filterName
@@ -101,7 +101,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function notRanges($filterName, $firstValue, $secondValue);
+    public function notRange($filterName, $firstValue, $secondValue);
 
     /**
      * @param $filterName
@@ -109,7 +109,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function notContains($filterName, $value);
+    public function notContain($filterName, $value);
 
     /**
      * @param $filterName
@@ -117,7 +117,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function contains($filterName, $value);
+    public function contain($filterName, $value);
 
     /**
      * @param $filterName
@@ -125,7 +125,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function greaterThanOrEqual($filterName, $value);
+    public function beGreaterThanOrEqual($filterName, $value);
 
     /**
      * @param $filterName
@@ -133,7 +133,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function greaterThan($filterName, $value);
+    public function beGreaterThan($filterName, $value);
 
     /**
      * @param $filterName
@@ -141,7 +141,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function lessThanOrEqual($filterName, $value);
+    public function beLessThanOrEqual($filterName, $value);
 
     /**
      * @param $filterName
@@ -149,7 +149,7 @@ interface BaseFilter
      *
      * @return mixed
      */
-    public function lessThan($filterName, $value);
+    public function beLessThan($filterName, $value);
 
     /**
      * @return mixed

@@ -12,9 +12,12 @@ namespace NilPortugues\Foundation\Domain\Model\Repository;
 
 use InvalidArgumentException;
 use NilPortugues\Foundation\Domain\Model\Repository\Contracts\Order as OrderInterface;
+use NilPortugues\Foundation\Domain\Model\Repository\Traits\Nullable;
 
 class Order implements OrderInterface
 {
+    use Nullable;
+
     /**
      * @var string
      */

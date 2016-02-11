@@ -106,7 +106,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function equals($filterName, $value)
+    public function equal($filterName, $value)
     {
         $this->addFilter(self::EQUALS, $filterName, $value);
 
@@ -119,7 +119,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function notEquals($filterName, $value)
+    public function notEqual($filterName, $value)
     {
         $this->addFilter(self::NOT_EQUAL, $filterName, $value);
 
@@ -132,7 +132,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function includesGroup($filterName, array $value)
+    public function includeGroup($filterName, array $value)
     {
         $filterName = (string) $filterName;
 
@@ -150,7 +150,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function notIncludesGroup($filterName, array $value)
+    public function notIncludeGroup($filterName, array $value)
     {
         $filterName = (string) $filterName;
 
@@ -169,7 +169,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function ranges($filterName, $firstValue, $secondValue)
+    public function range($filterName, $firstValue, $secondValue)
     {
         $this->addFilter(self::RANGES, $filterName, [$firstValue, $secondValue]);
 
@@ -183,7 +183,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function notRanges($filterName, $firstValue, $secondValue)
+    public function notRange($filterName, $firstValue, $secondValue)
     {
         $this->addFilter(self::NOT_RANGES, $filterName, [$firstValue, $secondValue]);
 
@@ -196,7 +196,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function notContains($filterName, $value)
+    public function notContain($filterName, $value)
     {
         $this->addFilter(self::NOT_CONTAINS, $filterName, $value);
 
@@ -209,7 +209,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function contains($filterName, $value)
+    public function contain($filterName, $value)
     {
         $this->addFilter(self::CONTAINS, $filterName, $value);
 
@@ -222,7 +222,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function greaterThanOrEqual($filterName, $value)
+    public function beGreaterThanOrEqual($filterName, $value)
     {
         $this->addFilter(self::GREATER_THAN_OR_EQUAL, $filterName, $value);
 
@@ -235,7 +235,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function greaterThan($filterName, $value)
+    public function beGreaterThan($filterName, $value)
     {
         $this->addFilter(self::GREATER_THAN, $filterName, $value);
 
@@ -248,7 +248,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function lessThanOrEqual($filterName, $value)
+    public function beLessThanOrEqual($filterName, $value)
     {
         $this->addFilter(self::LESS_THAN_OR_EQUAL, $filterName, $value);
 
@@ -261,7 +261,7 @@ class BaseFilter implements BaseFilterInterface
      *
      * @return $this
      */
-    public function lessThan($filterName, $value)
+    public function beLessThan($filterName, $value)
     {
         $this->addFilter(self::LESS_THAN, $filterName, $value);
 

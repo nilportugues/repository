@@ -73,9 +73,9 @@ class Page implements PageInterface
         $this->totalElements = (int) $totalElements;
         $this->pageNumber = (int) $pageNumber;
         $this->totalPages = (int) $totalPages;
-        $this->sort = ($sort) ? $sort : new Sort();
-        $this->filter = ($filter) ? $filter : new Filter();
-        $this->fields = ($fields) ? $fields : new Fields();
+        $this->sort = ($sort) ? $sort : Sort::null();
+        $this->filter = ($filter) ? $filter : Filter::null();
+        $this->fields = ($fields) ? $fields : Fields::null();
     }
 
     /**
