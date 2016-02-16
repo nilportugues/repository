@@ -73,7 +73,7 @@ class Sort implements SortInterface
      */
     public function orders()
     {
-        return $this->properties;
+        return (array) $this->properties;
     }
 
     /**
