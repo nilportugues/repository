@@ -159,6 +159,7 @@ class BaseFilter implements BaseFilterInterface
             array_values($value)
         );
 
+
         return $this;
     }
 

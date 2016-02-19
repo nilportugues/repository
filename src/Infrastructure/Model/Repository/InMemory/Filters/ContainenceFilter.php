@@ -77,20 +77,25 @@ class ContainenceFilter
     public static function in($property, array $value)
     {
         return function ($v) use ($property, $value) {
-            $hasGroup = true;
             $v = PropertyValue::get($v, $property);
 
+            $isTrue = [];
             foreach ($value as $groupItem) {
                 if (is_scalar($v)) {
-                    $hasGroup = $hasGroup && 1 == preg_match(sprintf('/%s/i', $groupItem), $v);
+                    $isTrue[] = 1 == preg_match(sprintf('/%s/i', $groupItem), $v);
                 }
 
                 if (is_array($v)) {
-                    $hasGroup = $hasGroup && in_array($groupItem, $v);
+                    $isTrue[] = in_array($groupItem, $v, false);
+                }
+
+                if (is_object($v)) {
+                    $isTrue[] = ($groupItem == $v);
                 }
             }
+            $isTrue = array_unique($isTrue);
 
-            return $hasGroup;
+            return false !== array_search(true, $isTrue, false);
         };
     }
 
@@ -108,15 +113,20 @@ class ContainenceFilter
 
             foreach ($value as $groupItem) {
                 if (is_scalar($v)) {
-                    $hasGroup = $hasGroup && 1 == preg_match(sprintf('/%s/i', $groupItem), $v);
+                    $hasGroup = $hasGroup && 0 == preg_match(sprintf('/^%s/i', $groupItem), $v);
                 }
 
                 if (is_array($v)) {
-                    $hasGroup = $hasGroup && in_array($groupItem, $v);
+                    $hasGroup = $hasGroup && false === array_search($groupItem, $v, false);
+                    ;
+                }
+
+                if (is_object($v)) {
+                    $hasGroup = $hasGroup && ($groupItem != $v);
                 }
             }
 
-            return !$hasGroup;
+            return $hasGroup;
         };
     }
 }

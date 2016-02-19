@@ -335,13 +335,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         );
         $results = InMemoryFilter::filter($this->data, $filter);
 
-        $this->assertEquals(1, count($results));
-
-        $names = ['Ken Sugimori'];
-        /** @var Clients $client */
-        foreach ($results as $client) {
-            $this->assertContains($client->name(), $names);
-        }
+        $this->assertEquals(4, count($results));
     }
 
     public function testItBeInArray()
@@ -364,6 +358,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
             ['k', 'e', 'n']
         );
         $results = InMemoryFilter::filter($this->data, $filter);
+
 
         $this->assertEquals(3, count($results));
 
