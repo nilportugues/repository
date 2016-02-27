@@ -69,7 +69,7 @@ class Page implements PageInterface
         FilterInterface $filter = null,
         FieldsInterface $fields = null
     ) {
-        $this->elements = ImmutableTypedCollection::fromArray($elements);
+        $this->elements = ImmutableTypedCollection::fromArray(array_values($elements));
         $this->totalElements = (int) $totalElements;
         $this->pageNumber = (int) $pageNumber;
         $this->totalPages = (int) $totalPages;
