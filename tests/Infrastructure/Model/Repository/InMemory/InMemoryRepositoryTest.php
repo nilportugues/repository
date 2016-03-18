@@ -850,8 +850,10 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
             throw new \Exception('Just making it fail');
         };
 
-        $this->repository->transactional($transaction);
-
-        $this->assertEquals(4, $this->repository->count());
+        try {
+            $this->repository->transactional($transaction);
+        } catch(\Exception $e) {
+            $this->assertEquals(4, $this->repository->count());
+        }
     }
 }

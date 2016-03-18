@@ -204,6 +204,8 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      * Must work or fail and rollback any persisted/erased data.
      *
      * @param callable $transaction
+     *
+     * @throws \Exception
      */
     public function transactional(callable $transaction)
     {
@@ -212,6 +214,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
             $transaction();
         } catch (\Exception $e) {
             $this->data = $copy;
+            throw $e;
         }
     }
 
