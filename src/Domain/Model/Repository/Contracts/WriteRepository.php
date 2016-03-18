@@ -52,6 +52,7 @@ interface WriteRepository extends Repository
      * Must work or fail and rollback any persisted/erased data.
      *
      * @param callable $transaction
+     * @throws \Exception
      */
     public function transactional(callable $transaction);
 }
