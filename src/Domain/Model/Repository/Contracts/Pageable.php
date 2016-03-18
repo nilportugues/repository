@@ -80,4 +80,9 @@ interface Pageable
      * @return Fields
      */
     public function fields();
+
+    /**
+     * @return Fields
+     */
+    public function distinctFields();
 }

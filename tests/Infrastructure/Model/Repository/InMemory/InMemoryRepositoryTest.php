@@ -776,6 +776,36 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4, count($results));
     }
 
+    public function testFindAllWithDistinct()
+    {
+        $clients = new Clients(
+            5,
+            'John Doe',
+            new DateTime('2014-12-11'),
+            3,
+            [
+                new DateTime('2014-12-16'),
+                new DateTime('2014-12-31'),
+                new DateTime('2015-03-11'),
+            ],
+            25.125
+        );
+
+        $this->repository->add($clients);
+
+        $pageable = new Pageable(
+            1,
+            10,
+            null,
+            null,
+            null,
+            new Fields(['name'])
+        );
+
+        $result = $this->repository->findAll($pageable);
+        $this->assertEquals(4, count($result->content()));
+    }
+
     public function testTransactional()
     {
         $clients = new Clients(

@@ -54,6 +54,10 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
 
         $results = $this->findBy($pageable->filters(), $pageable->sortings());
 
+        if (0 !== count($pageable->distinctFields()->get())) {
+            $results = $this->resultsWithDistinctFieldsOnly($pageable->distinctFields(), $results);
+        }
+
         return new ResultPage(
             array_slice($results, $pageable->offset() - $pageable->pageSize(), $pageable->pageSize()),
             count($results),
@@ -229,6 +233,19 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
     ) {
         $results = $this->findBy($filter, $sort, $filter);
 
+        return $this->resultsWithDistinctFieldsOnly($distinctFields, $results);
+    }
+
+    /**
+     * @param Fields $distinctFields
+     * @param        $results
+     *
+     * @return array
+     *
+     * @throws \Exception
+     */
+    protected function resultsWithDistinctFieldsOnly(Fields $distinctFields, $results)
+    {
         $newResults = [];
         $valueHash = [];
         foreach ($results as $result) {
