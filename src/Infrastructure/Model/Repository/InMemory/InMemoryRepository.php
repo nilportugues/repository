@@ -224,17 +224,12 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      * @param Fields               $distinctFields
      * @param FilterInterface|null $filter
      * @param Sort|null            $sort
-     * @param Fields|null          $fields
      *
      * @return array
      */
-    public function findByDistinct(
-        Fields $distinctFields,
-        FilterInterface $filter = null,
-        Sort $sort = null,
-        Fields $fields = null
-    ) {
-        $results = $this->findBy($filter, $sort, $filter);
+    public function findByDistinct(Fields $distinctFields, FilterInterface $filter = null, Sort $sort = null)
+    {
+        $results = $this->findBy($filter, $sort, $distinctFields);
 
         return $this->resultsWithDistinctFieldsOnly($distinctFields, $results);
     }

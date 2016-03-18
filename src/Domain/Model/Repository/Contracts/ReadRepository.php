@@ -39,9 +39,8 @@ interface ReadRepository extends Repository
      * @param Fields      $distinctFields
      * @param Filter|null $filter
      * @param Sort|null   $sort
-     * @param Fields|null $fields
      *
      * @return array
      */
-    public function findByDistinct(Fields $distinctFields, Filter $filter = null, Sort $sort = null, Fields $fields = null);
+    public function findByDistinct(Fields $distinctFields, Filter $filter = null, Sort $sort = null);
 }

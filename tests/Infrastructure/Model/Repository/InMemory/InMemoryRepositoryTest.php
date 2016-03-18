@@ -852,7 +852,7 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
 
         try {
             $this->repository->transactional($transaction);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertEquals(4, $this->repository->count());
         }
     }
