@@ -20,13 +20,15 @@ interface Pageable
      * @param Sort|null   $sort
      * @param Filter|null $filter
      * @param Fields|null $fields
+     * @param Fields|null $distinctFields
      */
     public function __construct(
         $pageNumber,
         $pageSize,
         Sort $sort = null,
         Filter $filter = null,
-        Fields $fields = null
+        Fields $fields = null,
+        Fields $distinctFields = null
     );
 
     /**

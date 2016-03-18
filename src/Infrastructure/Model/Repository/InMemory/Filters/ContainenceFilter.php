@@ -118,7 +118,6 @@ class ContainenceFilter
 
                 if (is_array($v)) {
                     $hasGroup = $hasGroup && false === array_search($groupItem, $v, false);
-                    ;
                 }
 
                 if (is_object($v)) {

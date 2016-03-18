@@ -91,7 +91,6 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->repository = new InMemoryRepository($data);
     }
 
-
     public function testFindByMustNotIncludeGroupTest()
     {
         $filter = new Filter();
@@ -103,7 +102,6 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
             );
 
         $results = $this->repository->findBy($filter);
-
 
         $this->assertEquals(1, count($results));
     }
@@ -248,7 +246,6 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], $repository->findBy($filter, $sort));
     }
 
-
     //--------------------------------------------------------------------------------
     // MUST FILTER TESTS
     //--------------------------------------------------------------------------------
@@ -271,7 +268,6 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
         $results = $this->repository->findBy($filter);
         $this->assertEquals(1, count($results));
     }
-
 
     public function testFindByWithMustEqual()
     {
@@ -723,7 +719,6 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
 
         $results = $this->repository->findBy($filter);
 
-
         $this->assertEquals(1, count($results));
     }
 
@@ -757,5 +752,76 @@ class InMemoryRepositoryTest extends \PHPUnit_Framework_TestCase
         $results = $this->repository->findBy($filter);
 
         $this->assertEquals(3, count($results));
+    }
+
+    public function testFindByDistinct()
+    {
+        $distinctFields = new Fields(['name']);
+        $clients = new Clients(
+            5,
+            'John Doe',
+            new DateTime('2014-12-11'),
+            3,
+            [
+                new DateTime('2014-12-16'),
+                new DateTime('2014-12-31'),
+                new DateTime('2015-03-11'),
+            ],
+            25.125
+        );
+
+        $this->repository->add($clients);
+        $results = $this->repository->findByDistinct($distinctFields);
+
+        $this->assertEquals(4, count($results));
+    }
+
+    public function testTransactional()
+    {
+        $clients = new Clients(
+            5,
+            'John Doe',
+            new DateTime('2014-12-11'),
+            3,
+            [
+                new DateTime('2014-12-16'),
+                new DateTime('2014-12-31'),
+                new DateTime('2015-03-11'),
+            ],
+            25.125
+        );
+
+        $transaction = function () use ($clients) {
+            $this->repository->add($clients);
+        };
+
+        $this->repository->transactional($transaction);
+
+        $this->assertEquals(5, $this->repository->count());
+    }
+
+    public function testTransactionalFailsAndDoesNotGetAdded()
+    {
+        $clients = new Clients(
+            5,
+            'John Doe',
+            new DateTime('2014-12-11'),
+            3,
+            [
+                new DateTime('2014-12-16'),
+                new DateTime('2014-12-31'),
+                new DateTime('2015-03-11'),
+            ],
+            25.125
+        );
+
+        $transaction = function () use ($clients) {
+            $this->repository->add($clients);
+            throw new \Exception('Just making it fail');
+        };
+
+        $this->repository->transactional($transaction);
+
+        $this->assertEquals(4, $this->repository->count());
     }
 }

@@ -152,6 +152,7 @@ Interaction with the repository requires the usage of the following classes or c
 
     - `public function find(Identity $id, Fields $fields = null)`
     - `public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null)`
+    - `public function findByDistinct(Fields $distinctFields, Filter $filter = null, Sort $sort = null, Fields $fields = null)`
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\WriteRepository**
 
@@ -159,6 +160,7 @@ Interaction with the repository requires the usage of the following classes or c
     - `public function addAll(array $values)`
     - `public function remove(Identity $id)`
     - `public function removeAll(Filter $filter = null)`
+    - `public function transactional(callable $transaction)`
 
 ---
 

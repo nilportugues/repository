@@ -359,7 +359,6 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         );
         $results = InMemoryFilter::filter($this->data, $filter);
 
-
         $this->assertEquals(3, count($results));
 
         $names = ['Ken Sugimori'];

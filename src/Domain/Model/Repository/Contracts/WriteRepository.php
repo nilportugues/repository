@@ -46,4 +46,12 @@ interface WriteRepository extends Repository
      * @return bool
      */
     public function removeAll(Filter $filter = null);
+
+    /**
+     * Repository data is added or removed as a whole block.
+     * Must work or fail and rollback any persisted/erased data.
+     *
+     * @param callable $transaction
+     */
+    public function transactional(callable $transaction);
 }

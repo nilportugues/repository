@@ -40,6 +40,11 @@ class Pageable implements PageableInterface
     protected $fields;
 
     /**
+     * @var FieldsInterface
+     */
+    protected $distinctFields;
+
+    /**
      * Pageable constructor.
      *
      * @param                      $pageNumber
@@ -47,19 +52,22 @@ class Pageable implements PageableInterface
      * @param SortInterface|null   $sort
      * @param FilterInterface|null $filter
      * @param FieldsInterface|null $fields
+     * @param FieldsInterface|null $distinctFields
      */
     public function __construct(
         $pageNumber,
         $pageSize,
         SortInterface $sort = null,
         FilterInterface $filter = null,
-        FieldsInterface $fields = null
+        FieldsInterface $fields = null,
+        FieldsInterface $distinctFields = null
     ) {
         $this->pageNumber = (int) $pageNumber;
         $this->pageSize = (int) $pageSize;
         $this->sort = ($sort) ? $sort : Sort::null();
         $this->filter = ($filter) ? $filter : Filter::null();
         $this->fields = ($fields) ? $fields : Fields::null();
+        $this->distinctFields = ($distinctFields) ? $distinctFields : Fields::null();
     }
 
     /**
@@ -163,5 +171,15 @@ class Pageable implements PageableInterface
     public function fields()
     {
         return $this->fields;
+    }
+
+    /**
+     * Returns value for `distinctFields`.
+     *
+     * @return FieldsInterface
+     */
+    public function distinctFields()
+    {
+        return $this->distinctFields;
     }
 }

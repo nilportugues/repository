@@ -32,4 +32,16 @@ interface ReadRepository extends Repository
      * @return array
      */
     public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null);
+
+    /**
+     * Returns all instances of the type meeting $distinctFields values.
+     *
+     * @param Fields      $distinctFields
+     * @param Filter|null $filter
+     * @param Sort|null   $sort
+     * @param Fields|null $fields
+     *
+     * @return array
+     */
+    public function findByDistinct(Fields $distinctFields, Filter $filter = null, Sort $sort = null, Fields $fields = null);
 }

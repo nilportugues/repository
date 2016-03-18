@@ -194,4 +194,56 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
 
         return array_values($results);
     }
+
+    /**
+     * Repository data is added or removed as a whole block.
+     * Must work or fail and rollback any persisted/erased data.
+     *
+     * @param callable $transaction
+     */
+    public function transactional(callable $transaction)
+    {
+        $copy = $this->data;
+        try {
+            $transaction();
+        } catch (\Exception $e) {
+            $this->data = $copy;
+        }
+    }
+
+    /**
+     * Returns all instances of the type meeting $distinctFields values.
+     *
+     * @param Fields               $distinctFields
+     * @param FilterInterface|null $filter
+     * @param Sort|null            $sort
+     * @param Fields|null          $fields
+     *
+     * @return array
+     */
+    public function findByDistinct(
+        Fields $distinctFields,
+        FilterInterface $filter = null,
+        Sort $sort = null,
+        Fields $fields = null
+    ) {
+        $results = $this->findBy($filter, $sort, $filter);
+
+        $newResults = [];
+        $valueHash = [];
+        foreach ($results as $result) {
+            $distinctValues = [];
+            foreach ($distinctFields->get() as $field) {
+                $distinctValues[$field] = PropertyValue::get($result, $field);
+            }
+
+            $hash = md5(serialize($distinctValues));
+            if (false === in_array($hash, $valueHash)) {
+                $valueHash[] = $hash;
+                $newResults[] = $result;
+            }
+        }
+
+        return $newResults;
+    }
 }
