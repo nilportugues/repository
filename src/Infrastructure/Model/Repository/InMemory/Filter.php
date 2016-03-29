@@ -106,6 +106,7 @@ class Filter
                     }
                 }
 
+                $v = (array) $v;
                 $v = array_shift($v);
                 switch ($filterName) {
                     case BaseFilter::GREATER_THAN_OR_EQUAL:
