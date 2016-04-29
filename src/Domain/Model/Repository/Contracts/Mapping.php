@@ -20,7 +20,8 @@ interface Mapping
     public function name();
 
     /**
-     * Keys are object properties without property defined in identity(). Values its SQL column equivalents.
+     * Keys are object properties without property defined in identity().
+     * Values its equivalents in the data store.
      *
      * @return array
      */
@@ -32,4 +33,19 @@ interface Mapping
      * @return string
      */
     public function identity();
+
+
+    /**
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function fromArray(array $data);
+
+    /**
+     * @param $object
+     *
+     * @return array
+     */
+    public function toArray($object);
 }
