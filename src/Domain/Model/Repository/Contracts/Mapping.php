@@ -48,4 +48,11 @@ interface Mapping
      * @return array
      */
     public function toArray($object);
+    
+        /**
+     * The automatic generated strategy used will be the data-store's if set to true.
+     *
+     * @return bool
+     */
+    public function autoGenerateId();
 }
