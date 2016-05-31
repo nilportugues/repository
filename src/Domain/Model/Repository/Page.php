@@ -83,7 +83,7 @@ class Page implements PageInterface
      *
      * @return array
      */
-    public function content()
+    public function content(): array
     {
         return array_filter($this->elements->toArray());
     }
@@ -93,7 +93,7 @@ class Page implements PageInterface
      *
      * @return bool
      */
-    public function hasPrevious()
+    public function hasPrevious(): bool
     {
         return $this->pageNumber > 1;
     }
@@ -103,7 +103,7 @@ class Page implements PageInterface
      *
      * @return bool
      */
-    public function isFirst()
+    public function isFirst(): bool
     {
         return 1 === $this->pageNumber;
     }
@@ -113,7 +113,7 @@ class Page implements PageInterface
      *
      * @return bool
      */
-    public function isLast()
+    public function isLast(): bool
     {
         return false === $this->hasNext();
     }
@@ -123,7 +123,7 @@ class Page implements PageInterface
      *
      * @return bool
      */
-    public function hasNext()
+    public function hasNext(): bool
     {
         return $this->pageSize() * $this->pageNumber() < $this->totalPages();
     }
@@ -133,7 +133,7 @@ class Page implements PageInterface
      *
      * @return int
      */
-    public function pageSize()
+    public function pageSize(): int
     {
         return count($this->elements);
     }
@@ -143,7 +143,7 @@ class Page implements PageInterface
      *
      * @return int
      */
-    public function pageNumber()
+    public function pageNumber(): int
     {
         return $this->pageNumber;
     }
@@ -153,7 +153,7 @@ class Page implements PageInterface
      *
      * @return int
      */
-    public function totalPages()
+    public function totalPages(): int
     {
         return $this->totalPages;
     }
@@ -163,7 +163,7 @@ class Page implements PageInterface
      *
      * @return PageableInterface
      */
-    public function nextPageable()
+    public function nextPageable(): PageableInterface
     {
         return new Pageable(
             $this->pageNumber() + 1,
@@ -179,7 +179,7 @@ class Page implements PageInterface
      *
      * @return SortInterface
      */
-    public function sortings()
+    public function sortings(): SortInterface
     {
         return $this->sort;
     }
@@ -187,7 +187,7 @@ class Page implements PageInterface
     /**
      * @return FilterInterface
      */
-    public function filters()
+    public function filters(): FilterInterface
     {
         return $this->filter;
     }
@@ -195,7 +195,7 @@ class Page implements PageInterface
     /**
      * @return FieldsInterface
      */
-    public function fields()
+    public function fields(): FieldsInterface
     {
         return $this->fields;
     }
@@ -205,7 +205,7 @@ class Page implements PageInterface
      *
      * @return PageableInterface
      */
-    public function previousPageable()
+    public function previousPageable(): PageableInterface
     {
         $pageable = new Pageable(
             $this->pageNumber(),
@@ -223,7 +223,7 @@ class Page implements PageInterface
      *
      * @return int
      */
-    public function totalElements()
+    public function totalElements(): int
     {
         return $this->totalElements;
     }
@@ -235,7 +235,7 @@ class Page implements PageInterface
      *
      * @return PageInterface
      */
-    public function map(callable $converter)
+    public function map(callable $converter): PageInterface
     {
         $collection = [];
         foreach ($this->elements as $key => $element) {

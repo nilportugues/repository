@@ -11,7 +11,7 @@ trait Nullable
      *
      * @return self
      */
-    public static function null()
+    public static function null(): self
     {
         return (new ReflectionClass(get_called_class()))->newInstanceWithoutConstructor();
     }
@@ -19,7 +19,7 @@ trait Nullable
     /**
      * @return bool
      */
-    public function isNull()
+    public function isNull(): bool
     {
         return empty(array_filter(get_object_vars($this)));
     }

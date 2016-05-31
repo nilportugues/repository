@@ -46,7 +46,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      *
      * @return Page
      */
-    public function findAll(Pageable $pageable = null)
+    public function findAll(Pageable $pageable = null): Page
     {
         if (null === $pageable) {
             return new ResultPage($this->data, count($this->data), 1, 1);
@@ -73,7 +73,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      *
      * @return int
      */
-    public function count(FilterInterface $filter = null)
+    public function count(FilterInterface $filter = null): int
     {
         if (null === $filter) {
             return count($this->data);
@@ -85,11 +85,11 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
     /**
      * Returns whether an entity with the given id exists.
      *
-     * @param $id
+     * @param Identity $id
      *
      * @return bool
      */
-    public function exists(Identity $id)
+    public function exists(Identity $id): bool
     {
         $id = (string) $id;
 
@@ -126,7 +126,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
     /**
      * Removes the entity with the given id.
      *
-     * @param $id
+     * @param Identity $id
      */
     public function remove(Identity $id)
     {
@@ -140,22 +140,16 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      * If $filter is null, all the repository data will be removed.
      *
      * @param FilterInterface $filter
-     *
-     * @return bool
      */
     public function removeAll(FilterInterface $filter = null)
     {
         if (null === $filter) {
             $this->data = [];
-
-            return true;
         }
         /** @var Identity $value */
         foreach ($this->findBy($filter) as $value) {
             unset($this->data[$value->id()]);
         }
-
-        return true;
     }
 
     /**
@@ -164,7 +158,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      * @param Identity    $id
      * @param Fields|null $fields
      *
-     * @return mixed
+     * @return array
      */
     public function find(Identity $id, Fields $fields = null)
     {
@@ -184,7 +178,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      *
      * @return array
      */
-    public function findBy(FilterInterface $filter = null, Sort $sort = null, Fields $fields = null)
+    public function findBy(FilterInterface $filter = null, Sort $sort = null, Fields $fields = null): array
     {
         $results = $this->data;
 
@@ -227,7 +221,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      *
      * @return array
      */
-    public function findByDistinct(Fields $distinctFields, FilterInterface $filter = null, Sort $sort = null)
+    public function findByDistinct(Fields $distinctFields, FilterInterface $filter = null, Sort $sort = null): array
     {
         $results = $this->findBy($filter, $sort, $distinctFields);
 
@@ -242,7 +236,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      *
      * @throws \Exception
      */
-    protected function resultsWithDistinctFieldsOnly(Fields $distinctFields, $results)
+    protected function resultsWithDistinctFieldsOnly(Fields $distinctFields, $results): array
     {
         $newResults = [];
         $valueHash = [];

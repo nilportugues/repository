@@ -13,7 +13,7 @@ class ContainenceFilter
      *
      * @return \Closure
      */
-    public static function contains($property, $value)
+    public static function contains(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             $v = PropertyValue::get($v, $property);
@@ -43,7 +43,7 @@ class ContainenceFilter
      *
      * @return \Closure
      */
-    public static function notContains($property, $value)
+    public static function notContains(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             $v = PropertyValue::get($v, $property);
@@ -74,7 +74,7 @@ class ContainenceFilter
      *
      * @return \Closure
      */
-    public static function in($property, array $value)
+    public static function in(string $property, array $value): \Closure
     {
         return function ($v) use ($property, $value) {
             $v = PropertyValue::get($v, $property);
@@ -105,7 +105,7 @@ class ContainenceFilter
      *
      * @return \Closure
      */
-    public static function notIn($property, array $value)
+    public static function notIn(string $property, array $value): \Closure
     {
         return function ($v) use ($property, $value) {
             $hasGroup = true;

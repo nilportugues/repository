@@ -42,7 +42,7 @@ class ColorRepository extends InMemoryRepository
      *
      * @return Color[]
      */
-    public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null)
+    public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null) : array
     {
         return parent::findBy($filter, $sort, $fields);
     }
@@ -53,12 +53,10 @@ class ColorRepository extends InMemoryRepository
      * @param Color|Identity $value
      *
      * @throws ColorNotFoundException
-     *
-     * @return Color
      */
     public function add(Identity $value)
     {
-        return parent::add($value);
+        parent::add($value);
     }
 
     /**
@@ -86,7 +84,7 @@ class ColorRepository extends InMemoryRepository
      *
      * @return Page
      */
-    public function findAll(Pageable $pageable = null)
+    public function findAll(Pageable $pageable = null) : Page
     {
         return parent::findAll($pageable);
     }
@@ -98,7 +96,7 @@ class ColorRepository extends InMemoryRepository
      *
      * @return int
      */
-    public function count(Filter $filter = null)
+    public function count(Filter $filter = null) : int
     {
         return parent::count($filter);
     }
@@ -110,7 +108,7 @@ class ColorRepository extends InMemoryRepository
      *
      * @return bool
      */
-    public function exists(Identity $id)
+    public function exists(Identity $id) : bool
     {
         return parent::exists($id);
     }
@@ -119,8 +117,6 @@ class ColorRepository extends InMemoryRepository
      * Adds a collections of entities to the storage.
      *
      * @param array $values
-     *
-     * @return mixed
      */
     public function addAll(array $values)
     {
@@ -134,22 +130,16 @@ class ColorRepository extends InMemoryRepository
      * If $filter is null, all the repository data will be removed.
      *
      * @param Filter $filter
-     *
-     * @return bool
      */
     public function removeAll(Filter $filter = null)
     {
         if (null === $filter) {
             $this->data = [];
-
-            return true;
         }
 
         /** @var Identity $value */
         foreach ($this->findBy($filter) as $value) {
             $this->remove($value->id());
         }
-
-        return true;
     }
 }

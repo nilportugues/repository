@@ -34,55 +34,55 @@ interface Pageable
     /**
      * @return int
      */
-    public function offset();
+    public function offset(): int;
 
     /**
      * @return int
      */
-    public function pageNumber();
+    public function pageNumber(): int;
 
     /**
      * @return Sort
      */
-    public function sortings();
+    public function sortings(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\Sort;
 
     /**
      * @return Pageable
      */
-    public function next();
+    public function next(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\Pageable;
 
     /**
      * @return int
      */
-    public function pageSize();
+    public function pageSize(): int;
 
     /**
      * @return Pageable
      */
-    public function previousOrFirst();
+    public function previousOrFirst(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\Pageable;
 
     /**
      * @return bool
      */
-    public function hasPrevious();
+    public function hasPrevious(): bool;
 
     /**
      * @return Pageable
      */
-    public function first();
+    public function first(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\Pageable;
 
     /**
      * @return Filter
      */
-    public function filters();
+    public function filters(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\Filter;
 
     /**
      * @return Fields
      */
-    public function fields();
+    public function fields(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\Fields;
 
     /**
      * @return Fields
      */
-    public function distinctFields();
+    public function distinctFields(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\Fields;
 }

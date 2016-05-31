@@ -23,7 +23,7 @@ class Sorter
      *
      * @throws \Exception
      */
-    public static function sort(array $results, Sort $sort)
+    public static function sort(array $results, Sort $sort): array
     {
         $sortOrder = array_reverse($sort->orders(), true);
 
@@ -56,6 +56,9 @@ class Sorter
      * @author: Clement Wong <cw@clement.hk>
      *
      * @link  : https://bugs.php.net/bug.php?id=53341
+     *
+     * @param array    $array
+     * @param callable $cmpFunction
      */
     protected static function stableUasort(array &$array, callable $cmpFunction)
     {

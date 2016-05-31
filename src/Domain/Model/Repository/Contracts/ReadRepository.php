@@ -18,7 +18,7 @@ interface ReadRepository extends Repository
      * @param Identity    $id
      * @param Fields|null $fields
      *
-     * @return array
+     * @return mixed
      */
     public function find(Identity $id, Fields $fields = null);
 
@@ -31,7 +31,7 @@ interface ReadRepository extends Repository
      *
      * @return array
      */
-    public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null);
+    public function findBy(Filter $filter = null, Sort $sort = null, Fields $fields = null): array;
 
     /**
      * Returns all instances of the type meeting $distinctFields values.
@@ -42,5 +42,5 @@ interface ReadRepository extends Repository
      *
      * @return array
      */
-    public function findByDistinct(Fields $distinctFields, Filter $filter = null, Sort $sort = null);
+    public function findByDistinct(Fields $distinctFields, Filter $filter = null, Sort $sort = null): array;
 }

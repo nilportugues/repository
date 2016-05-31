@@ -19,22 +19,22 @@ interface Filter
     /**
      * @return array
      */
-    public function filters();
+    public function filters(): array;
 
     /**
      * @return BaseFilter
      */
-    public function must();
+    public function must(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\BaseFilter;
 
     /**
      * @return BaseFilter
      */
-    public function mustNot();
+    public function mustNot(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\BaseFilter;
 
     /**
      * @return BaseFilter
      */
-    public function should();
+    public function should(): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\BaseFilter;
 
     /**
      * @return $this
@@ -51,5 +51,5 @@ interface Filter
     /**
      * @return bool
      */
-    public function isNull();
+    public function isNull(): bool;
 }

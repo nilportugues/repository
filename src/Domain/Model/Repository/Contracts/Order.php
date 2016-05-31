@@ -18,32 +18,32 @@ interface Order
     /**
      * @return bool
      */
-    public function isDescending();
+    public function isDescending(): bool;
 
     /**
      * @return bool
      */
-    public function isAscending();
+    public function isAscending(): bool;
 
     /**
      * @return string
      */
-    public function direction();
+    public function direction(): string;
 
     /**
      * @return string
      */
-    public function __toString();
+    public function __toString(): string;
 
     /**
      * Compares the current object with a second object.
      * It will compare its type and and its properties values.
      *
-     * @param self $object
+     * @param Order $object
      *
      * @return bool
      */
-    public function equals($object);
+    public function equals(Order $object): bool;
 
     /**
      * Creates a null Value Object.
@@ -55,5 +55,5 @@ interface Order
     /**
      * @return bool
      */
-    public function isNull();
+    public function isNull(): bool;
 }

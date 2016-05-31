@@ -13,7 +13,7 @@ class StringFilter
      *
      * @return \Closure
      */
-    public static function startsWith($property, $value)
+    public static function startsWith(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             $v = PropertyValue::get($v, $property);
@@ -57,7 +57,7 @@ class StringFilter
      *
      * @return \Closure
      */
-    public static function endsWith($property, $value)
+    public static function endsWith(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             $v = PropertyValue::get($v, $property);
@@ -75,7 +75,7 @@ class StringFilter
      *
      * @return \Closure
      */
-    public static function notStartsWith($property, $value)
+    public static function notStartsWith($property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             $v = PropertyValue::get($v, $property);
@@ -93,7 +93,7 @@ class StringFilter
      *
      * @return \Closure
      */
-    public static function notEndsWith($property, $value)
+    public static function notEndsWith($property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             $v = PropertyValue::get($v, $property);

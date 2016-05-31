@@ -14,7 +14,7 @@ class RangeFilter
      *
      * @return \Closure
      */
-    public static function ranges($property, $value1, $value2)
+    public static function ranges(string $property, $value1, $value2): \Closure
     {
         return function ($v) use ($property, $value1, $value2) {
             $v = PropertyValue::get($v, $property);
@@ -31,7 +31,7 @@ class RangeFilter
      *
      * @return \Closure
      */
-    public static function notRanges($property, $value1, $value2)
+    public static function notRanges(string $property, $value1, $value2): \Closure
     {
         return function ($v) use ($property, $value1, $value2) {
             $v = PropertyValue::get($v, $property);

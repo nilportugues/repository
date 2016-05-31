@@ -28,128 +28,132 @@ interface BaseFilter
     const NOT_EQUAL = 'not_equals';
 
     /**
-     * @param $filterName
+     * @param string $filterName
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function notEmpty($filterName);
+    public function notEmpty(string $filterName): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function hasEmpty($filterName);
+    public function hasEmpty(string $filterName): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      * @param $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function startsWith($filterName, $value);
+    public function startsWith(string $filterName, $value): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      * @param $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function endsWith($filterName, $value);
+    public function endsWith(string $filterName, $value): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      * @param $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function equal($filterName, $value);
+    public function equal(string $filterName, $value): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      * @param $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function notEqual($filterName, $value);
+    public function notEqual(string $filterName, $value): BaseFilter;
 
     /**
-     * @param       $filterName
-     * @param array $value
+     * @param string $filterName
+     * @param array  $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function includeGroup($filterName, array $value);
+    public function includeGroup(string $filterName, array $value): BaseFilter;
 
     /**
-     * @param       $filterName
-     * @param array $value
+     * @param string $filterName
+     * @param array  $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function notIncludeGroup($filterName, array $value);
+    public function notIncludeGroup(string $filterName, array $value): BaseFilter;
 
     /**
-     * @return $this
-     */
-    public function range($filterName, $firstValue, $secondValue);
-
-    /**
-     * @param $filterName
+     * @param string $filterName
      * @param $firstValue
      * @param $secondValue
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function notRange($filterName, $firstValue, $secondValue);
+    public function range(string $filterName, $firstValue, $secondValue): BaseFilter;
 
     /**
-     * @param $filterName
-     * @param $value
+     * @param string $filterName
+     * @param $firstValue
+     * @param $secondValue
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function notContain($filterName, $value);
+    public function notRange(string $filterName, $firstValue, $secondValue): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      * @param $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function contain($filterName, $value);
+    public function notContain(string $filterName, $value): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      * @param $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function beGreaterThanOrEqual($filterName, $value);
+    public function contain(string $filterName, $value): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      * @param $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function beGreaterThan($filterName, $value);
+    public function beGreaterThanOrEqual(string $filterName, $value): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      * @param $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function beLessThanOrEqual($filterName, $value);
+    public function beGreaterThan(string $filterName, $value): BaseFilter;
 
     /**
-     * @param $filterName
+     * @param string $filterName
      * @param $value
      *
-     * @return mixed
+     * @return BaseFilter
      */
-    public function beLessThan($filterName, $value);
+    public function beLessThanOrEqual(string $filterName, $value): BaseFilter;
+
+    /**
+     * @param string $filterName
+     * @param $value
+     *
+     * @return BaseFilter
+     */
+    public function beLessThan(string $filterName, $value): BaseFilter;
 
     /**
      * @return mixed
@@ -159,5 +163,5 @@ interface BaseFilter
     /**
      * @return mixed
      */
-    public function get();
+    public function get() : array;
 }

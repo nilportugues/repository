@@ -39,7 +39,7 @@ class ImmutableTypedCollection extends SplFixedArray
     /**
      * @return int
      */
-    protected function calculateIndexKey()
+    protected function calculateIndexKey(): int
     {
         $callable = function ($value) {
             return null !== $value;

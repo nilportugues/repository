@@ -42,8 +42,6 @@ interface WriteRepository extends Repository
      * If $filter is null, all the repository data will be deleted.
      *
      * @param Filter $filter
-     *
-     * @return bool
      */
     public function removeAll(Filter $filter = null);
 

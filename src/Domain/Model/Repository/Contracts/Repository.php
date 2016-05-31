@@ -22,7 +22,7 @@ interface Repository
      *
      * @return int
      */
-    public function count(Filter $filter = null);
+    public function count(Filter $filter = null): int;
 
     /**
      * Returns whether an entity with the given id exists.
@@ -31,5 +31,5 @@ interface Repository
      *
      * @return bool
      */
-    public function exists(Identity $id);
+    public function exists(Identity $id): bool;
 }

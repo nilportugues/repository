@@ -40,9 +40,9 @@ class BaseFilter implements BaseFilterInterface
     /**
      * @param string $filterName
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function notEmpty($filterName)
+    public function notEmpty(string $filterName): BaseFilterInterface
     {
         $this->notEmptyAttributes[] = $filterName;
 
@@ -52,9 +52,9 @@ class BaseFilter implements BaseFilterInterface
     /**
      * @param string $filterName
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function hasEmpty($filterName)
+    public function hasEmpty(string $filterName): BaseFilterInterface
     {
         $this->emptyAttributes[] = $filterName;
 
@@ -65,9 +65,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function startsWith($filterName, $value)
+    public function startsWith(string $filterName, $value) : BaseFilterInterface
     {
         $this->addFilter(self::STARTS_WITH, $filterName, $value);
 
@@ -79,7 +79,7 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      */
-    protected function addFilter($property, $filterName, $value)
+    protected function addFilter(string $property, string $filterName, $value)
     {
         $filterName = (string) $filterName;
         $property = (string) $property;
@@ -91,9 +91,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function endsWith($filterName, $value)
+    public function endsWith(string $filterName, $value): BaseFilterInterface
     {
         $this->addFilter(self::ENDS_WITH, $filterName, $value);
 
@@ -104,9 +104,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function equal($filterName, $value)
+    public function equal(string $filterName, $value): BaseFilterInterface
     {
         $this->addFilter(self::EQUALS, $filterName, $value);
 
@@ -117,9 +117,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function notEqual($filterName, $value)
+    public function notEqual(string $filterName, $value): BaseFilterInterface
     {
         $this->addFilter(self::NOT_EQUAL, $filterName, $value);
 
@@ -130,9 +130,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function includeGroup($filterName, array $value)
+    public function includeGroup(string $filterName, array $value): BaseFilterInterface
     {
         $filterName = (string) $filterName;
 
@@ -148,9 +148,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function notIncludeGroup($filterName, array $value)
+    public function notIncludeGroup(string $filterName, array $value): BaseFilterInterface
     {
         $filterName = (string) $filterName;
 
@@ -167,9 +167,9 @@ class BaseFilter implements BaseFilterInterface
      * @param mixed  $firstValue
      * @param mixed  $secondValue
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function range($filterName, $firstValue, $secondValue)
+    public function range(string $filterName, $firstValue, $secondValue): BaseFilterInterface
     {
         $this->addFilter(self::RANGES, $filterName, [$firstValue, $secondValue]);
 
@@ -181,9 +181,9 @@ class BaseFilter implements BaseFilterInterface
      * @param mixed  $firstValue
      * @param mixed  $secondValue
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function notRange($filterName, $firstValue, $secondValue)
+    public function notRange(string $filterName, $firstValue, $secondValue): BaseFilterInterface
     {
         $this->addFilter(self::NOT_RANGES, $filterName, [$firstValue, $secondValue]);
 
@@ -194,9 +194,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function notContain($filterName, $value)
+    public function notContain(string $filterName, $value): BaseFilterInterface
     {
         $this->addFilter(self::NOT_CONTAINS, $filterName, $value);
 
@@ -207,9 +207,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function contain($filterName, $value)
+    public function contain(string $filterName, $value): BaseFilterInterface
     {
         $this->addFilter(self::CONTAINS, $filterName, $value);
 
@@ -220,9 +220,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function beGreaterThanOrEqual($filterName, $value)
+    public function beGreaterThanOrEqual(string $filterName, $value): BaseFilterInterface
     {
         $this->addFilter(self::GREATER_THAN_OR_EQUAL, $filterName, $value);
 
@@ -233,9 +233,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function beGreaterThan($filterName, $value)
+    public function beGreaterThan(string $filterName, $value): BaseFilterInterface
     {
         $this->addFilter(self::GREATER_THAN, $filterName, $value);
 
@@ -246,9 +246,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function beLessThanOrEqual($filterName, $value)
+    public function beLessThanOrEqual(string $filterName, $value): BaseFilterInterface
     {
         $this->addFilter(self::LESS_THAN_OR_EQUAL, $filterName, $value);
 
@@ -259,9 +259,9 @@ class BaseFilter implements BaseFilterInterface
      * @param string $filterName
      * @param mixed  $value
      *
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function beLessThan($filterName, $value)
+    public function beLessThan(string $filterName, $value) : BaseFilterInterface
     {
         $this->addFilter(self::LESS_THAN, $filterName, $value);
 
@@ -269,9 +269,9 @@ class BaseFilter implements BaseFilterInterface
     }
 
     /**
-     * @return $this
+     * @return BaseFilterInterface
      */
-    public function clear()
+    public function clear(): BaseFilterInterface
     {
         $this->filters = [];
         $this->emptyAttributes = [];
@@ -283,7 +283,7 @@ class BaseFilter implements BaseFilterInterface
     /**
      * @return array
      */
-    public function get()
+    public function get(): array
     {
         $filters = array_merge(
             $this->filters,

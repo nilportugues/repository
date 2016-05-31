@@ -26,7 +26,7 @@ class Order implements OrderInterface
     /**
      * @param string $direction
      */
-    public function __construct($direction)
+    public function __construct(string $direction)
     {
         $direction = (string) strtoupper($direction);
         $this->assert($direction);
@@ -38,7 +38,7 @@ class Order implements OrderInterface
      *
      * @throws \InvalidArgumentException
      */
-    protected function assert($direction)
+    protected function assert(string $direction)
     {
         if (false === in_array($direction, [self::ASCENDING, self::DESCENDING], true)) {
             throw new InvalidArgumentException('Only accepted values for direction must be either ASC or DESC');
@@ -48,7 +48,7 @@ class Order implements OrderInterface
     /**
      * @return bool
      */
-    public function isDescending()
+    public function isDescending(): bool
     {
         return !$this->isAscending();
     }
@@ -56,7 +56,7 @@ class Order implements OrderInterface
     /**
      * @return bool
      */
-    public function isAscending()
+    public function isAscending(): bool
     {
         return $this->direction == self::ASCENDING;
     }
@@ -64,17 +64,17 @@ class Order implements OrderInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->direction;
     }
 
     /**
-     * @param self $object
+     * @param OrderInterface $object
      *
      * @return bool
      */
-    public function equals($object)
+    public function equals(OrderInterface $object): bool
     {
         return get_class($this) === get_class($object)
         && $this->direction() === $object->direction();
@@ -83,7 +83,7 @@ class Order implements OrderInterface
     /**
      * @return string
      */
-    public function direction()
+    public function direction(): string
     {
         return (!empty($this->direction)) ? $this->direction : self::ASCENDING;
     }

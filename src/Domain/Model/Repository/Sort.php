@@ -43,13 +43,11 @@ class Sort implements SortInterface
 
     /**
      * @param OrderInterface|null $order
-     *
-     * @return OrderInterface
      */
     protected function setOrder(OrderInterface $order = null)
     {
         if (null === $order) {
-            $order = new Order(Order::ASCENDING);
+            $order = new Order(OrderInterface::ASCENDING);
         }
         $this->order = $order;
     }
@@ -61,7 +59,7 @@ class Sort implements SortInterface
      *
      * @return SortInterface
      */
-    public function andSort(SortInterface $sort)
+    public function andSort(SortInterface $sort): SortInterface
     {
         $this->properties = array_merge($this->orders(), $sort->orders());
 
@@ -71,7 +69,7 @@ class Sort implements SortInterface
     /**
      * @return array
      */
-    public function orders()
+    public function orders(): array
     {
         return (array) $this->properties;
     }
@@ -92,7 +90,7 @@ class Sort implements SortInterface
      *
      * @return bool
      */
-    public function equals(SortInterface $sort)
+    public function equals(SortInterface $sort): bool
     {
         return $sort->orders() == $this->orders();
     }
@@ -102,9 +100,9 @@ class Sort implements SortInterface
      *
      * @param string $propertyName
      *
-     * @return Order
+     * @return OrderInterface
      */
-    public function orderFor($propertyName)
+    public function orderFor(string $propertyName): OrderInterface
     {
         $this->hasProperty($propertyName);
 
@@ -112,11 +110,11 @@ class Sort implements SortInterface
     }
 
     /**
-     * @param $propertyName
+     * @param string $propertyName
      *
      * @throws \InvalidArgumentException
      */
-    protected function hasProperty($propertyName)
+    protected function hasProperty(string $propertyName)
     {
         if (true === empty($this->properties[$propertyName])) {
             throw new InvalidArgumentException('Provided property could not be found.');
@@ -124,10 +122,10 @@ class Sort implements SortInterface
     }
 
     /**
-     * @param                $propertyName
+     * @param string         $propertyName
      * @param OrderInterface $order
      */
-    public function setOrderFor($propertyName, OrderInterface $order)
+    public function setOrderFor(string $propertyName, OrderInterface $order)
     {
         $this->properties[$propertyName] = $order;
     }
@@ -139,7 +137,7 @@ class Sort implements SortInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function property($propertyName)
+    public function property(string $propertyName): OrderInterface
     {
         $this->hasProperty($propertyName);
 

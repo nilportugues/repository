@@ -17,7 +17,7 @@ interface Mapping
      *
      * @return string
      */
-    public function name();
+    public function name(): string;
 
     /**
      * Keys are object properties without property defined in identity().
@@ -25,15 +25,14 @@ interface Mapping
      *
      * @return array
      */
-    public function map();
+    public function map(): array;
 
     /**
      * Name of the identity field in storage.
      *
      * @return string
      */
-    public function identity();
-
+    public function identity(): string;
 
     /**
      * @param array $data
@@ -47,12 +46,12 @@ interface Mapping
      *
      * @return array
      */
-    public function toArray($object);
-    
-        /**
+    public function toArray($object): array;
+
+    /**
      * The automatic generated strategy used will be the data-store's if set to true.
      *
      * @return bool
      */
-    public function autoGenerateId();
+    public function autoGenerateId(): bool;
 }

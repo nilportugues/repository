@@ -22,12 +22,12 @@ interface Fields
     /**
      * @param string $field
      */
-    public function add($field);
+    public function add(string $field);
 
     /**
      * @return array
      */
-    public function get();
+    public function get(): array;
 
     /**
      * Creates a null Value Object.
@@ -39,5 +39,5 @@ interface Fields
     /**
      * @return bool
      */
-    public function isNull();
+    public function isNull(): bool;
 }

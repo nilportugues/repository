@@ -27,19 +27,19 @@ interface Sort
      *
      * @return Sort
      */
-    public function andSort(Sort $sort);
+    public function andSort(Sort $sort): Sort;
 
     /**
      * @return Order[]
      */
-    public function orders();
+    public function orders(): array;
 
     /**
      * @param Sort $sort
      *
      * @return bool
      */
-    public function equals(Sort $sort);
+    public function equals(Sort $sort): bool;
 
     /**
      * Returns the order registered for the given property.
@@ -48,13 +48,13 @@ interface Sort
      *
      * @return Order
      */
-    public function orderFor($propertyName);
+    public function orderFor(string $propertyName): Order;
 
     /**
      * @param string $propertyName
      * @param Order  $order
      */
-    public function setOrderFor($propertyName, Order $order);
+    public function setOrderFor(string $propertyName, Order $order);
 
     /**
      * @param string $propertyName
@@ -63,7 +63,7 @@ interface Sort
      *
      * @throws \InvalidArgumentException
      */
-    public function property($propertyName);
+    public function property(string $propertyName): Order;
 
     /**
      * Creates a null Value Object.
@@ -75,5 +75,5 @@ interface Sort
     /**
      * @return bool
      */
-    public function isNull();
+    public function isNull(): bool;
 }

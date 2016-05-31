@@ -38,7 +38,7 @@ class Fields implements FieldsInterface
     /**
      * @param string $field
      */
-    public function add($field)
+    public function add(string $field)
     {
         $this->fields[] = (string) $field;
     }
@@ -46,7 +46,7 @@ class Fields implements FieldsInterface
     /**
      * @return array
      */
-    public function get()
+    public function get(): array
     {
         return (array) $this->fields;
     }

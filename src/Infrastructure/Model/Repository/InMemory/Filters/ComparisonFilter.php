@@ -12,7 +12,7 @@ class ComparisonFilter
      *
      * @return \Closure
      */
-    public static function equals($property, $value)
+    public static function equals(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             return PropertyValue::get($v, $property) == $value;
@@ -25,7 +25,7 @@ class ComparisonFilter
      *
      * @return \Closure
      */
-    public static function notEquals($property, $value)
+    public static function notEquals(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             return PropertyValue::get($v, $property) != $value;
@@ -38,7 +38,7 @@ class ComparisonFilter
      *
      * @return \Closure
      */
-    public static function greaterThanOrEqual($property, $value)
+    public static function greaterThanOrEqual(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             return PropertyValue::get($v, $property) >= $value;
@@ -51,7 +51,7 @@ class ComparisonFilter
      *
      * @return \Closure
      */
-    public static function greaterThan($property, $value)
+    public static function greaterThan(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             return PropertyValue::get($v, $property) > $value;
@@ -64,7 +64,7 @@ class ComparisonFilter
      *
      * @return \Closure
      */
-    public static function lessThanOrEqual($property, $value)
+    public static function lessThanOrEqual(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             return PropertyValue::get($v, $property) <= $value;
@@ -77,7 +77,7 @@ class ComparisonFilter
      *
      * @return \Closure
      */
-    public static function lessThan($property, $value)
+    public static function lessThan(string $property, $value): \Closure
     {
         return function ($v) use ($property, $value) {
             return PropertyValue::get($v, $property) < $value;

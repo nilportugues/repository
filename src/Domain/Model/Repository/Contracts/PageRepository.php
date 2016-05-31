@@ -22,5 +22,5 @@ interface PageRepository
      *
      * @return Page
      */
-    public function findAll(Pageable $pageable = null);
+    public function findAll(Pageable $pageable = null): \NilPortugues\Foundation\Domain\Model\Repository\Contracts\Page;
 }

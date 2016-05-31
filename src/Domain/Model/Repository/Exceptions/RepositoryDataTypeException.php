@@ -20,7 +20,7 @@ class RepositoryDataTypeException extends \InvalidArgumentException
      * @param int             $code
      * @param \Exception|null $previous
      */
-    public function __construct($type, $variable, $code = 0, \Exception $previous = null)
+    public function __construct(string $type, $variable, int $code = 0, \Exception $previous = null)
     {
         $message = sprintf(
             'Expected variable of type \'%s\', but got a variable of type \'%s\' instead.',

@@ -29,7 +29,7 @@ class Filter
      *
      * @return array
      */
-    public static function filter(array $results, FilterInterface $filter)
+    public static function filter(array $results, FilterInterface $filter): array
     {
         $filteredResults = $results;
 
@@ -62,7 +62,7 @@ class Filter
      *
      * @return array
      */
-    private static function removeEmptyFilters(array $filters)
+    private static function removeEmptyFilters(array $filters): array
     {
         $filters = array_filter($filters, function ($v) {
             return count($v) > 0;

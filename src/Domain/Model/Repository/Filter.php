@@ -35,7 +35,7 @@ class Filter implements FilterInterface
     /**
      * @return array
      */
-    public function filters()
+    public function filters(): array
     {
         return [
             'must' => $this->must()->get(),
@@ -47,7 +47,7 @@ class Filter implements FilterInterface
     /**
      * @return BaseFilterInterface
      */
-    public function must()
+    public function must(): BaseFilterInterface
     {
         return $this->getCollection(self::MUST);
     }
@@ -57,7 +57,7 @@ class Filter implements FilterInterface
      *
      * @return BaseFilterInterface
      */
-    protected function getCollection($name)
+    protected function getCollection($name): BaseFilterInterface
     {
         if (empty($this->filters[$name])) {
             $this->filters[$name] = new BaseFilter();
@@ -69,7 +69,7 @@ class Filter implements FilterInterface
     /**
      * @return BaseFilterInterface
      */
-    public function mustNot()
+    public function mustNot(): BaseFilterInterface
     {
         return $this->getCollection(self::MUST_NOT);
     }
@@ -77,7 +77,7 @@ class Filter implements FilterInterface
     /**
      * @return BaseFilterInterface
      */
-    public function should()
+    public function should(): BaseFilterInterface
     {
         return $this->getCollection(self::SHOULD);
     }

@@ -70,7 +70,7 @@ class Clients implements Identity
      *
      * @return string
      */
-    public function name()
+    public function name(): string
     {
         return $this->name;
     }
@@ -80,7 +80,7 @@ class Clients implements Identity
      *
      * @return \DateTime
      */
-    public function date()
+    public function date(): \DateTime
     {
         return $this->date;
     }
@@ -90,7 +90,7 @@ class Clients implements Identity
      *
      * @return int
      */
-    public function totalOrders()
+    public function totalOrders(): int
     {
         return $this->totalOrders;
     }
@@ -100,7 +100,7 @@ class Clients implements Identity
      *
      * @return \DateTime[]
      */
-    public function orderDates()
+    public function orderDates(): array
     {
         return $this->orderDates;
     }
@@ -110,7 +110,7 @@ class Clients implements Identity
      *
      * @return float
      */
-    public function totalEarnings()
+    public function totalEarnings(): float
     {
         return $this->totalEarnings;
     }

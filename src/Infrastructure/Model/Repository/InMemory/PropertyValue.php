@@ -12,7 +12,7 @@ class PropertyValue
      *
      * @throws \Exception
      */
-    public static function get($object, $property)
+    public static function get($object, string $property)
     {
         if (array_key_exists($property, get_object_vars($object))) {
             return $object->{$property};
