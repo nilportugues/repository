@@ -10,4 +10,4 @@ before_script:
   - composer install
 
 script: 
-  - bin/phpunit --coverage-text
+  - php vendor/bin/phpunit --coverage-text
