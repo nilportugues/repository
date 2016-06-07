@@ -107,6 +107,8 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
     {
         $id = (string) $value->id();
         $this->data[$id] = clone $value;
+        
+        return clone $value;
     }
 
     /**
