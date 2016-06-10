@@ -60,11 +60,13 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
             $results = $this->resultsWithDistinctFieldsOnly($pageable->distinctFields(), $results);
         }
 
+        $pageSize = ($pageable->pageSize()) ? $pageable->pageSize() : 1;
+        
         return new ResultPage(
             array_slice($results, $pageable->offset() - $pageable->pageSize(), $pageable->pageSize()),
             count($results),
             $pageable->pageNumber(),
-            ceil(count($results) / $pageable->pageSize())
+            ceil(count($results) / $pageSize)
         );
     }
 
