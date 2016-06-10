@@ -36,7 +36,9 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      */
     public function __construct(array $data = [])
     {
-        $this->data = $data;
+        foreach($data as $item) {
+            $this->add($item);
+        }
     }
 
     /**
