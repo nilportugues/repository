@@ -26,6 +26,32 @@ interface BaseFilter
     const NOT_GROUP = 'not_group';
     const EQUALS = 'equals';
     const NOT_EQUAL = 'not_equals';
+    const EMPTY = 'empty';
+    const NOT_EMPTY = 'not_empty';
+    const NOT_ENDS = 'not_ends';
+    const NOT_STARTS = 'not_starts';
+
+
+    /**
+     * @param string $filterName
+     * @param $value
+     * @return BaseFilter
+     */
+    public function notStartsWith(string $filterName, $value): BaseFilter;
+
+    /**
+     * @param string $filterName
+     * @param $value
+     * @return BaseFilter
+     */
+    public function notEndsWith(string $filterName, $value): BaseFilter;
+
+    /**
+     * @param string $filterName
+     *
+     * @return BaseFilter
+     */
+    public function empty(string $filterName): BaseFilter;
 
     /**
      * @param string $filterName

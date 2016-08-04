@@ -292,4 +292,40 @@ class BaseFilter implements BaseFilterInterface
 
         return $filters;
     }
+
+    /**
+     * @param string $filterName
+     *
+     * @param $value
+     * @return BaseFilterInterface
+     */
+    public function notStartsWith(string $filterName, $value): BaseFilterInterface
+    {
+        $this->addFilter(self::NOT_STARTS, $filterName, $value);
+
+        return $this;
+    }
+
+    /**
+     * @param string $filterName
+     *
+     * @param $value
+     * @return BaseFilterInterface
+     */
+    public function notEndsWith(string $filterName, $value): BaseFilterInterface
+    {
+        $this->addFilter(self::NOT_ENDS, $filterName, $value);
+
+        return $this;
+    }
+
+    /**
+     * @param string $filterName
+     *
+     * @return BaseFilterInterface
+     */
+    public function empty(string $filterName): BaseFilterInterface
+    {
+        return $this->hasEmpty($filterName);
+    }
 }
