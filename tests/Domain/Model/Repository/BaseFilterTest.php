@@ -19,6 +19,53 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
      */
     private $filter;
 
+    public function testItShouldAddFilterForNotStartsWith()
+    {
+        $this->filter->notStartsWith('name', 'N');
+
+        $expected = [
+            'not_starts' => [
+                'name' => ['N'],
+            ],
+            'be_empty' => [],
+            'be_not_empty' => [],
+        ];
+
+        $this->assertEquals($expected, $this->filter->get());
+        $this->assertEquals($expected, $this->filter->get());
+    }
+
+
+    public function testItShouldAddFilterForNotEndsWith()
+    {
+        $this->filter->notEndsWith('name', 'N');
+
+        $expected = [
+            'not_ends' => [
+                'name' => ['N'],
+            ],
+            'be_empty' => [],
+            'be_not_empty' => [],
+        ];
+
+        $this->assertEquals($expected, $this->filter->get());
+        $this->assertEquals($expected, $this->filter->get());
+    }
+
+
+    public function testItShouldAddFilterForEmpty()
+    {
+        $this->filter->empty('name');
+
+        $expected = [
+            'be_empty' => ['name'],
+            'be_not_empty' => [],
+        ];
+
+        $this->assertEquals($expected, $this->filter->get());
+    }
+
+
     public function testItShouldAddFilterForNotEmpty()
     {
         $this->filter->notEmpty('name');
