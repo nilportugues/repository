@@ -64,7 +64,10 @@ Interaction with the repository requires the usage of the following classes or c
     - `public function clear()`
     
 - **NilPortugues\Foundation\Domain\Model\Repository\BaseFilter**   
+    - `public function notStartsWith($filterName, $value)`
+    - `public function notEndsWith($filterName, $value)`
     - `public function notEmpty($filterName)`
+    - `public function hasEmpty($filterName)`
     - `public function hasEmpty($filterName)`
     - `public function startsWith($filterName, $value)`
     - `public function endsWith($filterName, $value)`
