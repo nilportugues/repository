@@ -42,13 +42,6 @@ interface Mapping
     public function fromArray(array $data);
 
     /**
-     * @param $object
-     *
-     * @return array
-     */
-    public function toArray($object): array;
-
-    /**
      * The automatic generated strategy used will be the data-store's if set to true.
      *
      * @return bool

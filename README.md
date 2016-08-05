@@ -67,8 +67,7 @@ Interaction with the repository requires the usage of the following classes or c
     - `public function notStartsWith($filterName, $value)`
     - `public function notEndsWith($filterName, $value)`
     - `public function notEmpty($filterName)`
-    - `public function hasEmpty($filterName)`
-    - `public function hasEmpty($filterName)`
+    - `public function empty($filterName)`
     - `public function startsWith($filterName, $value)`
     - `public function endsWith($filterName, $value)`
     - `public function equal($filterName, $value)`
@@ -85,7 +84,7 @@ Interaction with the repository requires the usage of the following classes or c
     - `public function beLessThan($filterName, $value)`
     - `public function clear()`
     - `public function get()`
-    
+    - `public function hasEmpty($filterName)` //alias of empty() for BC reasons.
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Order**
     - `public function __construct($direction)`
