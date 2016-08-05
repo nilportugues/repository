@@ -18,14 +18,6 @@ class BaseFilter implements BaseFilterInterface
      * @var array
      */
     protected $filters;
-    /**
-     * @var array
-     */
-    protected $emptyAttributes;
-    /**
-     * @var array
-     */
-    protected $notEmptyAttributes;
 
     /**
      *
@@ -33,8 +25,6 @@ class BaseFilter implements BaseFilterInterface
     public function __construct()
     {
         $this->filters = [];
-        $this->emptyAttributes = [];
-        $this->notEmptyAttributes = [];
     }
 
     /**
@@ -44,7 +34,7 @@ class BaseFilter implements BaseFilterInterface
      */
     public function notEmpty(string $filterName): BaseFilterInterface
     {
-        $this->notEmptyAttributes[] = $filterName;
+        $this->addFilter(self::NOT_EMPTY, $filterName, self::NOT_EMPTY);
 
         return $this;
     }
@@ -56,7 +46,7 @@ class BaseFilter implements BaseFilterInterface
      */
     public function hasEmpty(string $filterName): BaseFilterInterface
     {
-        $this->emptyAttributes[] = $filterName;
+        $this->empty($filterName);
 
         return $this;
     }
@@ -274,8 +264,6 @@ class BaseFilter implements BaseFilterInterface
     public function clear(): BaseFilterInterface
     {
         $this->filters = [];
-        $this->emptyAttributes = [];
-        $this->notEmptyAttributes = [];
 
         return $this;
     }
@@ -285,18 +273,13 @@ class BaseFilter implements BaseFilterInterface
      */
     public function get(): array
     {
-        $filters = array_merge(
-            $this->filters,
-            ['be_empty' => $this->emptyAttributes, 'be_not_empty' => $this->notEmptyAttributes]
-        );
-
-        return $filters;
+        return $this->filters;
     }
 
     /**
      * @param string $filterName
-     *
      * @param $value
+     *
      * @return BaseFilterInterface
      */
     public function notStartsWith(string $filterName, $value): BaseFilterInterface
@@ -308,8 +291,8 @@ class BaseFilter implements BaseFilterInterface
 
     /**
      * @param string $filterName
-     *
      * @param $value
+     *
      * @return BaseFilterInterface
      */
     public function notEndsWith(string $filterName, $value): BaseFilterInterface
@@ -326,6 +309,8 @@ class BaseFilter implements BaseFilterInterface
      */
     public function empty(string $filterName): BaseFilterInterface
     {
-        return $this->hasEmpty($filterName);
+        $this->addFilter(self::empty, $filterName, self::empty);
+
+        return $this;
     }
 }

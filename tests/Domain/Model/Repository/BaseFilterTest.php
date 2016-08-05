@@ -27,14 +27,11 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'not_starts' => [
                 'name' => ['N'],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
         $this->assertEquals($expected, $this->filter->get());
     }
-
 
     public function testItShouldAddFilterForNotEndsWith()
     {
@@ -44,35 +41,33 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'not_ends' => [
                 'name' => ['N'],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
         $this->assertEquals($expected, $this->filter->get());
     }
-
 
     public function testItShouldAddFilterForEmpty()
     {
         $this->filter->empty('name');
 
         $expected = [
-            'be_empty' => ['name'],
-            'be_not_empty' => [],
+            'empty' => [
+                'name' => ['empty'],
+            ],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
     }
-
 
     public function testItShouldAddFilterForNotEmpty()
     {
         $this->filter->notEmpty('name');
 
         $expected = [
-            'be_empty' => [],
-            'be_not_empty' => ['name'],
+            'not_empty' => [
+                'name' => ['not_empty'],
+            ],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -83,8 +78,9 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
         $this->filter->hasEmpty('name');
 
         $expected = [
-            'be_empty' => ['name'],
-            'be_not_empty' => [],
+            'empty' => [
+                'name' => ['empty'],
+            ],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -98,8 +94,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'start_with' => [
                 'name' => ['N'],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -113,8 +107,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'end_with' => [
                 'name' => ['N'],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -128,8 +120,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'equals' => [
                 'name' => ['Nil'],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -143,8 +133,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'not_equals' => [
                 'name' => ['Nil'],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -160,8 +148,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
                 'name' => ['Nil', 'Juan'],
 
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -177,8 +163,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
                     [18, 50],
                 ],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -194,8 +178,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
                     [18, 50],
                 ],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -209,8 +191,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'not_contains' => [
                 'name' => ['Nil'],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -224,8 +204,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'contains' => [
                 'name' => ['N'],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -239,8 +217,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'gte' => [
                 'age' => [18],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -254,8 +230,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'gt' => [
                 'age' => [18],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -269,8 +243,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'lte' => [
                 'age' => [18],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());
@@ -284,8 +256,6 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
             'lt' => [
                 'age' => [18],
             ],
-            'be_empty' => [],
-            'be_not_empty' => [],
         ];
 
         $this->assertEquals($expected, $this->filter->get());

@@ -413,4 +413,112 @@ class FilterTest extends \PHPUnit_Framework_TestCase
             $this->assertContains($client->name(), $names);
         }
     }
+
+    public function testItMustNotStartWithScalar()
+    {
+        $filter = new Filter();
+        $filter->must()->notStartsWith('name', 'Ken');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(3, count($results));
+    }
+
+    public function testItMustNotEndsWithScalar()
+    {
+        $filter = new Filter();
+        $filter->must()->notEndsWith('name', 'mori');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(3, count($results));
+    }
+
+    public function testItMustNotBeEmpty()
+    {
+        $filter = new Filter();
+        $filter->must()->notEmpty('name');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(4, count($results));
+    }
+
+    public function testItMustBeEmpty()
+    {
+        $filter = new Filter();
+        $filter->must()->empty('name');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(0, count($results));
+    }
+
+    public function testItMustNotNotStartWithScalar()
+    {
+        $filter = new Filter();
+        $filter->mustNot()->notStartsWith('name', 'Ken');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(1, count($results));
+    }
+
+    public function testItMustNotNotEndsWithScalar()
+    {
+        $filter = new Filter();
+        $filter->mustNot()->notEndsWith('name', 'mori');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(1, count($results));
+    }
+
+    public function testItMustNotNotBeEmpty()
+    {
+        $filter = new Filter();
+        $filter->mustNot()->notEmpty('name');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(0, count($results));
+    }
+
+    public function testItMustNotBeEmpty1()
+    {
+        $filter = new Filter();
+        $filter->mustNot()->empty('name');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(4, count($results));
+    }
+
+    public function testItShouldNotStartWithScalar()
+    {
+        $filter = new Filter();
+        $filter->should()->notStartsWith('name', 'Ken');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(4, count($results));
+    }
+
+    public function testItShouldNotEndsWithScalar()
+    {
+        $filter = new Filter();
+        $filter->should()->notEndsWith('name', 'mori');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(4, count($results));
+    }
+
+    public function testItShouldNotBeEmpty()
+    {
+        $filter = new Filter();
+        $filter->should()->notEmpty('name');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(4, count($results));
+    }
+
+    public function testItShouldBeEmpty()
+    {
+        $filter = new Filter();
+        $filter->should()->empty('name');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(4, count($results));
+    }
 }

@@ -36,7 +36,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
      */
     public function __construct(array $data = [])
     {
-        foreach($data as $item) {
+        foreach ($data as $item) {
             $this->add($item);
         }
     }
@@ -61,7 +61,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
         }
 
         $pageSize = ($pageable->pageSize()) ? $pageable->pageSize() : 1;
-        
+
         return new ResultPage(
             array_slice($results, $pageable->offset() - $pageable->pageSize(), $pageable->pageSize()),
             count($results),
@@ -111,7 +111,7 @@ class InMemoryRepository implements ReadRepository, WriteRepository, PageReposit
     {
         $id = (string) $value->id();
         $this->data[$id] = clone $value;
-        
+
         return clone $value;
     }
 

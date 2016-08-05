@@ -142,19 +142,15 @@ class Filter
                     case BaseFilter::NOT_EQUAL:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::notEquals($property, $v));
                         break;
-
                     case BaseFilter::NOT_EMPTY:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::notEmpty($property));
                         break;
-
-                    case BaseFilter::EMPTY:
+                    case BaseFilter::empty:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::empty($property));
                         break;
-
                     case BaseFilter::NOT_STARTS:
                         $filteredResults = array_filter($filteredResults, StringFilter::notStartsWith($property, $v));
                         break;
-
                     case BaseFilter::NOT_ENDS:
                         $filteredResults = array_filter($filteredResults, StringFilter::notEndsWith($property, $v));
                         break;
@@ -231,19 +227,15 @@ class Filter
                     case BaseFilter::NOT_EQUAL:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::equals($property, $v));
                         break;
-
                     case BaseFilter::NOT_EMPTY:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::empty($property));
                         break;
-
-                    case BaseFilter::EMPTY:
+                    case BaseFilter::empty:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::notEmpty($property));
                         break;
-
                     case BaseFilter::NOT_STARTS:
                         $filteredResults = array_filter($filteredResults, StringFilter::startsWith($property, $v));
                         break;
-
                     case BaseFilter::NOT_ENDS:
                         $filteredResults = array_filter($filteredResults, StringFilter::endsWith($property, $v));
                         break;
@@ -361,15 +353,13 @@ class Filter
                             array_filter($results, ComparisonFilter::notEquals($property, $v))
                         );
                         break;
-
                     case BaseFilter::NOT_EMPTY:
                         $filteredResults = array_merge(
                             $filteredResults,
                             array_filter($results, ComparisonFilter::notEmpty($property))
                         );
                         break;
-
-                    case BaseFilter::EMPTY:
+                    case BaseFilter::empty:
                         $filteredResults = array_merge(
                             $filteredResults,
                             array_filter($results, ComparisonFilter::empty($property))
@@ -382,7 +372,6 @@ class Filter
                             array_filter($results, StringFilter::notStartsWith($property, $v))
                         );
                         break;
-
                     case BaseFilter::NOT_ENDS:
                         $filteredResults = array_merge(
                             $filteredResults,

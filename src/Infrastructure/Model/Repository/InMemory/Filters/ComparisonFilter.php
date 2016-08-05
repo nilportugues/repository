@@ -8,6 +8,7 @@ class ComparisonFilter
 {
     /**
      * @param string $property
+     *
      * @return \Closure
      */
     public static function empty(string $property): \Closure
@@ -19,6 +20,7 @@ class ComparisonFilter
 
     /**
      * @param string $property
+     *
      * @return \Closure
      */
     public static function notEmpty(string $property): \Closure

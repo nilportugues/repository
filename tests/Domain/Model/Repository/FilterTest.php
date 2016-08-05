@@ -43,17 +43,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                 'equals' => [
                     'id' => [1],
                 ],
-                'be_empty' => [],
-                'be_not_empty' => [],
             ],
-            'must_not' => [
-                'be_empty' => [],
-                'be_not_empty' => [],
-            ],
-            'should' => [
-                'be_empty' => [],
-                'be_not_empty' => [],
-            ],
+            'must_not' => [],
+            'should' => [],
         ];
 
         $this->assertEquals($expected, $filter->filters());
@@ -66,18 +58,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $filter->clear();
 
         $expected = [
-            'must' => [
-                'be_empty' => [],
-                'be_not_empty' => [],
-            ],
-            'must_not' => [
-                'be_empty' => [],
-                'be_not_empty' => [],
-            ],
-            'should' => [
-                'be_empty' => [],
-                'be_not_empty' => [],
-            ],
+            'must' => [],
+            'must_not' => [],
+            'should' => [],
         ];
 
         $this->assertEquals($expected, $filter->filters());
