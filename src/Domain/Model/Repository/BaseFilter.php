@@ -309,7 +309,7 @@ class BaseFilter implements BaseFilterInterface
      */
     public function empty(string $filterName): BaseFilterInterface
     {
-        $this->addFilter(self::empty, $filterName, self::empty);
+        $this->addFilter(self::EMPTY_FILTER, $filterName, self::EMPTY_FILTER);
 
         return $this;
     }

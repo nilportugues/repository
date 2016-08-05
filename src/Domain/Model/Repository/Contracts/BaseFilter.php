@@ -26,7 +26,7 @@ interface BaseFilter
     const NOT_GROUP = 'not_group';
     const EQUALS = 'equals';
     const NOT_EQUAL = 'not_equals';
-    const empty = 'empty';
+    const EMPTY_FILTER = 'empty';
     const NOT_EMPTY = 'not_empty';
     const NOT_ENDS = 'not_ends';
     const NOT_STARTS = 'not_starts';

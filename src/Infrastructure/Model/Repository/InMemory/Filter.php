@@ -145,7 +145,7 @@ class Filter
                     case BaseFilter::NOT_EMPTY:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::notEmpty($property));
                         break;
-                    case BaseFilter::empty:
+                    case BaseFilter::EMPTY_FILTER:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::empty($property));
                         break;
                     case BaseFilter::NOT_STARTS:
@@ -230,7 +230,7 @@ class Filter
                     case BaseFilter::NOT_EMPTY:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::empty($property));
                         break;
-                    case BaseFilter::empty:
+                    case BaseFilter::EMPTY_FILTER:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::notEmpty($property));
                         break;
                     case BaseFilter::NOT_STARTS:
@@ -359,7 +359,7 @@ class Filter
                             array_filter($results, ComparisonFilter::notEmpty($property))
                         );
                         break;
-                    case BaseFilter::empty:
+                    case BaseFilter::EMPTY_FILTER:
                         $filteredResults = array_merge(
                             $filteredResults,
                             array_filter($results, ComparisonFilter::empty($property))
