@@ -29,6 +29,29 @@ class ComparisonFilter
             return PropertyValue::get($v, $property) !== null && PropertyValue::get($v, $property) !== '';
         };
     }
+    /**
+     * @param string $property
+     *
+     * @return \Closure
+     */
+    public static function null(string $property): \Closure
+    {
+        return function ($v) use ($property) {
+            return PropertyValue::get($v, $property) === null;
+        };
+    }
+
+    /**
+     * @param string $property
+     *
+     * @return \Closure
+     */
+    public static function notNull(string $property): \Closure
+    {
+        return function ($v) use ($property) {
+            return PropertyValue::get($v, $property) !== null;
+        };
+    }
 
     /**
      * @param string           $property

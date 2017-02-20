@@ -450,6 +450,24 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($results));
     }
 
+    public function testItMustNotBeNull()
+    {
+        $filter = new Filter();
+        $filter->must()->notNull('name');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(4, count($results));
+    }
+
+    public function testItMustBeNull()
+    {
+        $filter = new Filter();
+        $filter->must()->null('name');
+        $results = InMemoryFilter::filter($this->data, $filter);
+
+        $this->assertEquals(0, count($results));
+    }
+
     public function testItMustNotNotStartWithScalar()
     {
         $filter = new Filter();
