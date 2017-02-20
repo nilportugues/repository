@@ -27,7 +27,7 @@ class MyInMemoryRepository extends InMemoryRepository
 }
 ```
 
-Implementation can be seen [here](https://github.com/nilportugues/php-repository/blob/master/src/Infrastructure/Model/Repository/InMemory/InMemoryRepository.php). 
+Implementation can be seen [here](https://github.com/nilportugues/php-repository/blob/master/src/Infrastructure/Model/Repository/InMemory/InMemoryRepository.php).
 
 The base InMemoryRepository implements the following interfaces:
 
@@ -62,11 +62,13 @@ Interaction with the repository requires the usage of the following classes or c
     - `public function mustNot()`
     - `public function should()`
     - `public function clear()`
-    
-- **NilPortugues\Foundation\Domain\Model\Repository\BaseFilter**   
+
+- **NilPortugues\Foundation\Domain\Model\Repository\BaseFilter**
     - `public function notStartsWith($filterName, $value)`
     - `public function notEndsWith($filterName, $value)`
     - `public function notEmpty($filterName)`
+    - `public function empty($filterName)`
+    - `public function notNull($filterName)`
     - `public function empty($filterName)`
     - `public function startsWith($filterName, $value)`
     - `public function endsWith($filterName, $value)`
@@ -134,13 +136,13 @@ Interaction with the repository requires the usage of the following classes or c
     - `public function setOrderFor($propertyName, OrderInterface $order)`
     - `public function property($propertyName)`
 
-#### Interfaces 
+#### Interfaces
 
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Identity**
 
     - `public function id()`
     - `public function __toString()`
-    
+
 - **NilPortugues\Foundation\Domain\Model\Repository\Contracts\Repository**
 
     - `public function count(Filter $filter = null)`
