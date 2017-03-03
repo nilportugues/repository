@@ -53,6 +53,18 @@ class BaseFilter implements BaseFilterInterface
 
     /**
      * @param string $filterName
+     *
+     * @return BaseFilterInterface
+     */
+    public function notNull(string $filterName): BaseFilterInterface
+    {
+        $this->addFilter(self::NOT_NULL, $filterName, self::NOT_NULL);
+
+        return $this;
+    }
+
+    /**
+     * @param string $filterName
      * @param mixed  $value
      *
      * @return BaseFilterInterface
@@ -310,6 +322,18 @@ class BaseFilter implements BaseFilterInterface
     public function empty(string $filterName): BaseFilterInterface
     {
         $this->addFilter(self::EMPTY_FILTER, $filterName, self::EMPTY_FILTER);
+
+        return $this;
+    }
+
+    /**
+     * @param string $filterName
+     *
+     * @return BaseFilterInterface
+     */
+    public function null(string $filterName): BaseFilterInterface
+    {
+        $this->addFilter(self::NULL_FILTER, $filterName, self::NULL_FILTER);
 
         return $this;
     }

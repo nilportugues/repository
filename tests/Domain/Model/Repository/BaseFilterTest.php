@@ -86,6 +86,32 @@ class BaseFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->filter->get());
     }
 
+    public function testItShouldAddFilterForNull()
+    {
+        $this->filter->null('name');
+
+        $expected = [
+            'null' => [
+                'name' => ['null'],
+            ],
+        ];
+
+        $this->assertEquals($expected, $this->filter->get());
+    }
+
+    public function testItShouldAddFilterForNotNull()
+    {
+        $this->filter->notNull('name');
+
+        $expected = [
+            'not_null' => [
+                'name' => ['not_null'],
+            ],
+        ];
+
+        $this->assertEquals($expected, $this->filter->get());
+    }
+
     public function testItShouldAddFilterForStartsWith()
     {
         $this->filter->startsWith('name', 'N');

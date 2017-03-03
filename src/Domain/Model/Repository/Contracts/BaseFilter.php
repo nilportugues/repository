@@ -27,7 +27,9 @@ interface BaseFilter
     const EQUALS = 'equals';
     const NOT_EQUAL = 'not_equals';
     const EMPTY_FILTER = 'empty';
+    const NULL_FILTER = 'null';
     const NOT_EMPTY = 'not_empty';
+    const NOT_NULL = 'not_null';
     const NOT_ENDS = 'not_ends';
     const NOT_STARTS = 'not_starts';
 
@@ -67,6 +69,20 @@ interface BaseFilter
      * @return BaseFilter
      */
     public function hasEmpty(string $filterName): BaseFilter;
+
+    /**
+     * @param string $filterName
+     *
+     * @return BaseFilter
+     */
+    public function null(string $filterName): BaseFilter;
+
+    /**
+     * @param string $filterName
+     *
+     * @return BaseFilter
+     */
+    public function notNull(string $filterName): BaseFilter;
 
     /**
      * @param string $filterName

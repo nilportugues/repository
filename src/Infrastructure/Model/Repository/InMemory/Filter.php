@@ -148,6 +148,12 @@ class Filter
                     case BaseFilter::EMPTY_FILTER:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::empty($property));
                         break;
+                    case BaseFilter::NOT_NULL:
+                        $filteredResults = array_filter($filteredResults, ComparisonFilter::notNull($property));
+                        break;
+                    case BaseFilter::NULL_FILTER:
+                        $filteredResults = array_filter($filteredResults, ComparisonFilter::null($property));
+                        break;
                     case BaseFilter::NOT_STARTS:
                         $filteredResults = array_filter($filteredResults, StringFilter::notStartsWith($property, $v));
                         break;
@@ -232,6 +238,12 @@ class Filter
                         break;
                     case BaseFilter::EMPTY_FILTER:
                         $filteredResults = array_filter($filteredResults, ComparisonFilter::notEmpty($property));
+                        break;
+                    case BaseFilter::NOT_NULL:
+                        $filteredResults = array_filter($filteredResults, ComparisonFilter::notNull($property));
+                        break;
+                    case BaseFilter::NULL_FILTER:
+                        $filteredResults = array_filter($filteredResults, ComparisonFilter::null($property));
                         break;
                     case BaseFilter::NOT_STARTS:
                         $filteredResults = array_filter($filteredResults, StringFilter::startsWith($property, $v));
@@ -365,7 +377,18 @@ class Filter
                             array_filter($results, ComparisonFilter::empty($property))
                         );
                         break;
-
+                    case BaseFilter::NOT_NULL:
+                        $filteredResults = array_merge(
+                            $filteredResults,
+                            array_filter($results, ComparisonFilter::notNull($property))
+                        );
+                        break;
+                    case BaseFilter::NULL_FILTER:
+                        $filteredResults = array_merge(
+                            $filteredResults,
+                            array_filter($results, ComparisonFilter::null($property))
+                        );
+                        break;
                     case BaseFilter::NOT_STARTS:
                         $filteredResults = array_merge(
                             $filteredResults,
